@@ -656,9 +656,9 @@ export const events = [
     artist: 'King',
     genre: ['Pop', 'Hip-Hop'],
     bannerUrl:
-      'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=1600&q=80&sat=6',
+      'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=1600&q=80&sat=18',
     thumbnailUrl:
-      'https://images.unsplash.com/photo-1501612780327-45045538702b?auto=format&fit=crop&w=900&q=80&sat=8',
+      'https://images.unsplash.com/photo-1496293455970-f8581aae0e3b?auto=format&fit=crop&w=900&q=80&sat=16',
     description:
       'A slick crossover arena show with melodic rap hooks, cinematic transitions, and a high-energy stage mix designed for big premium nights.',
     duration: '2h 10m',
