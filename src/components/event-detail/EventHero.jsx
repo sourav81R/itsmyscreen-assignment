@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { CalendarDays, MapPin } from 'lucide-react';
 import Badge from '../shared/Badge';
@@ -11,20 +10,11 @@ import { formatPrice } from '../../utils/priceFormatter';
  * Props: event, onSelectSeats.
  */
 function EventHero({ event, onSelectSeats }) {
-  const [showSticky, setShowSticky] = useState(false);
   const firstShowtime = event.showtimes[0];
   const headlineGenres = event.genre.slice(0, 2);
 
-  useEffect(() => {
-    const onScroll = () => setShowSticky(window.scrollY > 260);
-    onScroll();
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
   return (
-    <>
-      <section className="premium-panel rounded-[30px] bg-[rgba(11,12,18,0.92)] p-3 lg:p-4">
+    <section className="premium-panel rounded-[30px] bg-[rgba(11,12,18,0.92)] p-3 lg:p-4">
         <div className="group relative h-[660px] overflow-hidden rounded-[28px]">
           <img
             src={event.bannerUrl}
@@ -121,22 +111,7 @@ function EventHero({ event, onSelectSeats }) {
             </div>
           </div>
         </div>
-      </section>
-
-      {showSticky ? (
-        <div className="fixed inset-x-0 top-[88px] z-30 border-b border-[var(--color-premium-border)] bg-[rgba(10,10,15,0.92)] px-8 py-4 backdrop-blur-xl">
-          <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-6">
-            <div>
-              <p className="font-display text-2xl text-[var(--color-text-primary)]">{event.title}</p>
-              <p className="text-sm text-[var(--color-text-secondary)]">
-                {event.venue.name} {firstShowtime ? `- ${firstShowtime.time}` : ''}
-              </p>
-            </div>
-            <Button onClick={onSelectSeats}>Select Seats</Button>
-          </div>
-        </div>
-      ) : null}
-    </>
+    </section>
   );
 }
 

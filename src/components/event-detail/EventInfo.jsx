@@ -101,26 +101,35 @@ function EventInfo({ event }) {
 
           {activeTab === 'Venue' ? (
             <div className="grid gap-5 lg:grid-cols-[1.05fr_0.95fr]">
-              <div className="premium-panel overflow-hidden rounded-[24px]">
+              <div className="premium-panel overflow-hidden rounded-[24px] bg-[linear-gradient(180deg,rgba(255,255,255,0.045),rgba(255,255,255,0.018))]">
                 <img
                   src={event.venue.mapImageUrl}
                   alt={`${event.venue.name} venue map preview`}
                   className="h-[270px] w-full rounded-[24px] object-cover transition duration-700 hover:scale-[1.03]"
                 />
+                <div className="border-t border-[rgba(255,255,255,0.06)] px-5 py-4">
+                  <p className="text-[11px] uppercase tracking-[0.22em] text-[var(--color-brand-accent)]">About this show</p>
+                  <p className="mt-2 text-sm leading-6 text-[rgba(235,235,242,0.9)]">
+                    Expect a high-energy live atmosphere with immersive production, crowd-led singalongs, and a setlist
+                    paced to build from warm-up grooves into a full headline peak.
+                  </p>
+                </div>
               </div>
 
-              <div className="premium-panel rounded-[24px] bg-[linear-gradient(180deg,rgba(255,255,255,0.025),rgba(255,255,255,0.01))] p-5">
+              <div className="premium-panel rounded-[24px] bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] p-5">
                 <span className="premium-chip inline-flex h-10 w-10 items-center justify-center rounded-[14px] text-[var(--color-brand-accent)]">
                   <MapPin className="h-5 w-5" aria-hidden="true" />
                 </span>
-                <p className="mt-4 text-xs uppercase tracking-[0.18em] text-[var(--color-text-muted)]">Address</p>
-                <p className="mt-2 text-base leading-7 text-[var(--color-text-primary)]">{event.venue.address}</p>
+                <p className="mt-4 text-xs uppercase tracking-[0.18em] text-[rgba(185,185,200,0.8)]">Address</p>
+                <p className="mt-2 text-base font-medium leading-7 text-[rgba(245,245,247,0.98)] [text-shadow:0_1px_10px_rgba(0,0,0,0.28)]">
+                  {event.venue.address}
+                </p>
 
                 <div className="mt-5 flex flex-wrap gap-3">
                   {event.venue.transportInfo.map((item) => (
                     <span
                       key={item}
-                      className="premium-chip rounded-full px-4 py-2 text-sm text-[var(--color-text-secondary)]"
+                      className="premium-chip rounded-full px-4 py-2 text-sm text-[rgba(235,235,242,0.92)]"
                     >
                       {item}
                     </span>
