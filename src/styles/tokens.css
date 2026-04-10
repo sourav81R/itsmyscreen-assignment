@@ -8,6 +8,9 @@
   --color-bg-panel: #11111b;
   --color-border-subtle: rgba(255, 255, 255, 0.08);
   --color-border-strong: rgba(255, 255, 255, 0.16);
+  --color-premium-border: rgba(255, 149, 0, 0.18);
+  --color-premium-border-strong: rgba(255, 190, 92, 0.44);
+  --color-premium-glow: rgba(255, 149, 0, 0.2);
   --color-text-primary: #f5f5f7;
   --color-text-secondary: #b9b9c8;
   --color-text-muted: #7f8094;
@@ -41,6 +44,7 @@
   --shadow-card: 0 16px 40px rgba(0, 0, 0, 0.24);
   --shadow-elevated: 0 24px 80px rgba(0, 0, 0, 0.48);
   --shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  --shadow-premium: 0 22px 60px rgba(0, 0, 0, 0.34), 0 18px 40px rgba(255, 149, 0, 0.08);
   --gradient-editorial: radial-gradient(circle at top left, rgba(255, 59, 48, 0.2), transparent 34%),
     radial-gradient(circle at top right, rgba(255, 149, 0, 0.18), transparent 28%),
     linear-gradient(180deg, rgba(20, 20, 32, 0.9), rgba(10, 10, 15, 1));

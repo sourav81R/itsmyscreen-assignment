@@ -56,11 +56,21 @@ function EventDetailPage() {
   }
 
   return (
-    <PageWrapper className="mx-auto max-w-[1440px] space-y-8 px-8 pb-12 pt-8">
-      <EventHero event={event} onSelectSeats={handleSelectSeats} />
-      <AIInsightChip event={event} onSelectSeats={handleSelectSeats} />
-      <EventInfo event={event} />
-      <PricingTiers event={event} />
+    <PageWrapper className="relative mx-auto max-w-[1440px] px-8 pb-14 pt-8">
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[760px] overflow-hidden">
+        <div className="absolute -left-12 top-28 h-44 w-44 rounded-full bg-[rgba(255,149,0,0.12)] blur-3xl" />
+        <div className="absolute right-8 top-16 h-52 w-52 rounded-full bg-[rgba(0,195,255,0.12)] blur-3xl" />
+        <div className="absolute left-1/3 top-[400px] h-40 w-40 rounded-full bg-[rgba(255,59,48,0.12)] blur-3xl" />
+      </div>
+
+      <div className="relative z-10 space-y-6">
+        <EventHero event={event} onSelectSeats={handleSelectSeats} />
+        <div className="-mt-8 px-4">
+          <AIInsightChip event={event} onSelectSeats={handleSelectSeats} />
+        </div>
+        <EventInfo event={event} />
+        <PricingTiers event={event} />
+      </div>
     </PageWrapper>
   );
 }
