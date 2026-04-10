@@ -62,7 +62,7 @@ function AIRecommendedBanner({ events }) {
     >
       <div className="absolute inset-x-0 top-0 h-28 bg-[radial-gradient(circle_at_top_left,rgba(255,149,0,0.2),transparent_52%)]" />
       <div className="rounded-[35px] bg-[linear-gradient(180deg,rgba(18,18,28,0.98),rgba(11,11,18,0.98))] p-5">
-        <div className="mb-5 flex items-center justify-between gap-4">
+        <div className="mb-5 flex items-center gap-4">
           <div className="flex items-start gap-4">
             <span className="inline-flex h-14 w-14 items-center justify-center rounded-[20px] border border-[rgba(255,149,0,0.18)] bg-[linear-gradient(180deg,rgba(255,149,0,0.18),rgba(255,149,0,0.08))] text-[var(--color-brand-accent)] shadow-[0_14px_30px_rgba(255,149,0,0.08)]">
               <Sparkles className="h-6 w-6" aria-hidden="true" />
@@ -92,28 +92,28 @@ function AIRecommendedBanner({ events }) {
               </div>
             </div>
           </div>
-
-          <div className="flex items-center gap-3">
-            <button
-              type="button"
-              aria-label="Scroll recommended events left"
-              onClick={() => scrollByAmount(-1)}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[rgba(255,149,0,0.24)] bg-[rgba(255,255,255,0.03)] text-[var(--color-text-primary)] transition hover:bg-[rgba(255,149,0,0.12)]"
-            >
-              <ChevronLeft className="h-4 w-4" aria-hidden="true" />
-            </button>
-            <button
-              type="button"
-              aria-label="Scroll recommended events right"
-              onClick={() => scrollByAmount(1)}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[rgba(255,149,0,0.24)] bg-[linear-gradient(180deg,rgba(255,149,0,0.22),rgba(255,149,0,0.08))] text-[var(--color-brand-accent)] transition hover:scale-[1.03]"
-            >
-              <ChevronRight className="h-4 w-4" aria-hidden="true" />
-            </button>
-          </div>
         </div>
 
-        <div ref={trackRef} className="thin-scrollbar overflow-x-auto scroll-smooth pb-4">
+        <div className="relative">
+          <button
+            type="button"
+            aria-label="Scroll recommended events left"
+            onClick={() => scrollByAmount(-1)}
+            className="absolute left-2 top-1/2 z-10 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-[rgba(255,149,0,0.24)] bg-[rgba(14,14,22,0.86)] text-[var(--color-text-primary)] shadow-[0_12px_30px_rgba(0,0,0,0.28)] backdrop-blur-sm transition hover:bg-[rgba(255,149,0,0.12)]"
+          >
+            <ChevronLeft className="h-4 w-4" aria-hidden="true" />
+          </button>
+
+          <button
+            type="button"
+            aria-label="Scroll recommended events right"
+            onClick={() => scrollByAmount(1)}
+            className="absolute right-2 top-1/2 z-10 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-[rgba(255,149,0,0.24)] bg-[linear-gradient(180deg,rgba(255,149,0,0.22),rgba(255,149,0,0.08))] text-[var(--color-brand-accent)] shadow-[0_12px_30px_rgba(0,0,0,0.28)] backdrop-blur-sm transition hover:scale-[1.03]"
+          >
+            <ChevronRight className="h-4 w-4" aria-hidden="true" />
+          </button>
+
+          <div ref={trackRef} className="thin-scrollbar overflow-x-auto scroll-smooth px-10 pb-4">
           <div className="flex gap-4">
             {items.map((event, index) => (
               <button
@@ -183,6 +183,7 @@ function AIRecommendedBanner({ events }) {
               </button>
             ))}
           </div>
+        </div>
         </div>
 
         <div className="mt-2 h-2 rounded-full bg-[rgba(255,255,255,0.06)]">
