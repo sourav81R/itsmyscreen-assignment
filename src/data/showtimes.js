@@ -62,6 +62,15 @@ export const showtimes = [
   { id: 'st-061', eventId: 'event-sanam', date: '2026-06-13', time: '7:30 PM', availableSeats: 3820, totalSeats: 8000 },
   { id: 'st-062', eventId: 'event-sanam', date: '2026-06-14', time: '8:15 PM', availableSeats: 2410, totalSeats: 8000 },
   { id: 'st-063', eventId: 'event-sanam', date: '2026-06-15', time: '7:00 PM', availableSeats: 980, totalSeats: 8000 },
+  { id: 'st-064', eventId: 'event-king', date: '2026-06-16', time: '8:00 PM', availableSeats: 6210, totalSeats: 25000 },
+  { id: 'st-065', eventId: 'event-king', date: '2026-06-17', time: '8:30 PM', availableSeats: 4180, totalSeats: 25000 },
+  { id: 'st-066', eventId: 'event-king', date: '2026-06-18', time: '7:45 PM', availableSeats: 2010, totalSeats: 25000 },
+  { id: 'st-067', eventId: 'event-jasleen', date: '2026-06-19', time: '7:30 PM', availableSeats: 5360, totalSeats: 8000 },
+  { id: 'st-068', eventId: 'event-jasleen', date: '2026-06-20', time: '8:00 PM', availableSeats: 3420, totalSeats: 8000 },
+  { id: 'st-069', eventId: 'event-jasleen', date: '2026-06-21', time: '7:00 PM', availableSeats: 1760, totalSeats: 8000 },
+  { id: 'st-070', eventId: 'event-mohit', date: '2026-06-22', time: '7:30 PM', availableSeats: 7280, totalSeats: 25000 },
+  { id: 'st-071', eventId: 'event-mohit', date: '2026-06-23', time: '8:00 PM', availableSeats: 4950, totalSeats: 25000 },
+  { id: 'st-072', eventId: 'event-mohit', date: '2026-06-24', time: '7:15 PM', availableSeats: 2480, totalSeats: 25000 },
 ];
 
 export const showtimesByEvent = showtimes.reduce((acc, showtime) => {

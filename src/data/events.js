@@ -650,6 +650,99 @@ export const events = [
       vip: ['Rows A-C', 'Limited-edition souvenir'],
     },
   },
+  {
+    id: 'event-king',
+    title: 'King Neon Skyline Tour',
+    artist: 'King',
+    genre: ['Pop', 'Hip-Hop'],
+    bannerUrl:
+      'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=1600&q=80&sat=6',
+    thumbnailUrl:
+      'https://images.unsplash.com/photo-1501612780327-45045538702b?auto=format&fit=crop&w=900&q=80&sat=8',
+    description:
+      'A slick crossover arena show with melodic rap hooks, cinematic transitions, and a high-energy stage mix designed for big premium nights.',
+    duration: '2h 10m',
+    ageRating: '13+',
+    language: 'Hindi, English',
+    venueId: 'venue-mumbai-mmrda',
+    priceRange: { min: 1150, max: 6600 },
+    availability: 'fast-filling',
+    availabilityPercent: 36,
+    tags: ['Crossover', 'Mumbai', 'Night show'],
+    aiInsight: 'Fans bouncing between rap and commercial pop shows often shortlist King because premium still feels like the value tier here.',
+    lineup: [
+      { name: 'Opening Club Set', time: '7:20 PM' },
+      { name: 'King', time: '8:15 PM' },
+      { name: 'Encore Mix', time: '9:50 PM' },
+    ],
+    tierPerks: {
+      general: ['Open bowl access', 'Quick merch lane'],
+      premium: ['Closer center block', 'Priority gate'],
+      vip: ['Front reserve section', 'Exclusive pass'],
+    },
+  },
+  {
+    id: 'event-jasleen',
+    title: 'Jasleen Royal Midnight Letters',
+    artist: 'Jasleen Royal',
+    genre: ['Indie', 'Bollywood'],
+    bannerUrl:
+      'https://images.unsplash.com/photo-1507878866276-a947ef722fee?auto=format&fit=crop&w=1600&q=80&sat=10',
+    thumbnailUrl:
+      'https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?auto=format&fit=crop&w=900&q=80&sat=6',
+    description:
+      'A heartfelt indie-pop concert with intimate storytelling, layered live instrumentation, and a softer visual atmosphere suited to close-listening seats.',
+    duration: '1h 55m',
+    ageRating: 'All Ages',
+    language: 'Hindi, English',
+    venueId: 'venue-chennai-sxicc',
+    priceRange: { min: 1050, max: 5600 },
+    availability: 'available',
+    availabilityPercent: 69,
+    tags: ['Indie pop', 'Chennai', 'Live band'],
+    aiInsight: 'Users who save indie and softer Bollywood nights tend to choose premium center rows early for this one.',
+    lineup: [
+      { name: 'Acoustic Support', time: '7:00 PM' },
+      { name: 'Jasleen Royal', time: '7:55 PM' },
+      { name: 'Closing Requests', time: '9:10 PM' },
+    ],
+    tierPerks: {
+      general: ['Balcony seating', 'Standard entry'],
+      premium: ['Closer center rows', 'Priority lane'],
+      vip: ['Front acoustic section', 'Collector keepsake'],
+    },
+  },
+  {
+    id: 'event-mohit',
+    title: 'Mohit Chauhan Velvet Skies',
+    artist: 'Mohit Chauhan',
+    genre: ['Indie', 'Bollywood'],
+    bannerUrl:
+      'https://images.unsplash.com/photo-1508979828023-0c2b4b060d06?auto=format&fit=crop&w=1600&q=80&sat=6',
+    thumbnailUrl:
+      'https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2?auto=format&fit=crop&w=900&q=80&sat=8',
+    description:
+      'A mellow yet cinematic live set blending indie warmth with Bollywood favorites, designed for audiences who want a richer premium-seat listening experience.',
+    duration: '2h 00m',
+    ageRating: 'All Ages',
+    language: 'Hindi',
+    venueId: 'venue-mumbai-mmrda',
+    priceRange: { min: 1200, max: 6200 },
+    availability: 'available',
+    availabilityPercent: 63,
+    tags: ['Indie', 'Mumbai', 'Live vocals'],
+    aiInsight: 'Fans who save softer Bollywood and indie nights often convert quickly on Mohit when center premium blocks are still open.',
+    lineup: [
+      { name: 'Acoustic Opening', time: '7:10 PM' },
+      { name: 'Mohit Chauhan', time: '8:00 PM' },
+      { name: 'Encore Favorites', time: '9:25 PM' },
+    ],
+    tierPerks: {
+      general: ['Open bowl access', 'Standard gate'],
+      premium: ['Closer center section', 'Priority entry'],
+      vip: ['Front reserve rows', 'Souvenir keepsake'],
+    },
+  },
 ];
 
 export const eventMap = Object.fromEntries(events.map((event) => [event.id, event]));
