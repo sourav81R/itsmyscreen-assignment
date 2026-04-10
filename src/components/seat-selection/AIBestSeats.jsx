@@ -9,13 +9,19 @@ import { formatPrice } from '../../utils/priceFormatter';
  */
 function AIBestSeats({ suggestions, onApply }) {
   return (
-    <section className="editorial-panel rounded-[28px] p-6">
-      <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-text-muted)]">AI Picks Across Tiers</p>
+    <section className="editorial-panel premium-panel rounded-[28px] bg-[linear-gradient(180deg,rgba(24,24,38,0.98),rgba(14,14,24,0.98))] p-6">
+      <div className="flex items-center justify-between gap-4">
+        <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-text-muted)]">AI Picks Across Tiers</p>
+        <span className="premium-chip rounded-full px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-[var(--color-brand-accent)]">
+          Smart match
+        </span>
+      </div>
+
       <div className="mt-4 space-y-3">
         {suggestions.map((group) => (
           <div
             key={`${group.seats[0].id}-${group.seats.length}`}
-            className="rounded-[24px] border border-[rgba(255,149,0,0.22)] bg-[rgba(255,149,0,0.06)] p-4"
+            className="premium-panel rounded-[24px] bg-[linear-gradient(135deg,rgba(255,149,0,0.08),rgba(255,255,255,0.02))] p-4"
           >
             <div className="flex items-start justify-between gap-4">
               <div>
@@ -26,7 +32,11 @@ function AIBestSeats({ suggestions, onApply }) {
                   {formatPrice(group.seats[0].price)} each · {formatPrice(group.total)} total
                 </p>
               </div>
-              <Button size="sm" onClick={() => onApply(group)}>
+              <Button
+                size="sm"
+                className="shadow-[0_10px_24px_rgba(255,59,48,0.18)]"
+                onClick={() => onApply(group)}
+              >
                 Apply
               </Button>
             </div>

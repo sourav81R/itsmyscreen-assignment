@@ -13,11 +13,11 @@ function SeatLegend() {
   ];
 
   return (
-    <div className="absolute right-6 top-6 z-20 rounded-[24px] border border-[var(--color-border-subtle)] bg-[rgba(10,10,15,0.78)] p-4 backdrop-blur-lg">
+    <div className="premium-panel rounded-[24px] bg-[linear-gradient(180deg,rgba(10,10,15,0.88),rgba(14,14,24,0.88))] p-4 backdrop-blur-xl">
       <p className="mb-3 text-xs uppercase tracking-[0.16em] text-[var(--color-text-muted)]">Legend</p>
       <div className="grid grid-cols-2 gap-3 text-sm text-[var(--color-text-secondary)]">
         {items.map((item) => (
-          <div key={item.label} className="flex items-center gap-2">
+          <div key={item.label} className="flex items-center gap-2 rounded-full px-2 py-1 transition hover:bg-[rgba(255,255,255,0.04)]">
             <span className={`inline-flex h-3.5 w-3.5 rounded-full border border-white/10 ${item.swatchClass}`} aria-hidden="true" />
             <span>{item.label}</span>
           </div>

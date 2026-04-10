@@ -16,9 +16,9 @@ function PriceSummaryBar({ seats, total, timer, onProceed, disabled, message, lo
   return (
     <div
       aria-live="polite"
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-[var(--color-border-subtle)] bg-[rgba(10,10,15,0.96)] px-8 py-4 backdrop-blur-xl"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-[var(--color-premium-border)] bg-[linear-gradient(180deg,rgba(10,10,15,0.96),rgba(14,14,22,0.98))] px-8 py-4 backdrop-blur-xl"
     >
-      <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-6">
+      <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-6 rounded-[24px] border border-[rgba(255,149,0,0.14)] bg-[rgba(255,255,255,0.02)] px-5 py-3 shadow-[0_18px_42px_rgba(0,0,0,0.22)]">
         <div>
           <p className="text-sm text-[var(--color-text-secondary)]">
             Selected: {seatLabels(seats).join(', ')} · {seats[0]?.tier?.toUpperCase()}
@@ -28,7 +28,12 @@ function PriceSummaryBar({ seats, total, timer, onProceed, disabled, message, lo
         </div>
         <div className="flex items-center gap-4">
           <Timer display={timer.display} totalSeconds={timer.totalSeconds} />
-          <Button onClick={onProceed} disabled={disabled || timer.isExpired} loading={loading}>
+          <Button
+            onClick={onProceed}
+            disabled={disabled || timer.isExpired}
+            loading={loading}
+            className="shadow-[0_12px_28px_rgba(255,59,48,0.22)]"
+          >
             Proceed to Summary
           </Button>
         </div>

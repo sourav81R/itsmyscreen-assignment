@@ -199,7 +199,7 @@ function SeatingMap({ seats, selectedSeatIds, suggestedIds, onSeatAction, soldOu
 
   return (
     <div
-      className="editorial-panel relative min-h-[760px] overflow-hidden rounded-[32px]"
+      className="editorial-panel premium-panel relative min-h-[760px] overflow-hidden rounded-[32px] bg-[linear-gradient(180deg,rgba(31,31,47,0.98),rgba(19,19,31,0.98))]"
       onWheel={handleWheel}
       onMouseMove={handleMove}
       onMouseUp={endDrag}
