@@ -16,10 +16,10 @@ function PriceSummaryBar({ seats, total, timer, onProceed, disabled, message, lo
   return (
     <div
       aria-live="polite"
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-[var(--color-premium-border)] bg-[linear-gradient(180deg,rgba(10,10,15,0.96),rgba(14,14,22,0.98))] px-8 py-4 backdrop-blur-xl"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-[rgba(255,149,0,0.14)] bg-[linear-gradient(180deg,rgba(8,8,12,0.78),rgba(12,12,18,0.96))] px-8 py-4 backdrop-blur-xl"
     >
-      <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-6 rounded-[24px] border border-[rgba(255,149,0,0.14)] bg-[rgba(255,255,255,0.02)] px-5 py-3 shadow-[0_18px_42px_rgba(0,0,0,0.22)]">
-        <div>
+      <div className="premium-panel mx-auto flex max-w-[1440px] items-center justify-between gap-6 overflow-hidden rounded-[26px] bg-[linear-gradient(135deg,rgba(34,31,51,0.92),rgba(14,14,22,0.96)_58%,rgba(42,20,20,0.9))] px-6 py-4 shadow-[0_24px_54px_rgba(0,0,0,0.28)]">
+        <div className="transition-transform duration-200">
           <p className="text-sm text-[var(--color-text-secondary)]">
             Selected: {seatLabels(seats).join(', ')} · {seats[0]?.tier?.toUpperCase()}
           </p>
@@ -27,12 +27,14 @@ function PriceSummaryBar({ seats, total, timer, onProceed, disabled, message, lo
           {message ? <p className="mt-1 text-sm text-[var(--color-brand-accent)]">{message}</p> : null}
         </div>
         <div className="flex items-center gap-4">
-          <Timer display={timer.display} totalSeconds={timer.totalSeconds} />
+          <div className="premium-chip rounded-full px-3 py-1.5 shadow-[0_10px_24px_rgba(0,0,0,0.16)]">
+            <Timer display={timer.display} totalSeconds={timer.totalSeconds} />
+          </div>
           <Button
             onClick={onProceed}
             disabled={disabled || timer.isExpired}
             loading={loading}
-            className="shadow-[0_12px_28px_rgba(255,59,48,0.22)]"
+            className="shadow-[0_12px_28px_rgba(255,59,48,0.22)] transition-all duration-200 hover:translate-y-[-1px] hover:shadow-[0_18px_36px_rgba(255,59,48,0.3)]"
           >
             Proceed to Summary
           </Button>
