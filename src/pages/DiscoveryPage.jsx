@@ -104,18 +104,18 @@ function DiscoveryPage({ city }) {
             </div>
 
             {isBooting ? (
-              <div className="grid grid-cols-4 gap-5">
+              <div className="grid grid-cols-4 gap-4">
                 {skeletonCards.map((key) => (
                   <div
                     key={key}
-                    className="h-[380px] rounded-[28px] border border-[var(--color-border-subtle)] bg-shimmer bg-[length:200%_100%] animate-shimmer"
+                    className="h-[318px] rounded-[24px] border border-[var(--color-border-subtle)] bg-shimmer bg-[length:200%_100%] animate-shimmer"
                   />
                 ))}
               </div>
             ) : cityEvents.length > 0 ? (
               <div
                 className={
-                  viewMode === 'grid' ? 'grid grid-cols-4 gap-5' : 'flex flex-col gap-5'
+                  viewMode === 'grid' ? 'grid grid-cols-4 gap-4' : 'flex flex-col gap-5'
                 }
               >
                 {cityEvents.map((event) => (
