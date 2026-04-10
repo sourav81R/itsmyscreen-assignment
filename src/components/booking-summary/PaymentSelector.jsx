@@ -34,10 +34,10 @@ function PaymentSelector({ values, errors, onFieldChange }) {
       {paymentMethod === 'card' ? (
         <div className="mt-5 grid gap-4">
           {[
-            { key: 'cardNumber', label: 'Card Number', placeholder: '4242 4242 4242 4242' },
-            { key: 'cardName', label: 'Name on Card', placeholder: 'Ananya Kapoor' },
-            { key: 'cardExpiry', label: 'Expiry MM/YY', placeholder: '08/28' },
-            { key: 'cardCvv', label: 'CVV', placeholder: '123' },
+            { key: 'cardNumber', label: 'Card Number', placeholder: '' },
+            { key: 'cardName', label: 'Name on Card', placeholder: '' },
+            { key: 'cardExpiry', label: 'Expiry MM/YY', placeholder: '' },
+            { key: 'cardCvv', label: 'CVV', placeholder: '' },
           ].map((field) => (
             <label key={field.key} className="block">
               <span className="mb-2 block text-sm text-[var(--color-text-secondary)]">{field.label}</span>
@@ -51,7 +51,6 @@ function PaymentSelector({ values, errors, onFieldChange }) {
                   errors[field.key] ? 'border-[rgba(255,69,58,0.5)]' : 'border-[rgba(255,149,0,0.14)]'
                 }`}
               />
-              {errors[field.key] ? <span className="mt-2 block text-sm text-[var(--color-danger)]">{errors[field.key]}</span> : null}
             </label>
           ))}
         </div>
@@ -65,12 +64,11 @@ function PaymentSelector({ values, errors, onFieldChange }) {
             value={values.upiId}
             onChange={(event) => onFieldChange('upiId', event.target.value)}
             autoComplete="off"
-            placeholder="name@bank"
+            placeholder=""
             className={`dark-input w-full rounded-[20px] border px-4 py-3 outline-none transition duration-200 hover:border-[rgba(255,190,92,0.28)] focus:border-[rgba(255,190,92,0.42)] ${
               errors.upiId ? 'border-[rgba(255,69,58,0.5)]' : 'border-[rgba(255,149,0,0.14)]'
             }`}
           />
-          {errors.upiId ? <span className="mt-2 block text-sm text-[var(--color-danger)]">{errors.upiId}</span> : null}
         </label>
       ) : null}
 

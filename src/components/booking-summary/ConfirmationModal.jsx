@@ -33,7 +33,12 @@ function ConfirmationModal({ open, bookingId, event, showtime, seats, onClose })
   }
 
   return (
-    <div className="fixed inset-0 z-50 bg-[rgba(10,10,15,0.92)] backdrop-blur-xl">
+    <div className="fixed inset-0 z-50 overflow-hidden bg-[rgba(6,6,10,0.9)] backdrop-blur-xl">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-[-8%] top-[-6%] h-72 w-72 rounded-full bg-[rgba(255,59,48,0.14)] blur-[120px]" />
+        <div className="absolute right-[-6%] top-[18%] h-80 w-80 rounded-full bg-[rgba(255,149,0,0.12)] blur-[140px]" />
+        <div className="absolute bottom-[-12%] left-[34%] h-80 w-80 rounded-full bg-[rgba(98,105,255,0.08)] blur-[140px]" />
+      </div>
       {confettiClasses.map((className, index) => (
         <motion.span
           key={className}
@@ -48,22 +53,38 @@ function ConfirmationModal({ open, bookingId, event, showtime, seats, onClose })
         <motion.div
           initial={{ opacity: 0, scale: 0.88 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="editorial-panel relative w-full max-w-[720px] rounded-[36px] p-10 text-center"
+          className="premium-panel relative w-full max-w-[760px] overflow-hidden rounded-[38px] bg-[linear-gradient(145deg,rgba(31,31,48,0.97),rgba(15,15,24,0.99))] p-10 text-center shadow-[0_32px_90px_rgba(0,0,0,0.5)]"
         >
-          <p className="text-xs uppercase tracking-[0.24em] text-[var(--color-text-muted)]">Booking confirmed</p>
-          <h2 className="mt-4 font-display text-6xl text-[var(--color-text-primary)]">See you there</h2>
-          <p className="mt-4 text-[var(--color-text-secondary)]">
+          <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-[rgba(255,190,92,0.26)] bg-[linear-gradient(135deg,rgba(255,149,0,0.12),rgba(255,59,48,0.08))] px-4 py-2 text-xs uppercase tracking-[0.24em] text-[var(--color-text-secondary)]">
+            <span className="h-2.5 w-2.5 rounded-full bg-[var(--color-brand-accent)] shadow-[0_0_16px_rgba(255,149,0,0.7)]" />
+            Booking confirmed
+          </div>
+          <h2 className="mt-6 font-display text-6xl leading-[0.96] text-[var(--color-text-primary)]">See you there</h2>
+          <p className="mt-4 text-lg text-[var(--color-text-secondary)]">
             {event.title} · {formatLongDate(showtime.date)} · {showtime.time}
           </p>
-          <p className="mt-2 text-[var(--color-text-secondary)]">Seats {seatLabels(seats).join(', ')}</p>
-          <div className="mt-8 rounded-[28px] border border-[rgba(255,149,0,0.24)] bg-[rgba(255,149,0,0.06)] px-6 py-5">
+          <div className="mt-4 flex justify-center">
+            <div className="premium-chip rounded-full px-4 py-2 text-sm text-[var(--color-text-secondary)]">
+              Seats {seatLabels(seats).join(', ')}
+            </div>
+          </div>
+          <div className="mt-8 rounded-[30px] border border-[rgba(255,190,92,0.22)] bg-[linear-gradient(145deg,rgba(255,149,0,0.08),rgba(255,255,255,0.03)_55%,rgba(255,59,48,0.06))] px-6 py-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
             <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-text-muted)]">Booking ID</p>
-            <p className="mt-2 font-display text-4xl text-[var(--color-brand-accent)]">{bookingId}</p>
+            <p className="mt-3 font-display text-[2.7rem] tracking-[0.04em] text-[var(--color-brand-accent)]">{bookingId}</p>
+            <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
+              Keep this reference handy for entry, support, and ticket verification.
+            </p>
           </div>
           <div className="mt-8 flex justify-center gap-3">
-            <Button onClick={() => window.print()}>Download Ticket</Button>
+            <Button
+              onClick={() => window.print()}
+              className="shadow-[0_18px_40px_rgba(255,59,48,0.28)] hover:shadow-[0_22px_48px_rgba(255,59,48,0.34)]"
+            >
+              Download Ticket
+            </Button>
             <Button
               variant="secondary"
+              className="border-[rgba(255,149,0,0.16)] bg-[rgba(255,255,255,0.02)] hover:border-[rgba(255,190,92,0.38)] hover:bg-[rgba(255,149,0,0.08)]"
               onClick={() => {
                 onClose();
                 navigate('/discover');
