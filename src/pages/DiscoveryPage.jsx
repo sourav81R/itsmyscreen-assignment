@@ -52,10 +52,11 @@ function DiscoveryPage({ city }) {
     () => filteredEvents.filter((event) => event.venue.city === city),
     [city, filteredEvents],
   );
-  const recommendedEvents = useMemo(
-    () => personalizedEvents.filter((event) => event.venue.city === city).slice(0, 5),
-    [city, personalizedEvents],
-  );
+  const recommendedEvents = useMemo(() => {
+    const cityFirst = personalizedEvents.filter((event) => event.venue.city === city);
+    const outsideCity = personalizedEvents.filter((event) => event.venue.city !== city);
+    return [...cityFirst, ...outsideCity].slice(0, 10);
+  }, [city, personalizedEvents]);
 
   return (
     <PageWrapper className="mx-auto max-w-[1440px] px-8 pb-12 pt-8">

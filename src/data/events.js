@@ -284,7 +284,7 @@ export const events = [
     artist: 'Multiple Artists',
     genre: ['Fusion', 'World'],
     bannerUrl:
-      'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1600&q=80',
+      'https://images.unsplash.com/photo-1507878866276-a947ef722fee?auto=format&fit=crop&w=1600&q=80',
     thumbnailUrl:
       'https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?auto=format&fit=crop&w=900&q=80',
     description:
@@ -315,7 +315,7 @@ export const events = [
     artist: 'Zakir Hussain',
     genre: ['Classical', 'Percussion'],
     bannerUrl:
-      'https://images.unsplash.com/photo-1460723237483-7a6dc9d0b212?auto=format&fit=crop&w=1600&q=80',
+      'https://images.unsplash.com/photo-1508979828023-0c2b4b060d06?auto=format&fit=crop&w=1600&q=80',
     thumbnailUrl:
       'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=900&q=80',
     description:
@@ -348,7 +348,7 @@ export const events = [
     bannerUrl:
       'https://images.unsplash.com/photo-1518972559570-7cc1309f3229?auto=format&fit=crop&w=1600&q=80',
     thumbnailUrl:
-      'https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=900&q=80',
+      'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80',
     description:
       'A nostalgic folk-rock set with wide-open visuals, intimate storytelling, and singalong choruses designed for a laid-back crowd.',
     duration: '2h 00m',
@@ -377,7 +377,7 @@ export const events = [
     artist: 'Sitara x Kayan',
     genre: ['Electronic', 'Alt Pop'],
     bannerUrl:
-      'https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1600&q=80',
+      'https://images.unsplash.com/photo-1518998053901-5348d3961a04?auto=format&fit=crop&w=1600&q=80',
     thumbnailUrl:
       'https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?auto=format&fit=crop&w=900&q=80',
     description:
@@ -400,6 +400,254 @@ export const events = [
       general: ['Rear lawn access', 'Standard gate'],
       premium: ['Central lawn viewing', 'Fast-track entry'],
       vip: ['Raised viewing deck', 'Private bar'],
+    },
+  },
+  {
+    id: 'event-sonu',
+    title: 'Sonu Nigam Starlight Revue',
+    artist: 'Sonu Nigam',
+    genre: ['Bollywood', 'Pop'],
+    bannerUrl:
+      'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=1600&q=80',
+    thumbnailUrl:
+      'https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?auto=format&fit=crop&w=900&q=80',
+    description:
+      'A polished Bollywood pop revue with soaring hooks, cinematic lighting, and an elegant full-band setup designed for a premium evening crowd.',
+    duration: '2h 25m',
+    ageRating: 'All Ages',
+    language: 'Hindi',
+    venueId: 'venue-mumbai-mmrda',
+    priceRange: { min: 1300, max: 7200 },
+    availability: 'available',
+    availabilityPercent: 58,
+    tags: ['Bollywood', 'Live vocals', 'Mumbai'],
+    aiInsight: 'Bollywood listeners who skip front-row premiums often convert fastest on center premium blocks for this show.',
+    lineup: [
+      { name: 'Opening Orchestra', time: '7:15 PM' },
+      { name: 'Sonu Nigam', time: '8:10 PM' },
+      { name: 'Encore Medley', time: '10:00 PM' },
+    ],
+    tierPerks: {
+      general: ['Open bowl access', 'Standard entry'],
+      premium: ['Centerline section', 'Fast-track security'],
+      vip: ['Close-view zone', 'Collector keepsake pass'],
+    },
+  },
+  {
+    id: 'event-krsna',
+    title: 'KR$NA After Dark',
+    artist: 'KR$NA',
+    genre: ['Hip-Hop', 'Rap'],
+    bannerUrl:
+      'https://images.unsplash.com/photo-1516280030429-27679b3dc9cf?auto=format&fit=crop&w=1600&q=80',
+    thumbnailUrl:
+      'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=900&q=80',
+    description:
+      'A punchy late-night rap set with sharp stage visuals, guest verses, and a center-focused mix for fans who want a high-energy arena feel.',
+    duration: '2h 05m',
+    ageRating: '16+',
+    language: 'Hindi, English',
+    venueId: 'venue-mumbai-mmrda',
+    priceRange: { min: 1000, max: 6400 },
+    availability: 'fast-filling',
+    availabilityPercent: 33,
+    tags: ['Rap night', 'Mumbai', 'High energy'],
+    aiInsight: 'Fans booking DIVINE and electronic crossover nights tend to shortlist KR$NA for premium side-center rows.',
+    lineup: [
+      { name: 'Cypher Warm-up', time: '7:40 PM' },
+      { name: 'KR$NA', time: '8:35 PM' },
+      { name: 'Guest Finale', time: '9:55 PM' },
+    ],
+    tierPerks: {
+      general: ['Upper bowl entry', 'Quick merch lane'],
+      premium: ['Closer center blocks', 'Fast re-entry'],
+      vip: ['Front barricade area', 'Exclusive wristband'],
+    },
+  },
+  {
+    id: 'event-sunidhi',
+    title: 'Sunidhi Chauhan Inferno Tour',
+    artist: 'Sunidhi Chauhan',
+    genre: ['Pop', 'Bollywood'],
+    bannerUrl:
+      'https://images.unsplash.com/photo-1496293455970-f8581aae0e3b?auto=format&fit=crop&w=1600&q=80',
+    thumbnailUrl:
+      'https://images.unsplash.com/photo-1493225055690-12c55ed6cc27?auto=format&fit=crop&w=900&q=80',
+    description:
+      'A high-voltage pop production anchored by powerhouse vocals, LED-heavy visuals, and a fast-moving setlist built for stadium energy.',
+    duration: '2h 20m',
+    ageRating: '12+',
+    language: 'Hindi',
+    venueId: 'venue-delhi-jln',
+    priceRange: { min: 1400, max: 7600 },
+    availability: 'fast-filling',
+    availabilityPercent: 37,
+    tags: ['Power vocals', 'Delhi', 'Night show'],
+    aiInsight: 'Users who hover between pop and Bollywood lineups often lock this faster when premium remains under half sold.',
+    lineup: [
+      { name: 'DJ Prelude', time: '7:00 PM' },
+      { name: 'Sunidhi Chauhan', time: '8:20 PM' },
+      { name: 'Finale Mix', time: '10:05 PM' },
+    ],
+    tierPerks: {
+      general: ['Stadium access', 'Standard gate'],
+      premium: ['Closer bowl section', 'Priority entry'],
+      vip: ['Front-view premium block', 'Hospitality lane'],
+    },
+  },
+  {
+    id: 'event-parikrama',
+    title: 'Parikrama Electric Highway',
+    artist: 'Parikrama',
+    genre: ['Rock', 'Indie Rock'],
+    bannerUrl:
+      'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=1600&q=80&sat=-20',
+    thumbnailUrl:
+      'https://images.unsplash.com/photo-1470229538611-16ba8c7ffbd7?auto=format&fit=crop&w=900&q=80',
+    description:
+      'A classic rock-driven live show with extended solos, arena-style lighting, and a fanbase that rewards a louder, center-stage vantage point.',
+    duration: '2h 30m',
+    ageRating: 'All Ages',
+    language: 'English, Hindi',
+    venueId: 'venue-delhi-jln',
+    priceRange: { min: 950, max: 5900 },
+    availability: 'available',
+    availabilityPercent: 62,
+    tags: ['Rock', 'Legacy act', 'Delhi'],
+    aiInsight: 'Rock-first browsers rank this unusually high because group buyers often find better value in general center rows here.',
+    lineup: [
+      { name: 'Opening Guitar Set', time: '6:50 PM' },
+      { name: 'Parikrama', time: '8:00 PM' },
+      { name: 'Jam Session Finale', time: '10:10 PM' },
+    ],
+    tierPerks: {
+      general: ['Open bowl access', 'Food court access'],
+      premium: ['Center sound pocket', 'Fast gate'],
+      vip: ['Front reserve rows', 'Signed poster lottery'],
+    },
+  },
+  {
+    id: 'event-anuv',
+    title: 'Anuv Jain Open Skies',
+    artist: 'Anuv Jain',
+    genre: ['Indie', 'Acoustic'],
+    bannerUrl:
+      'https://images.unsplash.com/photo-1501612780327-45045538702b?auto=format&fit=crop&w=1600&q=80',
+    thumbnailUrl:
+      'https://images.unsplash.com/photo-1487215078519-e21cc028cb29?auto=format&fit=crop&w=900&q=80',
+    description:
+      'A warm indie-acoustic night with intimate vocals, soft lighting, and a slower set pace built for listeners who want a closer emotional view.',
+    duration: '1h 55m',
+    ageRating: 'All Ages',
+    language: 'Hindi, English',
+    venueId: 'venue-bengaluru-palace',
+    priceRange: { min: 900, max: 5400 },
+    availability: 'available',
+    availabilityPercent: 67,
+    tags: ['Indie', 'Acoustic', 'Bengaluru'],
+    aiInsight: 'Fans who save indie and calmer rock nights typically convert on premium near-center rows for this show.',
+    lineup: [
+      { name: 'Acoustic Opening', time: '7:00 PM' },
+      { name: 'Anuv Jain', time: '8:00 PM' },
+      { name: 'Audience Encore', time: '9:25 PM' },
+    ],
+    tierPerks: {
+      general: ['Lawn access', 'Standard entry'],
+      premium: ['Closer centerline section', 'Early gate'],
+      vip: ['Front acoustic block', 'Souvenir laminate'],
+    },
+  },
+  {
+    id: 'event-wcmt',
+    title: 'When Chai Met Toast Sunlit Run',
+    artist: 'When Chai Met Toast',
+    genre: ['Indie', 'Pop'],
+    bannerUrl:
+      'https://images.unsplash.com/photo-1487180144351-b8472da7d491?auto=format&fit=crop&w=1600&q=80',
+    thumbnailUrl:
+      'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=900&q=80',
+    description:
+      'A breezy indie-pop set with melodic hooks, layered harmonies, and an uplifting live arrangement ideal for groups booking together.',
+    duration: '2h 00m',
+    ageRating: 'All Ages',
+    language: 'English',
+    venueId: 'venue-bengaluru-palace',
+    priceRange: { min: 850, max: 5000 },
+    availability: 'available',
+    availabilityPercent: 73,
+    tags: ['Indie pop', 'Feel-good', 'Bengaluru'],
+    aiInsight: 'This event over-indexes for users who browse rock and indie in the same session, especially in group bookings.',
+    lineup: [
+      { name: 'Sunset Support Set', time: '6:45 PM' },
+      { name: 'When Chai Met Toast', time: '7:50 PM' },
+      { name: 'Closing Choir', time: '9:15 PM' },
+    ],
+    tierPerks: {
+      general: ['Open lawn access', 'Merch queue'],
+      premium: ['Center lawn reserve', 'Fast-track entry'],
+      vip: ['Raised deck seating', 'Exclusive poster pack'],
+    },
+  },
+  {
+    id: 'event-jonita',
+    title: 'Jonita Gandhi Neon Bloom',
+    artist: 'Jonita Gandhi',
+    genre: ['Pop', 'Bollywood'],
+    bannerUrl:
+      'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1600&q=80',
+    thumbnailUrl:
+      'https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=900&q=80&sat=-10',
+    description:
+      'A sleek pop-forward concert with bilingual hits, crisp choreography cues, and a polished visual mix tailored for a premium seated crowd.',
+    duration: '2h 10m',
+    ageRating: '10+',
+    language: 'Hindi, English',
+    venueId: 'venue-chennai-sxicc',
+    priceRange: { min: 1200, max: 6800 },
+    availability: 'available',
+    availabilityPercent: 57,
+    tags: ['Pop', 'Chennai', 'Bilingual set'],
+    aiInsight: 'Viewers who shortlist Bollywood vocals and lighter pop tend to settle on premium for this one without much hesitation.',
+    lineup: [
+      { name: 'Opening DJ', time: '7:05 PM' },
+      { name: 'Jonita Gandhi', time: '8:00 PM' },
+      { name: 'Encore Duet', time: '9:35 PM' },
+    ],
+    tierPerks: {
+      general: ['Balcony access', 'Quick concessions'],
+      premium: ['Centered bowl seats', 'Priority lane'],
+      vip: ['Front orchestra view', 'Collector card'],
+    },
+  },
+  {
+    id: 'event-sanam',
+    title: 'SANAM Retro Gold Night',
+    artist: 'SANAM',
+    genre: ['Pop', 'Rock'],
+    bannerUrl:
+      'https://images.unsplash.com/photo-1516280030429-27679b3dc9cf?auto=format&fit=crop&w=1600&q=80&sat=-5',
+    thumbnailUrl:
+      'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=900&q=80',
+    description:
+      'A polished retro-pop concert with band-led reinterpretations, warm nostalgia, and clean sightlines that make premium rows especially rewarding.',
+    duration: '2h 15m',
+    ageRating: 'All Ages',
+    language: 'Hindi, English',
+    venueId: 'venue-chennai-sxicc',
+    priceRange: { min: 1100, max: 6500 },
+    availability: 'fast-filling',
+    availabilityPercent: 44,
+    tags: ['Retro', 'Band set', 'Chennai'],
+    aiInsight: 'Listeners moving between pop and softer rock often rank SANAM highly because premium gives the clearest balanced mix.',
+    lineup: [
+      { name: 'Retro Prelude', time: '7:10 PM' },
+      { name: 'SANAM', time: '8:05 PM' },
+      { name: 'Singalong Finale', time: '9:45 PM' },
+    ],
+    tierPerks: {
+      general: ['Rear bowl seating', 'Poster kiosk'],
+      premium: ['Center reserve rows', 'Priority entry'],
+      vip: ['Rows A-C', 'Limited-edition souvenir'],
     },
   },
 ];
