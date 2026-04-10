@@ -96,13 +96,30 @@ function BookingSummaryPage() {
 
   return (
     <>
-      <PageWrapper className="mx-auto max-w-[1440px] px-8 pb-12 pt-8">
-        <div className="mb-8">
-          <p className="text-xs uppercase tracking-[0.28em] text-[var(--color-text-muted)]">Step 3 of 3</p>
-          <h1 className="mt-2 font-display text-5xl text-[var(--color-text-primary)]">Booking Summary</h1>
+      <PageWrapper className="relative mx-auto max-w-[1440px] overflow-hidden px-8 pb-12 pt-8">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 -z-10"
+        >
+          <div className="absolute left-[-10%] top-10 h-72 w-72 rounded-full bg-[rgba(255,59,48,0.1)] blur-[110px]" />
+          <div className="absolute right-[-4%] top-36 h-80 w-80 rounded-full bg-[rgba(255,149,0,0.08)] blur-[130px]" />
+          <div className="absolute bottom-10 left-1/3 h-64 w-64 rounded-full bg-[rgba(80,90,255,0.07)] blur-[120px]" />
         </div>
 
-        <div className="grid grid-cols-[0.9fr_1.1fr] gap-8">
+        <div className="mb-8 flex items-end justify-between gap-6">
+          <div className="max-w-[760px]">
+            <p className="text-xs uppercase tracking-[0.28em] text-[var(--color-text-muted)]">Step 3 of 3</p>
+            <h1 className="mt-2 font-display text-5xl text-[var(--color-text-primary)]">Booking Summary</h1>
+            <p className="mt-3 max-w-[620px] text-sm text-[var(--color-text-secondary)]">
+              Review your seats, complete attendee details, and finish payment with a cleaner premium checkout flow.
+            </p>
+          </div>
+          <div className="premium-chip hidden rounded-full px-4 py-2 text-sm text-[var(--color-text-secondary)] lg:inline-flex">
+            Final step before confirmation
+          </div>
+        </div>
+
+        <div className="grid grid-cols-[0.9fr_1.1fr] items-start gap-8">
           <div className="space-y-5">
             <OrderSummaryCard event={selectedEvent} showtime={selectedShowtime} seats={selectedSeats} />
             <PriceBreakdown seats={selectedSeats} addOns={addOns} />
@@ -113,9 +130,9 @@ function BookingSummaryPage() {
             <PaymentSelector values={attendeeInfo} errors={paymentErrors} onFieldChange={(key, value) => setAttendeeInfo({ [key]: value })} />
             <AIAddOnStrip addOns={contextualAddOns} selectedAddOns={addOns} onToggle={toggleAddOn} />
 
-            <section className="editorial-panel rounded-[32px] p-6">
+            <section className="premium-panel rounded-[30px] bg-[linear-gradient(145deg,rgba(28,28,42,0.96),rgba(15,15,23,0.98))] p-6">
               <details>
-                <summary className="cursor-pointer text-sm text-[var(--color-text-secondary)]">
+                <summary className="cursor-pointer text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-text-primary)]">
                   Cancellation & refund policy
                 </summary>
                 <p className="mt-3 text-sm text-[var(--color-text-muted)]">
@@ -123,7 +140,7 @@ function BookingSummaryPage() {
                 </p>
               </details>
 
-              <div className="mt-6 flex items-center justify-between gap-4">
+              <div className="mt-6 flex items-center justify-between gap-4 border-t border-[rgba(255,255,255,0.06)] pt-5">
                 <p className="text-sm text-[var(--color-text-secondary)]">
                   {formValid ? 'Ready to secure your tickets.' : 'Complete the form and pick a payment method to enable checkout.'}
                 </p>
@@ -132,6 +149,7 @@ function BookingSummaryPage() {
                   disabled={!formValid}
                   loading={isLoading}
                   title={!formValid ? 'Complete required fields before payment.' : 'Pay now'}
+                  className="shadow-[0_16px_34px_rgba(255,59,48,0.24)] hover:shadow-[0_20px_42px_rgba(255,59,48,0.34)]"
                 >
                   Pay Now
                 </Button>

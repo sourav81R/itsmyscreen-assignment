@@ -13,26 +13,26 @@ function PriceBreakdown({ seats, addOns }) {
   const total = base + bookingFee + addOnTotal + gst;
 
   return (
-    <section className="editorial-panel rounded-[32px] p-6">
+    <section className="premium-panel rounded-[30px] bg-[linear-gradient(145deg,rgba(30,30,46,0.96),rgba(15,15,23,0.98))] p-6">
       <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-text-muted)]">Price breakdown</p>
       <div className="mt-5 space-y-4 text-sm text-[var(--color-text-secondary)]">
-        <div className="flex items-center justify-between">
+        <div className="premium-chip flex items-center justify-between rounded-[18px] px-4 py-3">
           <span>Base price</span>
           <span>{formatPrice(base)}</span>
         </div>
-        <div className="flex items-center justify-between">
+        <div className="premium-chip flex items-center justify-between rounded-[18px] px-4 py-3">
           <span>Booking fee</span>
           <span>{formatPrice(bookingFee)}</span>
         </div>
-        <div className="flex items-center justify-between">
+        <div className="premium-chip flex items-center justify-between rounded-[18px] px-4 py-3">
           <span>Add-ons</span>
           <span>{formatPrice(addOnTotal)}</span>
         </div>
-        <div className="flex items-center justify-between">
+        <div className="premium-chip flex items-center justify-between rounded-[18px] px-4 py-3">
           <span>GST (18%)</span>
           <span>{formatPrice(gst)}</span>
         </div>
-        <div className="border-t border-[var(--color-border-subtle)] pt-4">
+        <div className="border-t border-[rgba(255,255,255,0.06)] pt-4">
           <div className="flex items-center justify-between font-display text-3xl text-[var(--color-text-primary)]">
             <span>Total</span>
             <span>{formatPrice(total)}</span>

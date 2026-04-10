@@ -12,23 +12,33 @@ function OrderSummaryCard({ event, showtime, seats }) {
   const navigate = useNavigate();
 
   return (
-    <section className="editorial-panel rounded-[32px] p-6">
+    <section className="premium-panel group rounded-[30px] bg-[linear-gradient(145deg,rgba(31,31,48,0.96),rgba(15,15,24,0.98))] p-6">
       <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-text-muted)]">Order details</p>
       <div className="mt-5 flex gap-4">
-        <img src={event.thumbnailUrl} alt={`${event.title} ticket summary artwork`} className="h-28 w-24 rounded-[20px] object-cover" />
+        <div className="overflow-hidden rounded-[22px] border border-[rgba(255,149,0,0.14)] bg-[rgba(255,255,255,0.03)]">
+          <img
+            src={event.thumbnailUrl}
+            alt={`${event.title} ticket summary artwork`}
+            className="h-28 w-24 object-cover transition duration-300 group-hover:scale-[1.04]"
+          />
+        </div>
         <div>
-          <p className="font-display text-3xl text-[var(--color-text-primary)]">{event.title}</p>
+          <p className="font-display text-[2.05rem] leading-[1.05] text-[var(--color-text-primary)]">{event.title}</p>
           <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
             {formatLongDate(showtime.date)} · {showtime.time}
           </p>
           <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{event.venue.name}</p>
-          <p className="mt-4 text-sm text-[var(--color-text-primary)]">
+          <p className="mt-4 inline-flex rounded-full border border-[rgba(255,149,0,0.14)] bg-[rgba(255,255,255,0.03)] px-3 py-1.5 text-sm text-[var(--color-text-primary)] transition duration-200 group-hover:border-[rgba(255,190,92,0.34)]">
             Seats: {seatLabels(seats).join(', ')} · {seats[0]?.tier?.toUpperCase()} · {seats.length} tickets
           </p>
         </div>
       </div>
 
-      <Button className="mt-6" variant="secondary" onClick={() => navigate(`/event/${event.id}/seats`)}>
+      <Button
+        className="mt-6 border-[rgba(255,149,0,0.16)] bg-[rgba(255,255,255,0.02)] hover:border-[rgba(255,190,92,0.38)] hover:bg-[rgba(255,149,0,0.08)]"
+        variant="secondary"
+        onClick={() => navigate(`/event/${event.id}/seats`)}
+      >
         Edit Seats
       </Button>
     </section>
