@@ -14,7 +14,8 @@ function FilterPanel({ venues }) {
     useFilterStore();
 
   return (
-    <aside className="sticky top-28 h-fit overflow-hidden rounded-[36px] border border-[rgba(255,255,255,0.08)] bg-[linear-gradient(180deg,rgba(31,31,49,0.96),rgba(17,17,27,0.98))] shadow-[0_24px_70px_rgba(0,0,0,0.35)]">
+    <aside className="sticky top-28 h-fit overflow-hidden rounded-[36px] border border-[rgba(255,149,0,0.24)] bg-[linear-gradient(180deg,rgba(31,31,49,0.96),rgba(17,17,27,0.98))] shadow-[0_24px_70px_rgba(0,0,0,0.35),0_0_0_1px_rgba(255,149,0,0.08)]">
+      <div className="pointer-events-none absolute inset-0 rounded-[36px] border border-[rgba(255,210,120,0.08)]" />
       <div className="absolute inset-x-0 top-0 h-24 bg-[radial-gradient(circle_at_top_left,rgba(255,149,0,0.16),transparent_60%)]" />
 
       <div className="relative p-6">
@@ -38,7 +39,7 @@ function FilterPanel({ venues }) {
           </span>
         </div>
 
-        <div className="mb-6 rounded-[26px] border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.025)] px-4 py-3">
+        <div className="mb-6 rounded-[26px] border border-[rgba(255,149,0,0.14)] bg-[rgba(255,255,255,0.025)] px-4 py-3 transition duration-300 hover:-translate-y-0.5 hover:border-[rgba(255,149,0,0.28)] hover:bg-[rgba(255,255,255,0.04)]">
           <p className="text-[10px] uppercase tracking-[0.22em] text-[var(--color-text-muted)]">Quick summary</p>
           <div className="mt-3 flex flex-wrap gap-2">
             <span className="rounded-full border border-[rgba(255,255,255,0.08)] px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-[var(--color-text-secondary)]">
@@ -54,7 +55,7 @@ function FilterPanel({ venues }) {
         </div>
 
         <section className="space-y-5">
-          <div className="rounded-[26px] border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.02)] p-4">
+          <div className="rounded-[26px] border border-[rgba(255,149,0,0.14)] bg-[rgba(255,255,255,0.02)] p-4 transition duration-300 hover:-translate-y-0.5 hover:border-[rgba(255,149,0,0.28)] hover:bg-[rgba(255,255,255,0.04)]">
             <p className="mb-3 text-xs uppercase tracking-[0.18em] text-[var(--color-text-muted)]">Genre</p>
             <div className="flex flex-wrap gap-2">
               {genres.map((genre) => {
@@ -64,10 +65,10 @@ function FilterPanel({ venues }) {
                     key={genre}
                     type="button"
                     onClick={() => toggleGenre(genre)}
-                    className={`rounded-full border px-3 py-2 text-sm transition ${
+                  className={`rounded-full border px-3 py-2 text-sm transition duration-200 hover:-translate-y-0.5 ${
                       active
                         ? 'border-[rgba(255,149,0,0.3)] bg-[linear-gradient(180deg,rgba(255,59,48,0.18),rgba(255,149,0,0.12))] text-[var(--color-text-primary)] shadow-[0_10px_24px_rgba(255,149,0,0.08)]'
-                        : 'border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.03)] text-[var(--color-text-secondary)]'
+                        : 'border-[rgba(255,149,0,0.12)] bg-[rgba(255,255,255,0.03)] text-[var(--color-text-secondary)] hover:border-[rgba(255,149,0,0.24)] hover:bg-[rgba(255,255,255,0.05)]'
                     }`}
                   >
                     {genre}
@@ -77,7 +78,7 @@ function FilterPanel({ venues }) {
             </div>
           </div>
 
-          <div className="rounded-[26px] border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.02)] p-4">
+          <div className="rounded-[26px] border border-[rgba(255,149,0,0.14)] bg-[rgba(255,255,255,0.02)] p-4 transition duration-300 hover:-translate-y-0.5 hover:border-[rgba(255,149,0,0.28)] hover:bg-[rgba(255,255,255,0.04)]">
             <div className="mb-3 flex items-center gap-2">
               <CalendarDays className="h-4 w-4 text-[var(--color-brand-accent)]" aria-hidden="true" />
               <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-text-muted)]">Date range</p>
@@ -88,7 +89,7 @@ function FilterPanel({ venues }) {
                   type="date"
                   value={dateRange.from}
                   onChange={(event) => setFilter('dateRange', { ...dateRange, from: event.target.value })}
-                  className="w-full rounded-[20px] border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.04)] px-4 py-3 text-[var(--color-text-primary)] outline-none transition focus:border-[rgba(255,149,0,0.35)]"
+                  className="w-full rounded-[20px] border border-[rgba(255,149,0,0.14)] bg-[rgba(255,255,255,0.04)] px-4 py-3 text-[var(--color-text-primary)] outline-none transition duration-200 hover:border-[rgba(255,149,0,0.24)] hover:bg-[rgba(255,255,255,0.05)] focus:border-[rgba(255,149,0,0.35)]"
                 />
               </label>
               <label className="relative block">
@@ -96,13 +97,13 @@ function FilterPanel({ venues }) {
                   type="date"
                   value={dateRange.to}
                   onChange={(event) => setFilter('dateRange', { ...dateRange, to: event.target.value })}
-                  className="w-full rounded-[20px] border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.04)] px-4 py-3 text-[var(--color-text-primary)] outline-none transition focus:border-[rgba(255,149,0,0.35)]"
+                  className="w-full rounded-[20px] border border-[rgba(255,149,0,0.14)] bg-[rgba(255,255,255,0.04)] px-4 py-3 text-[var(--color-text-primary)] outline-none transition duration-200 hover:border-[rgba(255,149,0,0.24)] hover:bg-[rgba(255,255,255,0.05)] focus:border-[rgba(255,149,0,0.35)]"
                 />
               </label>
             </div>
           </div>
 
-          <div className="rounded-[26px] border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.02)] p-4">
+          <div className="rounded-[26px] border border-[rgba(255,149,0,0.14)] bg-[rgba(255,255,255,0.02)] p-4 transition duration-300 hover:-translate-y-0.5 hover:border-[rgba(255,149,0,0.28)] hover:bg-[rgba(255,255,255,0.04)]">
             <div className="mb-3 flex items-center justify-between text-xs uppercase tracking-[0.18em] text-[var(--color-text-muted)]">
               <span>Price</span>
               <span>
@@ -143,7 +144,7 @@ function FilterPanel({ venues }) {
             </div>
           </div>
 
-          <div className="rounded-[26px] border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.02)] p-4">
+          <div className="rounded-[26px] border border-[rgba(255,149,0,0.14)] bg-[rgba(255,255,255,0.02)] p-4 transition duration-300 hover:-translate-y-0.5 hover:border-[rgba(255,149,0,0.28)] hover:bg-[rgba(255,255,255,0.04)]">
             <div className="mb-3 flex items-center gap-2">
               <MapPin className="h-4 w-4 text-[var(--color-brand-accent)]" aria-hidden="true" />
               <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-text-muted)]">Venue</p>
@@ -151,7 +152,7 @@ function FilterPanel({ venues }) {
             <select
               value={venue}
               onChange={(event) => setFilter('venue', event.target.value)}
-              className="w-full rounded-[20px] border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.04)] px-4 py-3 text-[var(--color-text-primary)] outline-none transition focus:border-[rgba(255,149,0,0.35)]"
+              className="w-full rounded-[20px] border border-[rgba(255,149,0,0.14)] bg-[rgba(255,255,255,0.04)] px-4 py-3 text-[var(--color-text-primary)] outline-none transition duration-200 hover:border-[rgba(255,149,0,0.24)] hover:bg-[rgba(255,255,255,0.05)] focus:border-[rgba(255,149,0,0.35)]"
             >
               <option value="">All venues</option>
               {venues.map((item) => (
