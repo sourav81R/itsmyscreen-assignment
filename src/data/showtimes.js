@@ -1,0 +1,47 @@
+export const showtimes = [
+  { id: 'st-001', eventId: 'event-arijit', date: '2026-04-18', time: '7:30 PM', availableSeats: 5120, totalSeats: 8000 },
+  { id: 'st-002', eventId: 'event-arijit', date: '2026-04-19', time: '8:00 PM', availableSeats: 3780, totalSeats: 8000 },
+  { id: 'st-003', eventId: 'event-arijit', date: '2026-04-20', time: '7:00 PM', availableSeats: 1940, totalSeats: 8000 },
+  { id: 'st-004', eventId: 'event-dua-lipa', date: '2026-04-24', time: '8:00 PM', availableSeats: 5980, totalSeats: 30000 },
+  { id: 'st-005', eventId: 'event-dua-lipa', date: '2026-04-25', time: '8:30 PM', availableSeats: 4210, totalSeats: 30000 },
+  { id: 'st-006', eventId: 'event-dua-lipa', date: '2026-04-26', time: '7:30 PM', availableSeats: 1620, totalSeats: 30000 },
+  { id: 'st-007', eventId: 'event-nucleya', date: '2026-04-17', time: '9:00 PM', availableSeats: 6880, totalSeats: 20000 },
+  { id: 'st-008', eventId: 'event-nucleya', date: '2026-04-18', time: '9:15 PM', availableSeats: 3420, totalSeats: 20000 },
+  { id: 'st-009', eventId: 'event-nucleya', date: '2026-04-19', time: '8:30 PM', availableSeats: 0, totalSeats: 20000 },
+  { id: 'st-010', eventId: 'event-local-train', date: '2026-04-22', time: '7:00 PM', availableSeats: 8250, totalSeats: 25000 },
+  { id: 'st-011', eventId: 'event-local-train', date: '2026-04-23', time: '8:00 PM', availableSeats: 6910, totalSeats: 25000 },
+  { id: 'st-012', eventId: 'event-local-train', date: '2026-04-24', time: '7:30 PM', availableSeats: 4320, totalSeats: 25000 },
+  { id: 'st-013', eventId: 'event-rahman', date: '2026-04-28', time: '7:30 PM', availableSeats: 2640, totalSeats: 8000 },
+  { id: 'st-014', eventId: 'event-rahman', date: '2026-04-29', time: '8:00 PM', availableSeats: 1460, totalSeats: 8000 },
+  { id: 'st-015', eventId: 'event-rahman', date: '2026-04-30', time: '7:00 PM', availableSeats: 920, totalSeats: 8000 },
+  { id: 'st-016', eventId: 'event-prateek', date: '2026-05-02', time: '7:30 PM', availableSeats: 7850, totalSeats: 8000 },
+  { id: 'st-017', eventId: 'event-prateek', date: '2026-05-03', time: '8:30 PM', availableSeats: 6020, totalSeats: 8000 },
+  { id: 'st-018', eventId: 'event-prateek', date: '2026-05-04', time: '7:00 PM', availableSeats: 2810, totalSeats: 8000 },
+  { id: 'st-019', eventId: 'event-divine', date: '2026-05-05', time: '8:00 PM', availableSeats: 5020, totalSeats: 25000 },
+  { id: 'st-020', eventId: 'event-divine', date: '2026-05-06', time: '9:00 PM', availableSeats: 3090, totalSeats: 25000 },
+  { id: 'st-021', eventId: 'event-divine', date: '2026-05-07', time: '8:30 PM', availableSeats: 1310, totalSeats: 25000 },
+  { id: 'st-022', eventId: 'event-shreya', date: '2026-05-08', time: '7:30 PM', availableSeats: 3750, totalSeats: 8000 },
+  { id: 'st-023', eventId: 'event-shreya', date: '2026-05-09', time: '8:00 PM', availableSeats: 2480, totalSeats: 8000 },
+  { id: 'st-024', eventId: 'event-shreya', date: '2026-05-10', time: '7:00 PM', availableSeats: 920, totalSeats: 8000 },
+  { id: 'st-025', eventId: 'event-ritviz', date: '2026-05-10', time: '8:30 PM', availableSeats: 5940, totalSeats: 20000 },
+  { id: 'st-026', eventId: 'event-ritviz', date: '2026-05-11', time: '9:00 PM', availableSeats: 4030, totalSeats: 20000 },
+  { id: 'st-027', eventId: 'event-ritviz', date: '2026-05-12', time: '8:00 PM', availableSeats: 2210, totalSeats: 20000 },
+  { id: 'st-028', eventId: 'event-coke', date: '2026-05-13', time: '6:30 PM', availableSeats: 12540, totalSeats: 30000 },
+  { id: 'st-029', eventId: 'event-coke', date: '2026-05-14', time: '7:00 PM', availableSeats: 9420, totalSeats: 30000 },
+  { id: 'st-030', eventId: 'event-coke', date: '2026-05-15', time: '7:30 PM', availableSeats: 6840, totalSeats: 30000 },
+  { id: 'st-031', eventId: 'event-zakir', date: '2026-05-16', time: '7:00 PM', availableSeats: 4580, totalSeats: 8000 },
+  { id: 'st-032', eventId: 'event-zakir', date: '2026-05-17', time: '7:30 PM', availableSeats: 2160, totalSeats: 8000 },
+  { id: 'st-033', eventId: 'event-zakir', date: '2026-05-18', time: '6:30 PM', availableSeats: 780, totalSeats: 8000 },
+  { id: 'st-034', eventId: 'event-lucky-ali', date: '2026-05-18', time: '7:30 PM', availableSeats: 6480, totalSeats: 25000 },
+  { id: 'st-035', eventId: 'event-lucky-ali', date: '2026-05-19', time: '8:00 PM', availableSeats: 4920, totalSeats: 25000 },
+  { id: 'st-036', eventId: 'event-lucky-ali', date: '2026-05-20', time: '7:00 PM', availableSeats: 1900, totalSeats: 25000 },
+  { id: 'st-037', eventId: 'event-sitara', date: '2026-05-20', time: '9:00 PM', availableSeats: 7440, totalSeats: 20000 },
+  { id: 'st-038', eventId: 'event-sitara', date: '2026-05-21', time: '8:45 PM', availableSeats: 5810, totalSeats: 20000 },
+  { id: 'st-039', eventId: 'event-sitara', date: '2026-05-22', time: '8:30 PM', availableSeats: 2880, totalSeats: 20000 },
+];
+
+export const showtimesByEvent = showtimes.reduce((acc, showtime) => {
+  acc[showtime.eventId] ??= [];
+  acc[showtime.eventId].push(showtime);
+  return acc;
+}, {});
