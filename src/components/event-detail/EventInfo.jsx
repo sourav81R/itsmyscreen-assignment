@@ -62,13 +62,15 @@ function EventInfo({ event }) {
                 ].map(({ label, value, icon: Icon }) => (
                   <div
                     key={label}
-                    className="premium-panel rounded-[22px] bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.015))] p-4"
+                    className="premium-panel rounded-[22px] bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.022))] p-4"
                   >
                     <span className="premium-chip inline-flex h-10 w-10 items-center justify-center rounded-[14px] text-[var(--color-brand-accent)]">
                       <Icon className="h-5 w-5" aria-hidden="true" />
                     </span>
-                    <p className="mt-4 text-xs uppercase tracking-[0.18em] text-[var(--color-text-muted)]">{label}</p>
-                    <p className="mt-1.5 text-base text-[var(--color-text-primary)]">{value}</p>
+                    <p className="mt-4 text-xs uppercase tracking-[0.18em] text-[rgba(185,185,200,0.78)]">{label}</p>
+                    <p className="mt-1.5 text-[1.05rem] font-medium text-[rgba(245,245,247,0.98)] [text-shadow:0_1px_10px_rgba(0,0,0,0.28)]">
+                      {value}
+                    </p>
                   </div>
                 ))}
               </div>
