@@ -25,7 +25,7 @@ function AIRecommendedBanner({ events }) {
     }
 
     let animationFrame = 0;
-    const step = 0.8;
+    const step = 1.8;
 
     const tick = () => {
       if (!isPaused) {
@@ -61,8 +61,8 @@ function AIRecommendedBanner({ events }) {
       onMouseLeave={() => setIsPaused(false)}
     >
       <div className="absolute inset-x-0 top-0 h-28 bg-[radial-gradient(circle_at_top_left,rgba(255,149,0,0.2),transparent_52%)]" />
-      <div className="rounded-[35px] bg-[linear-gradient(180deg,rgba(18,18,28,0.98),rgba(11,11,18,0.98))] p-6">
-        <div className="mb-6 flex items-center justify-between gap-4">
+      <div className="rounded-[35px] bg-[linear-gradient(180deg,rgba(18,18,28,0.98),rgba(11,11,18,0.98))] p-5">
+        <div className="mb-5 flex items-center justify-between gap-4">
           <div className="flex items-start gap-4">
             <span className="inline-flex h-14 w-14 items-center justify-center rounded-[20px] border border-[rgba(255,149,0,0.18)] bg-[linear-gradient(180deg,rgba(255,149,0,0.18),rgba(255,149,0,0.08))] text-[var(--color-brand-accent)] shadow-[0_14px_30px_rgba(255,149,0,0.08)]">
               <Sparkles className="h-6 w-6" aria-hidden="true" />
@@ -114,19 +114,19 @@ function AIRecommendedBanner({ events }) {
         </div>
 
         <div ref={trackRef} className="thin-scrollbar overflow-x-auto scroll-smooth pb-4">
-          <div className="flex gap-5">
+          <div className="flex gap-4">
             {items.map((event, index) => (
               <button
                 key={`${event.id}-${index}`}
                 type="button"
                 onClick={() => navigate(`/event/${event.id}`)}
-                className="group relative min-w-[316px] overflow-hidden rounded-[30px] border border-[rgba(255,255,255,0.08)] bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.015))] text-left transition duration-300 hover:-translate-y-1.5 hover:border-[rgba(255,149,0,0.35)] hover:shadow-[0_18px_42px_rgba(0,0,0,0.28)]"
+                className="group relative min-w-[290px] overflow-hidden rounded-[28px] border border-[rgba(255,255,255,0.08)] bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.015))] text-left transition duration-300 hover:-translate-y-1.5 hover:border-[rgba(255,149,0,0.35)] hover:shadow-[0_18px_42px_rgba(0,0,0,0.28)]"
               >
                 <div className="relative">
                   <img
                     src={event.thumbnailUrl}
                     alt={`${event.title} recommended event artwork`}
-                    className="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
+                    className="h-40 w-full object-cover transition duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,10,15,0.06),rgba(10,10,15,0.28)_55%,rgba(10,10,15,0.82)_100%)]" />
                   <div className="absolute inset-x-4 top-4 flex items-start justify-between gap-3">
@@ -147,20 +147,20 @@ function AIRecommendedBanner({ events }) {
                   </div>
                 </div>
 
-                <div className="space-y-4 p-5">
-                  <div className="space-y-1.5">
+                <div className="space-y-3 p-4">
+                  <div className="space-y-1">
                     <div>
-                      <p className="font-display text-[2rem] leading-[1.02] text-[var(--color-text-primary)]">
+                      <p className="font-display text-[1.75rem] leading-[1.02] text-[var(--color-text-primary)]">
                         {event.title}
                       </p>
-                      <p className="mt-1 text-base text-[var(--color-text-secondary)]">{event.artist}</p>
+                      <p className="mt-1 text-[0.95rem] text-[var(--color-text-secondary)]">{event.artist}</p>
                     </div>
-                    <p className="text-sm leading-relaxed text-[var(--color-text-muted)]">
+                    <p className="text-[13px] leading-relaxed text-[var(--color-text-muted)]">
                       High-confidence recommendation based on your saved taste profile and recent premium browsing behavior.
                     </p>
                   </div>
 
-                  <div className="flex items-center justify-between gap-4 border-t border-[rgba(255,255,255,0.06)] pt-4">
+                  <div className="flex items-center justify-between gap-4 border-t border-[rgba(255,255,255,0.06)] pt-3">
                     <button
                       type="button"
                       onClick={(action) => action.stopPropagation()}
