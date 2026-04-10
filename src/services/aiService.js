@@ -10,6 +10,8 @@ const affinityWeights = {
   Bass: 3,
 };
 
+const tierOrder = ['general', 'premium', 'vip'];
+
 /**
  * Returns the top three contiguous seat groups that best match a group size and budget.
  * @param {Array} seats
@@ -25,7 +27,7 @@ export const getBestSeats = (seats, budget = 5000, count = 2) => {
     return acc;
   }, {});
 
-  const recommendations = Object.values(groupedRows)
+  const candidateGroups = Object.values(groupedRows)
     .flatMap((rowSeats) => {
       const sorted = [...rowSeats].sort((left, right) => left.number - right.number);
       const groups = [];
@@ -37,21 +39,27 @@ export const getBestSeats = (seats, budget = 5000, count = 2) => {
         );
         const total = slice.reduce((sum, seat) => sum + seat.price, 0);
         if (contiguous && total <= budget) {
+          const rowDepthScore = 26 - slice[0].row.charCodeAt(0);
+          const budgetFitScore = Math.max(0, budget - total) / 300;
+
           groups.push({
             seats: slice,
             total,
-            score:
-              (slice[0].tier === 'premium' ? 22 : slice[0].tier === 'vip' ? 18 : 12) +
-              Math.max(0, 10000 - total) / 300 +
-              (26 - slice[0].row.charCodeAt(0)),
+            score: rowDepthScore + budgetFitScore,
           });
         }
       }
 
       return groups;
-    })
-    .sort((left, right) => right.score - left.score)
-    .slice(0, 3);
+    });
+
+  const recommendations = tierOrder
+    .map((tier) =>
+      candidateGroups
+        .filter((group) => group.seats[0].tier === tier)
+        .sort((left, right) => right.score - left.score)[0],
+    )
+    .filter(Boolean);
 
   return recommendations;
 };

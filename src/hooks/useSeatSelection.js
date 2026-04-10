@@ -4,12 +4,17 @@ import { validateContiguous } from '../services/seatService';
 import { useBookingStore } from '../store/useBookingStore';
 
 export const useSeatSelection = (seats) => {
-  const { selectedSeats, selectedSeatCount, setSelectedSeats, toggleSeat } = useBookingStore();
+  const { selectedEvent, selectedSeats, selectedSeatCount, setSelectedSeats, toggleSeat } = useBookingStore();
   const [tooltip, setTooltip] = useState(null);
 
+  const suggestionBudget = useMemo(
+    () => Math.max((selectedEvent?.priceRange?.max ?? 4500) * selectedSeatCount, 4500),
+    [selectedEvent?.priceRange?.max, selectedSeatCount],
+  );
+
   const suggestions = useMemo(
-    () => getBestSeats(seats, Math.max(2200 * selectedSeatCount, 4500), selectedSeatCount),
-    [seats, selectedSeatCount],
+    () => getBestSeats(seats, suggestionBudget, selectedSeatCount),
+    [seats, selectedSeatCount, suggestionBudget],
   );
 
   const selectedSeatIds = useMemo(() => new Set(selectedSeats.map((seat) => seat.id)), [selectedSeats]);

@@ -10,7 +10,7 @@ import { formatPrice } from '../../utils/priceFormatter';
 function AIBestSeats({ suggestions, onApply }) {
   return (
     <section className="editorial-panel rounded-[28px] p-6">
-      <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-text-muted)]">AI Pick for your budget</p>
+      <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-text-muted)]">AI Picks Across Tiers</p>
       <div className="mt-4 space-y-3">
         {suggestions.map((group) => (
           <div
