@@ -214,7 +214,7 @@ function SeatingMap({ seats, selectedSeatIds, suggestedIds, onSeatAction, soldOu
         </div>
       ) : null}
 
-      <div className="absolute left-6 top-6 z-10 rounded-full border border-[var(--color-border-subtle)] bg-[rgba(10,10,15,0.78)] px-4 py-2 text-xs uppercase tracking-[0.18em] text-[var(--color-text-secondary)]">
+      <div className="absolute left-6 top-6 z-10 inline-flex rounded-full border border-[var(--color-border-subtle)] bg-[rgba(10,10,15,0.78)] px-4 py-2 text-xs uppercase tracking-[0.18em] text-[var(--color-text-secondary)]">
         Scroll to zoom · drag to pan
       </div>
 
