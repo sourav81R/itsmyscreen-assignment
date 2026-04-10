@@ -51,13 +51,13 @@ function EventCard({ event, viewMode }) {
           ) : null}
         </div>
 
-        <div className="flex flex-1 flex-col justify-between gap-3 p-3.5">
-          <div className="space-y-2">
+        <div className="flex flex-1 flex-col gap-3 p-3.5">
+          <div className={`space-y-2 ${isList ? '' : 'min-h-[150px]'}`}>
             <div className={`flex items-start justify-between gap-3 ${isList ? '' : 'hidden'}`}>
               <AvailabilityBadge availability={event.availability} className="!px-2.5 !py-1 !text-[10px]" />
             </div>
 
-            <div className="space-y-1">
+            <div className={`space-y-1 ${isList ? '' : 'min-h-[88px]'}`}>
               <div>
                 <p
                   className={`font-display leading-[1.04] text-[var(--color-text-primary)] ${
@@ -70,7 +70,7 @@ function EventCard({ event, viewMode }) {
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-1.5">
+            <div className={`flex flex-wrap gap-1.5 ${isList ? '' : 'min-h-[30px]'}`}>
               {event.genre.slice(0, 2).map((genre) => (
                 <span
                   key={genre}
@@ -82,7 +82,7 @@ function EventCard({ event, viewMode }) {
             </div>
           </div>
 
-          <div className="space-y-2 border-t border-[rgba(255,255,255,0.06)] pt-2.5 text-sm text-[var(--color-text-secondary)]">
+          <div className="mt-auto space-y-2 border-t border-[rgba(255,255,255,0.06)] pt-2.5 text-sm text-[var(--color-text-secondary)]">
             <div className="flex items-center gap-2 truncate text-[0.95rem]">
               <MapPin className="h-4 w-4 text-[var(--color-brand-accent)]" aria-hidden="true" />
               <span className="truncate">{event.venue.name}</span>
@@ -91,7 +91,7 @@ function EventCard({ event, viewMode }) {
               <CalendarDays className="h-4 w-4 text-[var(--color-brand-accent)]" aria-hidden="true" />
               <span>{firstShowtime ? formatShortDate(firstShowtime.date) : 'Dates soon'}</span>
             </div>
-            <div className="flex items-end justify-between gap-3">
+            <div className="flex min-h-[42px] items-end justify-between gap-3">
               <div>
                 <p className="text-[10px] uppercase tracking-[0.18em] text-[var(--color-text-muted)]">From</p>
                 <p className="font-display text-[1.4rem] leading-none text-[var(--color-text-primary)]">
