@@ -45,8 +45,9 @@ function PaymentSelector({ values, errors, onFieldChange }) {
                 type="text"
                 value={values[field.key]}
                 onChange={(event) => onFieldChange(field.key, event.target.value)}
+                autoComplete="off"
                 placeholder={field.placeholder}
-                className={`w-full rounded-[20px] border bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.02))] px-4 py-3 text-[var(--color-text-primary)] outline-none transition duration-200 placeholder:text-[var(--color-text-muted)] hover:border-[rgba(255,190,92,0.28)] focus:border-[rgba(255,190,92,0.42)] focus:bg-[rgba(255,255,255,0.05)] ${
+                className={`dark-input w-full rounded-[20px] border px-4 py-3 outline-none transition duration-200 hover:border-[rgba(255,190,92,0.28)] focus:border-[rgba(255,190,92,0.42)] ${
                   errors[field.key] ? 'border-[rgba(255,69,58,0.5)]' : 'border-[rgba(255,149,0,0.14)]'
                 }`}
               />
@@ -63,8 +64,9 @@ function PaymentSelector({ values, errors, onFieldChange }) {
             type="text"
             value={values.upiId}
             onChange={(event) => onFieldChange('upiId', event.target.value)}
+            autoComplete="off"
             placeholder="name@bank"
-            className={`w-full rounded-[20px] border bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.02))] px-4 py-3 text-[var(--color-text-primary)] outline-none transition duration-200 placeholder:text-[var(--color-text-muted)] hover:border-[rgba(255,190,92,0.28)] focus:border-[rgba(255,190,92,0.42)] focus:bg-[rgba(255,255,255,0.05)] ${
+            className={`dark-input w-full rounded-[20px] border px-4 py-3 outline-none transition duration-200 hover:border-[rgba(255,190,92,0.28)] focus:border-[rgba(255,190,92,0.42)] ${
               errors.upiId ? 'border-[rgba(255,69,58,0.5)]' : 'border-[rgba(255,149,0,0.14)]'
             }`}
           />

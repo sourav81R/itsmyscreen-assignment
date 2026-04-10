@@ -15,11 +15,11 @@ function OrderSummaryCard({ event, showtime, seats }) {
     <section className="premium-panel group rounded-[30px] bg-[linear-gradient(145deg,rgba(31,31,48,0.96),rgba(15,15,24,0.98))] p-6">
       <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-text-muted)]">Order details</p>
       <div className="mt-5 flex gap-4">
-        <div className="overflow-hidden rounded-[22px] border border-[rgba(255,149,0,0.14)] bg-[rgba(255,255,255,0.03)]">
+        <div className="w-[126px] shrink-0 self-stretch overflow-hidden rounded-[22px] border border-[rgba(255,149,0,0.14)] bg-[rgba(255,255,255,0.03)]">
           <img
             src={event.thumbnailUrl}
             alt={`${event.title} ticket summary artwork`}
-            className="h-28 w-24 object-cover transition duration-300 group-hover:scale-[1.04]"
+            className="h-full min-h-[152px] w-full object-cover transition duration-300 group-hover:scale-[1.04]"
           />
         </div>
         <div>
