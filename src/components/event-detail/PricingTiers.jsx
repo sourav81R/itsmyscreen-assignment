@@ -2,6 +2,12 @@ import PropTypes from 'prop-types';
 import Badge from '../shared/Badge';
 import { formatPrice } from '../../utils/priceFormatter';
 
+const tierColors = {
+  general: 'var(--color-seat-general)',
+  premium: 'var(--color-seat-premium)',
+  vip: 'var(--color-seat-vip)',
+};
+
 /**
  * Pricing tier comparison table with AI best-value emphasis.
  * Props: event.
@@ -60,7 +66,9 @@ function PricingTiers({ event }) {
             <div className="flex items-start justify-between gap-4">
               <div>
                 <p className="text-[11px] uppercase tracking-[0.24em] text-[var(--color-text-muted)]">{column.eyebrow}</p>
-                <p className="mt-2 font-display text-[1.55rem] text-[var(--color-text-primary)]">{column.label}</p>
+                <p className="mt-2 font-display text-[1.55rem]" style={{ color: tierColors[column.key] }}>
+                  {column.label}
+                </p>
                 <p className="mt-2 text-[1.55rem] text-[var(--color-text-primary)]">{formatPrice(column.price)}</p>
               </div>
               {column.highlight ? <Badge label="Best Value" variant="accent" /> : null}
