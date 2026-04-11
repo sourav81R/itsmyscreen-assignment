@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 import { AnimatePresence, motion } from 'framer-motion';
-import { X } from 'lucide-react';
 import Button from '../../shared/Button';
+import Timer from '../../shared/Timer';
 import { formatPrice } from '../../../utils/priceFormatter';
+import { seatLabels } from '../../../utils/seatValidator';
 
-function SelectionSummaryDrawer({ selectedSeats, timer, total, onRemoveSeat, onProceed, disabled, loading, message }) {
+function SelectionSummaryDrawer({ selectedSeats, timer, total, onProceed, disabled, loading, message }) {
   return (
     <AnimatePresence>
       {selectedSeats.length > 0 ? (
@@ -13,49 +14,31 @@ function SelectionSummaryDrawer({ selectedSeats, timer, total, onRemoveSeat, onP
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 50 }}
           transition={{ duration: 0.28, ease: 'easeOut' }}
-          className="selection-summary-drawer editorial-panel premium-panel"
+          className="fixed inset-x-0 bottom-0 z-40 border-t border-[rgba(255,149,0,0.14)] bg-[linear-gradient(180deg,rgba(8,8,12,0.78),rgba(12,12,18,0.96))] px-8 py-4 backdrop-blur-xl"
         >
-          <div className="selection-summary-main">
-            <div>
-              <p className="selection-summary-eyebrow">Your seats</p>
-              <h2 className="selection-summary-title">{selectedSeats.length} selected</h2>
+          <div className="premium-panel mx-auto flex max-w-[1440px] items-center justify-between gap-6 overflow-hidden rounded-[26px] bg-[linear-gradient(135deg,rgba(34,31,51,0.92),rgba(14,14,22,0.96)_58%,rgba(42,20,20,0.9))] px-6 py-4 shadow-[0_24px_54px_rgba(0,0,0,0.28)]">
+            <div className="min-w-0 transition-transform duration-200">
+              <p className="truncate text-sm text-[var(--color-text-secondary)]">
+                Selected: {seatLabels(selectedSeats).join(', ')} · {selectedSeats[0]?.tier?.toUpperCase()}
+              </p>
+              <p className="mt-1 font-display text-3xl text-[var(--color-text-primary)]">{formatPrice(total)}</p>
+              {message ? <p className="mt-1 text-sm text-[var(--color-brand-accent)]">{message}</p> : null}
             </div>
 
-            <div className={`selection-summary-timer ${timer.totalSeconds < 120 ? 'is-urgent' : ''}`}>
-              <span>Hold timer</span>
-              <strong>{timer.display}</strong>
-            </div>
-          </div>
-
-          <div className="selection-summary-seats thin-scrollbar">
-            {selectedSeats.map((seat) => (
-              <div key={seat.id} className="selection-summary-seat">
-                <div>
-                  <p className="selection-summary-seat-id">{seat.row}{seat.number}</p>
-                  <p className="selection-summary-seat-meta">{seat.tier.toUpperCase()} · {formatPrice(seat.price)}</p>
-                </div>
-                <button
-                  type="button"
-                  aria-label={`Remove seat ${seat.row}${seat.number}`}
-                  onClick={() => onRemoveSeat(seat)}
-                  className="selection-summary-remove"
-                >
-                  <X className="h-3.5 w-3.5" aria-hidden="true" />
-                </button>
+            <div className="flex shrink-0 items-center gap-4">
+              <div className="premium-chip rounded-full px-3 py-1.5 shadow-[0_10px_24px_rgba(0,0,0,0.16)]">
+                <Timer display={timer.display} totalSeconds={timer.totalSeconds} />
               </div>
-            ))}
-          </div>
-
-          <div className="selection-summary-footer">
-            <div>
-              <p className="selection-summary-total-label">Total</p>
-              <p className="selection-summary-total-value">{formatPrice(total)}</p>
-              <p className="selection-summary-insight">AI notes: these seats keep strong sightlines for your chosen count.</p>
-              {message ? <p className="selection-summary-warning">{message}</p> : null}
+              <Button
+                size="lg"
+                onClick={onProceed}
+                disabled={disabled || timer.totalSeconds <= 0}
+                loading={loading}
+                className="min-w-[220px] shadow-[0_12px_28px_rgba(255,59,48,0.22)] transition-all duration-200 hover:translate-y-[-1px] hover:shadow-[0_18px_36px_rgba(255,59,48,0.3)]"
+              >
+                Proceed to Summary
+              </Button>
             </div>
-            <Button size="lg" onClick={onProceed} disabled={disabled} loading={loading} className="min-w-[180px]">
-              Continue
-            </Button>
           </div>
         </motion.section>
       ) : null}
@@ -78,7 +61,6 @@ SelectionSummaryDrawer.propTypes = {
     totalSeconds: PropTypes.number.isRequired,
   }).isRequired,
   total: PropTypes.number.isRequired,
-  onRemoveSeat: PropTypes.func.isRequired,
   onProceed: PropTypes.func.isRequired,
   disabled: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
