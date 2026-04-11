@@ -163,11 +163,13 @@ const buildTicketHtml = ({ bookingId, event, showtime, seats, attendeeName, addO
         box-sizing: border-box;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
+        overflow-wrap: anywhere;
+        word-break: break-word;
       }
 
       @page {
         size: A4;
-        margin: 12mm;
+        margin: 8mm;
       }
 
       html, body {
@@ -180,14 +182,14 @@ const buildTicketHtml = ({ bookingId, event, showtime, seats, attendeeName, addO
 
       body {
         padding: 0;
+        line-height: 1.35;
       }
 
       .sheet {
         position: relative;
         overflow: hidden;
-        min-height: calc(297mm - 24mm);
         border: 1.5px solid var(--line);
-        border-radius: 28px;
+        border-radius: 24px;
         background:
           radial-gradient(circle at top right, rgba(255, 149, 0, 0.16), transparent 30%),
           radial-gradient(circle at bottom left, rgba(255, 59, 48, 0.08), transparent 26%),
@@ -198,9 +200,9 @@ const buildTicketHtml = ({ bookingId, event, showtime, seats, attendeeName, addO
       .sheet::before {
         content: "";
         position: absolute;
-        inset: 14px;
+        inset: 10px;
         border: 1px solid rgba(216, 108, 29, 0.18);
-        border-radius: 22px;
+        border-radius: 18px;
         pointer-events: none;
       }
 
@@ -208,14 +210,15 @@ const buildTicketHtml = ({ bookingId, event, showtime, seats, attendeeName, addO
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 18px;
-        padding: 28px 32px 18px;
+        gap: 14px;
+        padding: 20px 24px 12px;
       }
 
       .brand {
         display: flex;
         align-items: center;
-        gap: 14px;
+        gap: 12px;
+        min-width: 0;
       }
 
       .brand-mark {
@@ -224,7 +227,7 @@ const buildTicketHtml = ({ bookingId, event, showtime, seats, attendeeName, addO
         justify-content: center;
         width: 48px;
         height: 48px;
-        border-radius: 16px;
+        border-radius: 14px;
         border: 1px solid rgba(216, 108, 29, 0.28);
         background: linear-gradient(145deg, rgba(255, 149, 0, 0.16), rgba(255, 255, 255, 0.88));
         color: var(--accent-deep);
@@ -234,15 +237,15 @@ const buildTicketHtml = ({ bookingId, event, showtime, seats, attendeeName, addO
 
       .eyebrow {
         margin: 0 0 4px;
-        font-size: 11px;
-        letter-spacing: 0.28em;
+        font-size: 10px;
+        letter-spacing: 0.24em;
         text-transform: uppercase;
         color: var(--accent-deep);
       }
 
       .brand-title {
         margin: 0;
-        font-size: 21px;
+        font-size: 19px;
         font-weight: 700;
         letter-spacing: 0.02em;
       }
@@ -250,15 +253,16 @@ const buildTicketHtml = ({ bookingId, event, showtime, seats, attendeeName, addO
       .status-pill {
         display: inline-flex;
         align-items: center;
-        gap: 10px;
-        padding: 10px 16px;
+        gap: 8px;
+        padding: 8px 14px;
         border-radius: 999px;
         border: 1px solid rgba(216, 108, 29, 0.26);
         background: linear-gradient(145deg, rgba(255, 149, 0, 0.12), rgba(255, 255, 255, 0.76));
-        font-size: 11px;
-        letter-spacing: 0.24em;
+        font-size: 10px;
+        letter-spacing: 0.2em;
         text-transform: uppercase;
         color: #6f4a22;
+        flex-shrink: 0;
       }
 
       .status-pill::before {
@@ -272,9 +276,10 @@ const buildTicketHtml = ({ bookingId, event, showtime, seats, attendeeName, addO
 
       .hero {
         display: grid;
-        grid-template-columns: minmax(0, 1.35fr) 250px;
-        gap: 20px;
-        padding: 0 32px 24px;
+        grid-template-columns: minmax(0, 1.42fr) 210px;
+        gap: 14px;
+        padding: 0 24px 14px;
+        break-inside: avoid;
       }
 
       .hero-card,
@@ -283,95 +288,99 @@ const buildTicketHtml = ({ bookingId, event, showtime, seats, attendeeName, addO
       .note-card,
       .footer-card {
         border: 1px solid rgba(232, 215, 188, 0.92);
-        border-radius: 24px;
+        border-radius: 20px;
         background: rgba(255, 253, 248, 0.82);
       }
 
       .hero-card {
         display: grid;
-        grid-template-columns: 170px minmax(0, 1fr);
-        gap: 20px;
-        padding: 20px;
+        grid-template-columns: 136px minmax(0, 1fr);
+        gap: 14px;
+        padding: 16px;
+        min-width: 0;
       }
 
       .poster {
         width: 100%;
-        height: 220px;
+        height: 176px;
         object-fit: cover;
-        border-radius: 18px;
+        border-radius: 16px;
         background: #ece4d8;
       }
 
       .genre-row {
         display: flex;
         flex-wrap: wrap;
-        gap: 8px;
-        margin-bottom: 12px;
+        gap: 6px;
+        margin-bottom: 10px;
       }
 
       .genre-chip {
-        padding: 7px 11px;
+        padding: 6px 9px;
         border-radius: 999px;
         background: var(--paper-strong);
         border: 1px solid rgba(216, 108, 29, 0.18);
-        font-size: 11px;
-        letter-spacing: 0.14em;
+        font-size: 9px;
+        letter-spacing: 0.12em;
         text-transform: uppercase;
         color: #6f5842;
       }
 
       h1 {
         margin: 0;
-        font-size: 38px;
-        line-height: 1;
+        font-size: 30px;
+        line-height: 1.02;
         letter-spacing: -0.03em;
       }
 
       .artist {
-        margin: 10px 0 0;
-        font-size: 16px;
+        margin: 8px 0 0;
+        font-size: 14px;
         color: var(--soft-ink);
       }
 
       .meta {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 12px;
-        margin-top: 18px;
+        gap: 10px;
+        margin-top: 12px;
       }
 
       .meta-block {
-        padding: 12px 14px;
-        border-radius: 18px;
+        padding: 10px 12px;
+        border-radius: 14px;
         background: linear-gradient(180deg, rgba(255, 149, 0, 0.08), rgba(255, 255, 255, 0.92));
         border: 1px solid rgba(216, 108, 29, 0.12);
+        min-width: 0;
       }
 
       .meta-label {
         margin: 0 0 4px;
-        font-size: 10px;
-        letter-spacing: 0.18em;
+        font-size: 9px;
+        letter-spacing: 0.14em;
         text-transform: uppercase;
         color: #8a7b6a;
       }
 
       .meta-value {
         margin: 0;
-        font-size: 15px;
+        font-size: 13px;
         font-weight: 700;
+        line-height: 1.35;
       }
 
       .scan-card {
-        padding: 18px;
+        padding: 14px;
         background:
           linear-gradient(180deg, rgba(255, 149, 0, 0.1), rgba(255, 255, 255, 0.92)),
           #fffdf8;
+        min-width: 0;
       }
 
       .scan-card h2 {
         margin: 0;
-        font-size: 13px;
-        letter-spacing: 0.18em;
+        font-size: 11px;
+        letter-spacing: 0.16em;
         text-transform: uppercase;
         color: #72532d;
       }
@@ -379,51 +388,54 @@ const buildTicketHtml = ({ bookingId, event, showtime, seats, attendeeName, addO
       .code-panel {
         display: grid;
         place-items: center;
-        margin-top: 14px;
-        padding: 14px;
-        border-radius: 20px;
+        margin-top: 10px;
+        padding: 10px;
+        border-radius: 16px;
         background: #fffdf7;
         border: 1px solid rgba(216, 108, 29, 0.16);
       }
 
       .code-panel svg {
-        width: 164px;
-        height: 164px;
+        width: 128px;
+        height: 128px;
       }
 
       .booking-id {
-        margin: 12px 0 0;
-        font-size: 20px;
+        margin: 10px 0 0;
+        font-size: 16px;
         font-weight: 800;
-        letter-spacing: 0.12em;
+        letter-spacing: 0.08em;
         text-align: center;
         color: var(--accent-deep);
+        line-height: 1.25;
       }
 
       .scan-caption {
         margin: 8px 0 0;
-        font-size: 12px;
+        font-size: 11px;
         text-align: center;
         color: #766b60;
-        line-height: 1.5;
+        line-height: 1.4;
       }
 
       .details {
         display: grid;
-        grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-        gap: 18px;
-        padding: 0 32px 18px;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 14px;
+        padding: 0 24px 14px;
+        break-inside: avoid;
       }
 
       .detail-card,
       .note-card {
-        padding: 20px;
+        padding: 16px;
+        min-width: 0;
       }
 
       .section-title {
-        margin: 0 0 16px;
-        font-size: 12px;
-        letter-spacing: 0.22em;
+        margin: 0 0 12px;
+        font-size: 10px;
+        letter-spacing: 0.18em;
         text-transform: uppercase;
         color: #87684a;
       }
@@ -431,88 +443,92 @@ const buildTicketHtml = ({ bookingId, event, showtime, seats, attendeeName, addO
       .detail-grid {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 12px;
+        gap: 10px;
       }
 
       .detail-item {
-        padding: 12px 14px;
-        border-radius: 18px;
+        padding: 10px 12px;
+        border-radius: 14px;
         background: var(--paper);
         border: 1px solid rgba(22, 20, 18, 0.05);
+        min-width: 0;
       }
 
       .detail-item span {
         display: block;
         margin-bottom: 4px;
-        font-size: 10px;
-        letter-spacing: 0.16em;
+        font-size: 9px;
+        letter-spacing: 0.12em;
         text-transform: uppercase;
         color: #918574;
       }
 
       .detail-item strong {
         display: block;
-        font-size: 14px;
-        line-height: 1.45;
+        font-size: 12px;
+        line-height: 1.35;
       }
 
       .price-row {
         display: flex;
         justify-content: space-between;
         gap: 12px;
-        margin-top: 14px;
-        padding-top: 14px;
+        margin-top: 12px;
+        padding-top: 12px;
         border-top: 1px dashed rgba(216, 108, 29, 0.26);
-        font-size: 14px;
+        font-size: 12px;
       }
 
       .price-row strong {
-        font-size: 18px;
+        font-size: 16px;
         color: var(--accent-deep);
       }
 
       .list {
         margin: 0;
-        padding-left: 18px;
+        padding-left: 16px;
       }
 
       .list li {
-        margin-bottom: 10px;
+        margin-bottom: 8px;
         color: var(--soft-ink);
-        line-height: 1.5;
+        line-height: 1.4;
+        font-size: 12px;
       }
 
       .chip-row {
         display: flex;
         flex-wrap: wrap;
-        gap: 8px;
-        margin-top: 16px;
+        gap: 6px;
+        margin-top: 12px;
       }
 
       .soft-chip {
-        padding: 8px 11px;
+        padding: 6px 9px;
         border-radius: 999px;
         background: linear-gradient(180deg, rgba(255, 149, 0, 0.12), rgba(255, 255, 255, 0.94));
         border: 1px solid rgba(216, 108, 29, 0.14);
-        font-size: 11px;
+        font-size: 10px;
         color: #6f5842;
       }
 
       .footer-card {
         display: grid;
         grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
-        gap: 16px;
-        margin: 0 32px 30px;
-        padding: 18px 20px;
+        gap: 12px;
+        margin: 0 24px 20px;
+        padding: 14px 16px;
         background:
           linear-gradient(180deg, rgba(255, 149, 0, 0.08), rgba(255, 255, 255, 0.92)),
           #fffdf8;
+        break-inside: avoid;
       }
 
       .footer-card p {
         margin: 0;
         color: var(--soft-ink);
-        line-height: 1.55;
+        line-height: 1.4;
+        font-size: 12px;
       }
 
       .footer-highlight {
@@ -521,21 +537,22 @@ const buildTicketHtml = ({ bookingId, event, showtime, seats, attendeeName, addO
       }
 
       .support {
-        padding-left: 18px;
+        padding-left: 12px;
         border-left: 1px dashed rgba(216, 108, 29, 0.28);
+        min-width: 0;
       }
 
       .support strong {
         display: block;
         margin-bottom: 6px;
-        font-size: 13px;
-        letter-spacing: 0.18em;
+        font-size: 11px;
+        letter-spacing: 0.14em;
         text-transform: uppercase;
         color: #86623d;
       }
 
       .support p + p {
-        margin-top: 8px;
+        margin-top: 5px;
       }
 
       @media print {
@@ -546,6 +563,13 @@ const buildTicketHtml = ({ bookingId, event, showtime, seats, attendeeName, addO
         .sheet {
           min-height: auto;
           box-shadow: none;
+        }
+
+        .hero,
+        .details,
+        .footer-card {
+          page-break-inside: avoid;
+          break-inside: avoid;
         }
       }
     </style>
@@ -588,7 +612,7 @@ const buildTicketHtml = ({ bookingId, event, showtime, seats, attendeeName, addO
               </div>
               <div class="meta-block">
                 <p class="meta-label">Tickets</p>
-                <p class="meta-value">${ticketCount} • ${safeTier}</p>
+                <p class="meta-value">${ticketCount} | ${safeTier}</p>
               </div>
             </div>
           </div>
@@ -658,7 +682,7 @@ const buildTicketHtml = ({ bookingId, event, showtime, seats, attendeeName, addO
           <strong>Support</strong>
           <p>Booking ID: ${safeBookingId}</p>
           <p>${safeVenue}</p>
-          <p>${safeDate} • ${safeTime}</p>
+          <p>${safeDate} | ${safeTime}</p>
         </div>
       </section>
     </main>
@@ -741,3 +765,4 @@ export const openTicketPrintWindow = ({ bookingId, event, showtime, seats, atten
 
   return true;
 };
+
