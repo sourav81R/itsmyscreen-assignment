@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="10" y1="8" x2="54" y2="58" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2A2438"/>
+      <stop offset="1" stop-color="#0F1018"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="16" y1="14" x2="48" y2="50" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFB020"/>
+      <stop offset="1" stop-color="#FF3B30"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(20 16) rotate(43.7811) scale(38.8772)">
+      <stop stop-color="#FF9500" stop-opacity=".42"/>
+      <stop offset="1" stop-color="#FF9500" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="64" height="64" rx="18" fill="url(#bg)"/>
+  <rect width="64" height="64" rx="18" fill="url(#glow)"/>
+  <rect x="4" y="4" width="56" height="56" rx="14" stroke="url(#accent)" stroke-opacity=".32" stroke-width="1.5"/>
+  <path d="M18 23C18 20.7909 19.7909 19 22 19H42C44.2091 19 46 20.7909 46 23V35C46 37.2091 44.2091 39 42 39H31.5L25.5 45V39H22C19.7909 39 18 37.2091 18 35V23Z" fill="url(#accent)" fill-opacity=".14" stroke="url(#accent)" stroke-width="2"/>
+  <path d="M29 25.5L37 29.5L29 33.5V25.5Z" fill="#FFF6ED"/>
+  <circle cx="43.5" cy="21.5" r="3.5" fill="#FFB020"/>
+  <circle cx="43.5" cy="21.5" r="1.25" fill="#FFF6ED"/>
+</svg>

@@ -4,6 +4,7 @@ import AIRecommendedBanner from '../components/discovery/AIRecommendedBanner';
 import EventCard from '../components/discovery/EventCard';
 import FilterPanel from '../components/discovery/FilterPanel';
 import SearchBar from '../components/discovery/SearchBar';
+import SortDropdown from '../components/discovery/SortDropdown';
 import ViewToggle from '../components/discovery/ViewToggle';
 import Button from '../components/shared/Button';
 import PageWrapper from '../components/layout/PageWrapper';
@@ -72,7 +73,7 @@ function DiscoveryPage({ city }) {
           <AIRecommendedBanner events={recommendedEvents} />
 
           <section className="space-y-6">
-            <div className="flex items-center justify-between gap-4">
+            <div className="flex items-start justify-between gap-4">
               <div>
                 <p className="text-xs uppercase tracking-[0.28em] text-[var(--color-text-muted)]">{city}</p>
                 <h1 className="mt-2 font-display text-5xl text-[var(--color-text-primary)]">All Events</h1>
@@ -80,27 +81,7 @@ function DiscoveryPage({ city }) {
                   {cityEvents.length} results curated for a premium live-night shortlist.
                 </p>
               </div>
-              <label className="rounded-full border border-[var(--color-border-subtle)] bg-[rgba(255,255,255,0.04)] px-4 py-3 text-sm text-[var(--color-text-secondary)]">
-                <span className="mr-2 text-xs uppercase tracking-[0.18em]">Sort</span>
-                <select
-                  value={sortBy}
-                  onChange={(event) => setFilter('sortBy', event.target.value)}
-                  className="bg-transparent text-[var(--color-text-primary)] outline-none"
-                >
-                  <option value="recommended" className="bg-[var(--color-bg-surface)]">
-                    Recommended
-                  </option>
-                  <option value="date" className="bg-[var(--color-bg-surface)]">
-                    Date
-                  </option>
-                  <option value="price" className="bg-[var(--color-bg-surface)]">
-                    Price
-                  </option>
-                  <option value="popularity" className="bg-[var(--color-bg-surface)]">
-                    Popularity
-                  </option>
-                </select>
-              </label>
+              <SortDropdown value={sortBy} onChange={(nextValue) => setFilter('sortBy', nextValue)} />
             </div>
 
             {isBooting ? (

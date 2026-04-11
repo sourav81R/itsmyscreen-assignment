@@ -228,13 +228,100 @@ function SeatingMap({ seats, selectedSeatIds, suggestedIds, onSeatAction, soldOu
             <stop offset="0%" stopColor="rgba(255,149,0,0.9)" />
             <stop offset="100%" stopColor="rgba(255,59,48,0.9)" />
           </linearGradient>
+          <linearGradient id="stageTopGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="rgba(255,214,138,0.9)" />
+            <stop offset="50%" stopColor="rgba(255,248,232,0.92)" />
+            <stop offset="100%" stopColor="rgba(255,193,118,0.88)" />
+          </linearGradient>
+          <linearGradient id="stageLipGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="rgba(255,255,255,0.22)" />
+            <stop offset="100%" stopColor="rgba(255,255,255,0)" />
+          </linearGradient>
+          <radialGradient id="stageGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="rgba(255,149,0,0.28)" />
+            <stop offset="100%" stopColor="rgba(255,149,0,0)" />
+          </radialGradient>
+          <radialGradient id="spotlightGlow" cx="50%" cy="0%" r="80%">
+            <stop offset="0%" stopColor="rgba(255,225,168,0.22)" />
+            <stop offset="100%" stopColor="rgba(255,225,168,0)" />
+          </radialGradient>
+          <linearGradient id="guideGradient" x1="50%" y1="0%" x2="50%" y2="100%">
+            <stop offset="0%" stopColor="rgba(255,208,120,0.28)" />
+            <stop offset="100%" stopColor="rgba(255,208,120,0)" />
+          </linearGradient>
         </defs>
 
         <g transform={`translate(${pan.x} ${pan.y}) scale(${zoom})`}>
-          <rect x="300" y="46" width="400" height="46" rx="23" fill="url(#stageGradient)" opacity="0.9" />
-          <text x="500" y="75" fill="white" textAnchor="middle" fontSize="18" letterSpacing="4">
-            STAGE
-          </text>
+          <ellipse cx="500" cy="118" rx="250" ry="78" fill="url(#stageGlow)" />
+          <ellipse cx="500" cy="100" rx="180" ry="56" fill="url(#spotlightGlow)" />
+          <path
+            d="M500 118 L500 186"
+            stroke="url(#guideGradient)"
+            strokeWidth="2"
+            strokeDasharray="5 9"
+            strokeLinecap="round"
+            opacity="0.75"
+          />
+          <g>
+            <path
+              d="M286 92C286 75.431 299.431 62 316 62H684C700.569 62 714 75.431 714 92C714 108.569 700.569 122 684 122H316C299.431 122 286 108.569 286 92Z"
+              fill="rgba(11,11,18,0.36)"
+            />
+            <path
+              d="M304 84C304 69.641 315.641 58 330 58H670C684.359 58 696 69.641 696 84C696 98.359 684.359 110 670 110H330C315.641 110 304 98.359 304 84Z"
+              fill="url(#stageGradient)"
+            />
+            <path
+              d="M320 66H680"
+              stroke="url(#stageTopGradient)"
+              strokeWidth="3"
+              strokeLinecap="round"
+              opacity="0.9"
+            />
+            <path
+              d="M318 78H682"
+              stroke="url(#stageLipGradient)"
+              strokeWidth="14"
+              strokeLinecap="round"
+              opacity="0.75"
+            />
+            <path
+              d="M330 110C373 124 627 124 670 110"
+              stroke="rgba(255,255,255,0.18)"
+              strokeWidth="2"
+              strokeLinecap="round"
+              opacity="0.75"
+            />
+            <circle cx="500" cy="44" r="4" fill="rgba(255,202,110,0.95)" />
+            <path
+              d="M398 51C432 39 466 33 500 33C534 33 568 39 602 51"
+              fill="none"
+              stroke="rgba(255,214,138,0.38)"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+            <text
+              x="500"
+              y="88"
+              fill="white"
+              textAnchor="middle"
+              fontSize="20"
+              fontWeight="600"
+              letterSpacing="5"
+            >
+              STAGE
+            </text>
+            <text
+              x="500"
+              y="45"
+              fill="rgba(255,214,138,0.86)"
+              textAnchor="middle"
+              fontSize="10"
+              letterSpacing="3.2"
+            >
+              CENTER VIEW
+            </text>
+          </g>
 
           {sortedSeats.map((seat) => (
             <SeatNode
