@@ -175,12 +175,16 @@ const buildTicketHtml = ({ bookingId, event, showtime, seats, attendeeName, addO
       html, body {
         margin: 0;
         padding: 0;
-        background: linear-gradient(180deg, #f6f1e7, #f1ebe0);
+        background: #ffffff;
         color: var(--ink);
         font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+        min-height: 100%;
       }
 
       body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         padding: 0;
         line-height: 1.35;
       }
@@ -188,6 +192,7 @@ const buildTicketHtml = ({ bookingId, event, showtime, seats, attendeeName, addO
       .sheet {
         position: relative;
         overflow: hidden;
+        width: min(100%, 190mm);
         border: 1.5px solid var(--line);
         border-radius: 24px;
         background:
@@ -195,15 +200,6 @@ const buildTicketHtml = ({ bookingId, event, showtime, seats, attendeeName, addO
           radial-gradient(circle at bottom left, rgba(255, 59, 48, 0.08), transparent 26%),
           linear-gradient(180deg, #fffdf8, #f7f1e7);
         box-shadow: 0 20px 70px rgba(58, 44, 31, 0.12);
-      }
-
-      .sheet::before {
-        content: "";
-        position: absolute;
-        inset: 10px;
-        border: 1px solid rgba(216, 108, 29, 0.18);
-        border-radius: 18px;
-        pointer-events: none;
       }
 
       .topbar {
@@ -558,10 +554,13 @@ const buildTicketHtml = ({ bookingId, event, showtime, seats, attendeeName, addO
       @media print {
         body {
           background: #ffffff;
+          display: block;
         }
 
         .sheet {
           min-height: auto;
+          width: 100%;
+          margin: 0 auto;
           box-shadow: none;
         }
 
