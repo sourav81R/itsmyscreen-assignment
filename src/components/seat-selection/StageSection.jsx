@@ -122,6 +122,10 @@ function StageSection({
           <ViewAngleToggle value={viewMode} onChange={setViewMode} />
         </div>
 
+        <div className="mb-4">
+          <SeatLegend seats={seats} activeTierFilter={activeTierFilter} onToggleTier={setActiveTierFilter} />
+        </div>
+
         <div ref={mapContainerRef} className="map-container">
           <StageCanvas
             seatRows={seatRows}
@@ -147,10 +151,6 @@ function StageSection({
             isFullscreen={isFullscreen}
           />
           <SeatInfoTooltip tooltip={tooltip} />
-        </div>
-
-        <div className="mt-4">
-          <SeatLegend seats={seats} activeTierFilter={activeTierFilter} onToggleTier={setActiveTierFilter} />
         </div>
       </div>
 
