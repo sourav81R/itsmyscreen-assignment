@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { AnimatePresence, motion } from 'framer-motion';
 import Button from '../../shared/Button';
+import { isSeatBooked } from '../../../services/seatService';
 import { formatPrice } from '../../../utils/priceFormatter';
 
 const tierColors = {
@@ -13,7 +14,8 @@ const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
 function SeatInfoTooltip({ tooltip, selectedSeatIds, onBookSeat, onMouseEnter, onMouseLeave }) {
   const cardWidth = 220;
-  const cardHeight = tooltip.seat?.status === 'unavailable' ? 118 : 248;
+  const seatIsBooked = isSeatBooked(tooltip.seat);
+  const cardHeight = seatIsBooked ? 118 : 248;
   const left = clamp(tooltip.screenX + 16, 12, Math.max(12, tooltip.containerWidth - cardWidth - 12));
   const top = clamp(tooltip.screenY - 26, 12, Math.max(12, tooltip.containerHeight - cardHeight - 12));
   const isSelected = Boolean(tooltip.seat?.id && selectedSeatIds.has(tooltip.seat.id));
@@ -32,10 +34,10 @@ function SeatInfoTooltip({ tooltip, selectedSeatIds, onBookSeat, onMouseEnter, o
           onMouseLeave={onMouseLeave}
         >
           <div className="seat-tooltip-card" style={{ borderColor: `${tierColors[tooltip.seat?.tier] ?? '#434359'}55` }}>
-            {tooltip.seat?.status === 'unavailable' ? (
+            {seatIsBooked ? (
               <>
                 <p className="seat-tooltip-seat">{tooltip.seat.row}{tooltip.seat.number}</p>
-                <p className="seat-tooltip-note">Already taken</p>
+                <p className="seat-tooltip-note">Already booked</p>
               </>
             ) : (
               <>

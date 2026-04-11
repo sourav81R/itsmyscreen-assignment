@@ -7,7 +7,7 @@ function SeatLegend() {
     { label: 'Premium', swatchClass: 'bg-[var(--color-seat-premium)]' },
     { label: 'General', swatchClass: 'bg-[var(--color-seat-general)]' },
     { label: 'Selected', swatchClass: 'bg-[var(--color-seat-selected)]' },
-    { label: 'Unavailable', swatchClass: 'bg-[var(--color-seat-unavailable)]' },
+    { label: 'Booked', swatchClass: 'bg-[var(--color-seat-unavailable)]' },
     { label: 'AI Pick', swatchClass: 'bg-[var(--color-seat-suggested)]' },
     { label: 'Wheelchair', swatchClass: 'bg-[var(--color-seat-general)]' },
   ];

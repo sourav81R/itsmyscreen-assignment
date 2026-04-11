@@ -9,6 +9,14 @@ import { areSeatsContiguous } from '../utils/seatValidator';
 export const getSeatsByVenue = (venueId) => JSON.parse(JSON.stringify(seatLayouts[venueId] ?? []));
 
 /**
+ * Returns whether a seat is already booked and cannot be selected.
+ * Supports older unavailable status values for compatibility.
+ * @param {Object} seat
+ * @returns {boolean}
+ */
+export const isSeatBooked = (seat) => seat?.status === 'booked' || seat?.status === 'unavailable';
+
+/**
  * Validates that selected seats are adjacent inside their rows.
  * @param {Array} seats
  * @returns {boolean}

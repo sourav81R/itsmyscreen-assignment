@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
+import { isSeatBooked } from '../../../services/seatService';
 import { formatPrice } from '../../../utils/priceFormatter';
 
 const fillMap = {
@@ -15,7 +16,7 @@ const strokeMap = {
   premium: '#30D158',
   general: '#0A84FF',
   selected: '#FF3B30',
-  unavailable: '#1E1E2A',
+  unavailable: '#0F172A',
 };
 
 const SeatCircle = memo(function SeatCircle({
@@ -32,9 +33,9 @@ const SeatCircle = memo(function SeatCircle({
   onHoverEnd,
   onKeyDown,
 }) {
-  const isUnavailable = seat.status === 'unavailable';
+  const isUnavailable = isSeatBooked(seat);
   const mainFill = isSelected ? fillMap.selected : fillMap[seat.tier];
-  const seatOpacity = dimmed ? 0.24 : isUnavailable ? 0.36 : 1;
+  const seatOpacity = dimmed ? (isUnavailable ? 0.72 : 0.24) : isUnavailable ? 0.96 : 1;
 
   return (
     <motion.g
@@ -50,6 +51,7 @@ const SeatCircle = memo(function SeatCircle({
       role="button"
       aria-label={`Seat ${seat.row}${seat.number}, ${seat.tier} tier, ${formatPrice(seat.price)}, ${seat.status}`}
       aria-selected={isSelected}
+      aria-disabled={isUnavailable}
       tabIndex={isUnavailable ? -1 : 0}
       onClick={() => !isUnavailable && onClick(seat)}
       onMouseEnter={onHoverStart}
@@ -87,12 +89,23 @@ const SeatCircle = memo(function SeatCircle({
 
       <circle
         r={seat.seatRadius}
-        fill={isUnavailable ? '#1E1E2A' : mainFill}
+        fill={isUnavailable ? 'var(--color-seat-unavailable)' : mainFill}
         stroke={isUnavailable ? strokeMap.unavailable : isSelected ? strokeMap.selected : strokeMap[seat.tier]}
-        strokeWidth={isSelected ? 1.4 : isUnavailable ? 0.7 : 0.95}
+        strokeWidth={isSelected ? 1.4 : isUnavailable ? 1.15 : 0.95}
       />
 
       {isUnavailable ? <circle r={seat.seatRadius} fill="url(#seat-unavailable-hatch)" opacity="0.7" /> : null}
+
+      {isUnavailable ? (
+        <path
+          d={`M-${seat.seatRadius * 0.42} -${seat.seatRadius * 0.42} L${seat.seatRadius * 0.42} ${seat.seatRadius * 0.42} M-${seat.seatRadius * 0.42} ${seat.seatRadius * 0.42} L${seat.seatRadius * 0.42} -${seat.seatRadius * 0.42}`}
+          stroke="#0F172A"
+          strokeWidth="1.35"
+          strokeLinecap="round"
+          opacity="0.9"
+          pointerEvents="none"
+        />
+      ) : null}
 
       {seat.status === 'wheelchair' ? (
         <text textAnchor="middle" dominantBaseline="central" fontSize={seat.seatRadius * 1.05} fill="#FFFFFF" pointerEvents="none">

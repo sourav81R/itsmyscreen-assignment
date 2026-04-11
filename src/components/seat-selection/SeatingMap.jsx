@@ -2,6 +2,7 @@ import { memo, useCallback, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import Tooltip from '../shared/Tooltip';
+import { isSeatBooked } from '../../services/seatService';
 
 const tierColors = {
   vip: 'var(--color-seat-vip)',
@@ -19,8 +20,9 @@ const SeatNode = memo(function SeatNode({
   onSelect,
   onKeyMove,
 }) {
+  const seatIsBooked = isSeatBooked(seat);
   const fill =
-    seat.status === 'unavailable'
+    seatIsBooked
       ? 'var(--color-seat-unavailable)'
       : isSelected
         ? 'var(--color-seat-selected)'
@@ -29,10 +31,11 @@ const SeatNode = memo(function SeatNode({
   return (
     <motion.g
       ref={registerRef}
-      tabIndex={0}
+      tabIndex={seatIsBooked ? -1 : 0}
       role="button"
       aria-label={`Row ${seat.row}, Seat ${seat.number}, ${seat.tier}, ${seat.status}`}
       aria-selected={isSelected}
+      aria-disabled={seatIsBooked}
       focusable="true"
       onFocus={onHover}
       onBlur={onLeave}
@@ -43,7 +46,7 @@ const SeatNode = memo(function SeatNode({
       animate={isSelected ? { scale: [0.8, 1.08, 1] } : { scale: 1 }}
       transition={{ duration: 0.28 }}
       transform={`translate(${seat.x} ${seat.y})`}
-      className="cursor-pointer outline-none"
+      className={`${seatIsBooked ? 'cursor-not-allowed' : 'cursor-pointer'} outline-none`}
     >
       {isSuggested && !isSelected ? (
         <circle cx="0" cy="0" r="10" fill="none" stroke="var(--color-seat-suggested)" strokeWidth="1.5" className="animate-pulse-ring" />
@@ -53,9 +56,18 @@ const SeatNode = memo(function SeatNode({
         cy="0"
         r="6.4"
         fill={fill}
-        stroke={seat.status === 'wheelchair' ? 'white' : 'rgba(255,255,255,0.08)'}
-        strokeWidth={seat.status === 'wheelchair' ? '2' : '1'}
+        stroke={seatIsBooked ? 'rgba(238,242,255,0.9)' : seat.status === 'wheelchair' ? 'white' : 'rgba(255,255,255,0.08)'}
+        strokeWidth={seatIsBooked ? '1.2' : seat.status === 'wheelchair' ? '2' : '1'}
       />
+      {seatIsBooked ? (
+        <path
+          d="M-2.6 -2.6 L2.6 2.6 M-2.6 2.6 L2.6 -2.6"
+          stroke="#0F172A"
+          strokeWidth="1.15"
+          strokeLinecap="round"
+          pointerEvents="none"
+        />
+      ) : null}
       {seat.status === 'wheelchair' ? (
         <text x="0" y="1.5" fill="var(--color-bg-base)" fontSize="6" textAnchor="middle">
           W

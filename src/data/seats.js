@@ -15,7 +15,7 @@ const deterministicStatus = (venueId, row, number) => {
 
   const charCode = row.charCodeAt(0);
   const seed = (venueId.length * 13 + charCode * 7 + number * 11) % 100;
-  return seed < 15 ? 'unavailable' : 'available';
+  return seed < 15 ? 'booked' : 'available';
 };
 
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);

@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
 import { getBestSeats } from '../services/aiService';
-import { validateContiguous } from '../services/seatService';
+import { isSeatBooked, validateContiguous } from '../services/seatService';
 import { useBookingStore } from '../store/useBookingStore';
 
 export const useSeatSelection = (seats) => {
@@ -33,13 +33,13 @@ export const useSeatSelection = (seats) => {
 
   const handleSeatAction = useCallback(
     (seat, position) => {
-      if (seat.status === 'unavailable') {
+      if (isSeatBooked(seat)) {
         setTooltip({
-          message: `Seat ${seat.row}${seat.number} is already taken`,
+          message: `Seat ${seat.row}${seat.number} is already booked`,
           x: position?.x ?? 0,
           y: position?.y ?? 0,
         });
-        return { accepted: false, reason: 'unavailable', message: `Seat ${seat.row}${seat.number} is already taken` };
+        return { accepted: false, reason: 'booked', message: `Seat ${seat.row}${seat.number} is already booked` };
       }
 
       if (seat.status === 'wheelchair') {

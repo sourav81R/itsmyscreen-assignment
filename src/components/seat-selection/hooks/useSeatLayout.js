@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { isSeatBooked } from '../../../services/seatService';
 
 export const STAGE_CENTER = { x: 500, y: 115 };
 
@@ -40,8 +41,8 @@ export const getViewQuality = (seat) => {
 export const getViewNote = (seat) => {
   const stars = getViewQuality(seat);
 
-  if (seat?.status === 'unavailable') {
-    return 'This seat is already taken';
+  if (isSeatBooked(seat)) {
+    return 'This seat is already booked';
   }
 
   if (stars >= 5) {

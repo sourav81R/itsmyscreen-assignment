@@ -204,7 +204,8 @@ function StageCanvas({
               <stop offset="100%" stopColor="#CC2010" />
             </radialGradient>
             <pattern id="seat-unavailable-hatch" patternUnits="userSpaceOnUse" width="4" height="4">
-              <path d="M0 4L4 0" stroke="#2C2C3E" strokeWidth="0.8" opacity="0.5" />
+              <rect width="4" height="4" fill="transparent" />
+              <path d="M0 4L4 0" stroke="#0F172A" strokeWidth="0.9" opacity="0.82" />
             </pattern>
             <linearGradient id="spotlight" x1="0.5" y1="1" x2="0.5" y2="0">
               <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.06" />

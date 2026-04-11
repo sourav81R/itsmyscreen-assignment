@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { Sparkles } from 'lucide-react';
+import { isSeatBooked } from '../../../services/seatService';
 import { formatPrice } from '../../../utils/priceFormatter';
 
 const tierMeta = {
@@ -11,7 +12,7 @@ const tierMeta = {
 function SeatLegend({ seats, activeTierFilter, onToggleTier }) {
   const stats = Object.entries(tierMeta).map(([tier, meta]) => {
     const tierSeats = seats.filter((seat) => seat.tier === tier);
-    const available = tierSeats.filter((seat) => seat.status !== 'unavailable').length;
+    const available = tierSeats.filter((seat) => !isSeatBooked(seat)).length;
     const prices = tierSeats.map((seat) => seat.price);
 
     return {
@@ -60,7 +61,7 @@ function SeatLegend({ seats, activeTierFilter, onToggleTier }) {
         </div>
         <div className="seat-legend-static seat-legend-static-unavailable">
           <span className="seat-legend-swatch seat-legend-unavailable" aria-hidden="true" />
-          <span>Unavailable</span>
+          <span>Booked</span>
         </div>
         <div className="seat-legend-static">
           <Sparkles className="h-3.5 w-3.5 text-[var(--color-brand-accent)]" aria-hidden="true" />
