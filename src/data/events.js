@@ -346,9 +346,9 @@ export const events = [
     artist: 'Lucky Ali',
     genre: ['Indie', 'Folk Rock'],
     bannerUrl:
-      'https://images.unsplash.com/photo-1518972559570-7cc1309f3229?auto=format&fit=crop&w=1600&q=80',
+      'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=1600&q=80',
     thumbnailUrl:
-      'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80',
+      'https://images.unsplash.com/photo-1518972559570-7cc1309f3229?auto=format&fit=crop&w=900&q=80',
     description:
       'A nostalgic folk-rock set with wide-open visuals, intimate storytelling, and singalong choruses designed for a laid-back crowd.',
     duration: '2h 00m',
@@ -441,7 +441,7 @@ export const events = [
     bannerUrl:
       'https://images.unsplash.com/photo-1516280030429-27679b3dc9cf?auto=format&fit=crop&w=1600&q=80',
     thumbnailUrl:
-      'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=900&q=80',
+      'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=900&q=80&sat=18',
     description:
       'A punchy late-night rap set with sharp stage visuals, guest verses, and a center-focused mix for fans who want a high-energy arena feel.',
     duration: '2h 05m',
