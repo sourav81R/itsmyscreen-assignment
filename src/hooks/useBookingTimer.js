@@ -3,7 +3,7 @@ import { useEffect, useMemo, useReducer } from 'react';
 export const useBookingTimer = (expiry) => {
   const [totalSeconds, dispatch] = useReducer((state, action) => {
     if (action.type === 'reset') {
-      return 600;
+      return action.payload;
     }
 
     if (action.type === 'tick') {
@@ -18,7 +18,13 @@ export const useBookingTimer = (expiry) => {
       return undefined;
     }
 
-    dispatch({ type: 'reset' });
+    const remainingSeconds = Math.max(0, Math.ceil((expiry - Date.now()) / 1000));
+    dispatch({ type: 'reset', payload: remainingSeconds });
+
+    if (remainingSeconds <= 0) {
+      return undefined;
+    }
+
     const timer = window.setInterval(() => {
       dispatch({ type: 'tick' });
     }, 1000);
