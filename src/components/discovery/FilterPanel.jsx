@@ -1,5 +1,6 @@
+import { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { CalendarDays, MapPin, SlidersHorizontal, Sparkles } from 'lucide-react';
+import { CalendarDays, Check, ChevronDown, MapPin, SlidersHorizontal, Sparkles } from 'lucide-react';
 import { useFilterStore } from '../../store/useFilterStore';
 import { formatPrice } from '../../utils/priceFormatter';
 
@@ -12,6 +13,31 @@ const genres = ['Pop', 'Rock', 'Classical', 'Electronic', 'Jazz', 'Hip-Hop', 'Bo
 function FilterPanel({ venues }) {
   const { genres: activeGenres, dateRange, priceRange, venue, toggleGenre, setFilter, resetFilters } =
     useFilterStore();
+  const [venueMenuOpen, setVenueMenuOpen] = useState(false);
+  const venueMenuRef = useRef(null);
+  const selectedVenue = venues.find((item) => item.id === venue);
+
+  useEffect(() => {
+    const handlePointerDown = (event) => {
+      if (!venueMenuRef.current?.contains(event.target)) {
+        setVenueMenuOpen(false);
+      }
+    };
+
+    const handleEscape = (event) => {
+      if (event.key === 'Escape') {
+        setVenueMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handlePointerDown);
+    document.addEventListener('keydown', handleEscape);
+
+    return () => {
+      document.removeEventListener('mousedown', handlePointerDown);
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, []);
 
   return (
     <aside className="sticky top-28 h-fit overflow-hidden rounded-[36px] border border-[rgba(255,149,0,0.24)] bg-[linear-gradient(180deg,rgba(31,31,49,0.96),rgba(17,17,27,0.98))] shadow-[0_24px_70px_rgba(0,0,0,0.35),0_0_0_1px_rgba(255,149,0,0.08)]">
@@ -149,18 +175,92 @@ function FilterPanel({ venues }) {
               <MapPin className="h-4 w-4 text-[var(--color-brand-accent)]" aria-hidden="true" />
               <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-text-muted)]">Venue</p>
             </div>
-            <select
-              value={venue}
-              onChange={(event) => setFilter('venue', event.target.value)}
-              className="w-full rounded-[20px] border border-[rgba(255,149,0,0.14)] bg-[rgba(255,255,255,0.04)] px-4 py-3 text-[var(--color-text-primary)] outline-none transition duration-200 hover:border-[rgba(255,149,0,0.24)] hover:bg-[rgba(255,255,255,0.05)] focus:border-[rgba(255,149,0,0.35)]"
-            >
-              <option value="">All venues</option>
-              {venues.map((item) => (
-                <option key={item.id} value={item.id} className="bg-[var(--color-bg-surface)]">
-                  {item.name}
-                </option>
-              ))}
-            </select>
+            <div ref={venueMenuRef} className="relative">
+              <button
+                type="button"
+                aria-haspopup="listbox"
+                aria-expanded={venueMenuOpen}
+                onClick={() => setVenueMenuOpen((current) => !current)}
+                className={`group flex w-full items-center justify-between gap-3 rounded-[20px] border px-4 py-3 text-left transition duration-200 ${
+                  venueMenuOpen
+                    ? 'border-[rgba(255,190,92,0.34)] bg-[linear-gradient(135deg,rgba(255,149,0,0.14),rgba(255,255,255,0.05))] shadow-[0_16px_34px_rgba(255,149,0,0.1)]'
+                    : 'border-[rgba(255,149,0,0.14)] bg-[rgba(255,255,255,0.04)] hover:border-[rgba(255,149,0,0.24)] hover:bg-[rgba(255,255,255,0.05)]'
+                }`}
+              >
+                <span className="min-w-0">
+                  <span className="block text-[10px] uppercase tracking-[0.18em] text-[var(--color-text-muted)]">
+                    Selected venue
+                  </span>
+                  <span className="mt-1 block truncate font-medium text-[var(--color-text-primary)]">
+                    {selectedVenue?.name ?? 'All venues'}
+                  </span>
+                </span>
+                <ChevronDown
+                  className={`h-4 w-4 shrink-0 text-[var(--color-text-secondary)] transition duration-200 ${
+                    venueMenuOpen ? 'rotate-180 text-[var(--color-brand-accent)]' : 'group-hover:text-[var(--color-text-primary)]'
+                  }`}
+                  aria-hidden="true"
+                />
+              </button>
+
+              {venueMenuOpen ? (
+                <div className="mt-2 overflow-hidden rounded-[18px] border border-[rgba(255,190,92,0.2)] bg-[linear-gradient(180deg,rgba(24,24,36,0.96),rgba(13,13,22,0.98))] p-1.5 shadow-[0_18px_34px_rgba(0,0,0,0.28),0_0_0_1px_rgba(255,149,0,0.06)] backdrop-blur-xl">
+                  <div className="pointer-events-none absolute inset-x-0 top-0 h-12 bg-[radial-gradient(circle_at_top,rgba(255,149,0,0.12),transparent_72%)]" />
+                  <div role="listbox" aria-label="Select venue" className="relative max-h-[156px] space-y-1 overflow-y-auto pr-1 thin-scrollbar">
+                    <button
+                      type="button"
+                      role="option"
+                      aria-selected={!venue}
+                      onClick={() => {
+                        setFilter('venue', '');
+                        setVenueMenuOpen(false);
+                      }}
+                      className={`flex w-full items-center justify-between rounded-[14px] px-3 py-2.5 text-left text-sm transition duration-200 ${
+                        !venue
+                          ? 'bg-[linear-gradient(135deg,rgba(255,149,0,0.2),rgba(255,59,48,0.14))] text-[var(--color-text-primary)] shadow-[0_10px_24px_rgba(255,149,0,0.1)]'
+                          : 'text-[var(--color-text-secondary)] hover:bg-[rgba(255,255,255,0.04)] hover:text-[var(--color-text-primary)]'
+                      }`}
+                    >
+                      <span className="font-medium">All venues</span>
+                      {!venue ? (
+                        <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-[rgba(255,255,255,0.08)] text-[var(--color-brand-accent)]">
+                          <Check className="h-4 w-4" aria-hidden="true" />
+                        </span>
+                      ) : null}
+                    </button>
+
+                    {venues.map((item) => {
+                      const selected = item.id === venue;
+
+                      return (
+                        <button
+                          key={item.id}
+                          type="button"
+                          role="option"
+                          aria-selected={selected}
+                          onClick={() => {
+                            setFilter('venue', item.id);
+                            setVenueMenuOpen(false);
+                          }}
+                          className={`flex w-full items-center justify-between rounded-[14px] px-3 py-2.5 text-left text-sm transition duration-200 ${
+                            selected
+                              ? 'bg-[linear-gradient(135deg,rgba(255,149,0,0.2),rgba(255,59,48,0.14))] text-[var(--color-text-primary)] shadow-[0_10px_24px_rgba(255,149,0,0.1)]'
+                              : 'text-[var(--color-text-secondary)] hover:bg-[rgba(255,255,255,0.04)] hover:text-[var(--color-text-primary)]'
+                          }`}
+                        >
+                          <span className="pr-4 font-medium truncate">{item.name}</span>
+                          {selected ? (
+                            <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[rgba(255,255,255,0.08)] text-[var(--color-brand-accent)]">
+                              <Check className="h-4 w-4" aria-hidden="true" />
+                            </span>
+                          ) : null}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              ) : null}
+            </div>
           </div>
         </section>
 
