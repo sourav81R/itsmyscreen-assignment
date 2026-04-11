@@ -69,7 +69,7 @@ function EventDetailPage() {
           <AIInsightChip event={event} onSelectSeats={handleSelectSeats} />
         </div>
         <EventInfo event={event} />
-        <PricingTiers event={event} />
+        <PricingTiers event={event} onSelectSeats={handleSelectSeats} />
       </div>
     </PageWrapper>
   );
