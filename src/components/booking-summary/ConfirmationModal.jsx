@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import Button from '../shared/Button';
+import { openTicketPrintWindow } from '../../services/ticketPrintService';
 import { seatLabels } from '../../utils/seatValidator';
 import { formatLongDate } from '../../utils/dateFormatter';
 
@@ -25,7 +26,7 @@ const confettiClasses = [
  * Full-screen success modal with booking id, confetti, and follow-up actions.
  * Props: open, bookingId, event, showtime, seats, onClose.
  */
-function ConfirmationModal({ open, bookingId, event, showtime, seats, onClose }) {
+function ConfirmationModal({ open, bookingId, event, showtime, seats, attendeeInfo, addOns, onClose }) {
   const navigate = useNavigate();
 
   if (!open) {
@@ -93,7 +94,20 @@ function ConfirmationModal({ open, bookingId, event, showtime, seats, onClose })
 
           <div className="mt-7 flex justify-center gap-3">
             <Button
-              onClick={() => window.print()}
+              onClick={() => {
+                const opened = openTicketPrintWindow({
+                  bookingId,
+                  event,
+                  showtime,
+                  seats,
+                  attendeeInfo,
+                  addOns,
+                });
+
+                if (!opened) {
+                  window.print();
+                }
+              }}
               className="shadow-[0_18px_40px_rgba(255,59,48,0.28)] hover:shadow-[0_22px_48px_rgba(255,59,48,0.34)]"
             >
               Download Ticket
@@ -119,12 +133,32 @@ ConfirmationModal.propTypes = {
   open: PropTypes.bool.isRequired,
   bookingId: PropTypes.string.isRequired,
   event: PropTypes.shape({
+    artist: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
+    genre: PropTypes.arrayOf(PropTypes.string).isRequired,
+    bannerUrl: PropTypes.string,
+    thumbnailUrl: PropTypes.string,
+    tierPerks: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.string)),
+    venue: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      address: PropTypes.string.isRequired,
+    }).isRequired,
   }).isRequired,
   showtime: PropTypes.shape({
     date: PropTypes.string.isRequired,
     time: PropTypes.string.isRequired,
   }).isRequired,
+  attendeeInfo: PropTypes.shape({
+    name: PropTypes.string,
+  }),
+  addOns: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string,
+      label: PropTypes.string,
+      price: PropTypes.number,
+    }),
+  ),
   seats: PropTypes.arrayOf(
     PropTypes.shape({
       row: PropTypes.string.isRequired,
@@ -132,6 +166,13 @@ ConfirmationModal.propTypes = {
     }),
   ).isRequired,
   onClose: PropTypes.func.isRequired,
+};
+
+ConfirmationModal.defaultProps = {
+  attendeeInfo: {
+    name: '',
+  },
+  addOns: [],
 };
 
 export default ConfirmationModal;

@@ -174,6 +174,8 @@ function BookingSummaryPage() {
         event={selectedEvent}
         showtime={selectedShowtime}
         seats={selectedSeats}
+        attendeeInfo={attendeeInfo}
+        addOns={addOns}
         onClose={() => {
           setActiveModal('');
           resetBooking();
