@@ -53,10 +53,22 @@ const SeatCircle = memo(function SeatCircle({
       aria-selected={isSelected}
       aria-disabled={isUnavailable}
       tabIndex={isUnavailable ? -1 : 0}
-      onClick={() => !isUnavailable && onClick(seat)}
+      onClick={(event) => {
+        event.stopPropagation();
+        if (!isUnavailable) {
+          onClick(seat);
+        }
+      }}
+      onDoubleClick={(event) => {
+        event.preventDefault();
+        event.stopPropagation();
+      }}
       onMouseEnter={onHoverStart}
       onMouseLeave={onHoverEnd}
-      onPointerDown={onHoverStart}
+      onPointerDown={(event) => {
+        event.stopPropagation();
+        onHoverStart(event);
+      }}
       onFocus={onHoverStart}
       onBlur={onHoverEnd}
       onKeyDown={onKeyDown}

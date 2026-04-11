@@ -41,7 +41,15 @@ const SeatNode = memo(function SeatNode({
       onBlur={onLeave}
       onMouseEnter={onHover}
       onMouseLeave={onLeave}
-      onClick={onSelect}
+      onMouseDown={(event) => event.stopPropagation()}
+      onClick={(event) => {
+        event.stopPropagation();
+        onSelect(event);
+      }}
+      onDoubleClick={(event) => {
+        event.preventDefault();
+        event.stopPropagation();
+      }}
       onKeyDown={onKeyMove}
       animate={isSelected ? { scale: [0.8, 1.08, 1] } : { scale: 1 }}
       transition={{ duration: 0.28 }}

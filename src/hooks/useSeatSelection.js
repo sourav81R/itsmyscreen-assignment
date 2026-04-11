@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { getBestSeats } from '../services/aiService';
 import { isSeatBooked, validateContiguous } from '../services/seatService';
 import { useBookingStore } from '../store/useBookingStore';
@@ -6,6 +6,7 @@ import { useBookingStore } from '../store/useBookingStore';
 export const useSeatSelection = (seats) => {
   const { selectedEvent, selectedSeats, selectedSeatCount, setSelectedSeats, toggleSeat } = useBookingStore();
   const [tooltip, setTooltip] = useState(null);
+  const lastSeatActionRef = useRef({ seatId: null, timestamp: 0 });
 
   const suggestionBudget = useMemo(
     () => Math.max((selectedEvent?.priceRange?.max ?? 4500) * selectedSeatCount, 4500),
@@ -33,6 +34,18 @@ export const useSeatSelection = (seats) => {
 
   const handleSeatAction = useCallback(
     (seat, position) => {
+      const now = Date.now();
+      const lastAction = lastSeatActionRef.current;
+
+      if (lastAction.seatId === seat.id && now - lastAction.timestamp < 250) {
+        return { accepted: false, reason: 'debounced' };
+      }
+
+      lastSeatActionRef.current = {
+        seatId: seat.id,
+        timestamp: now,
+      };
+
       if (isSeatBooked(seat)) {
         setTooltip({
           message: `Seat ${seat.row}${seat.number} is already booked`,
