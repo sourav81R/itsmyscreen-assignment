@@ -1,11 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import AIBestSeats from '../components/seat-selection/AIBestSeats';
-import PriceSummaryBar from '../components/seat-selection/PriceSummaryBar';
-import SeatCountPicker from '../components/seat-selection/SeatCountPicker';
-import SeatLegend from '../components/seat-selection/SeatLegend';
-import SeatingMap from '../components/seat-selection/SeatingMap';
-import ShowtimeSelector from '../components/seat-selection/ShowtimeSelector';
+import StageSection from '../components/seat-selection/StageSection';
 import PageWrapper from '../components/layout/PageWrapper';
 import { useBookingTimer } from '../hooks/useBookingTimer';
 import { useSeatSelection } from '../hooks/useSeatSelection';
@@ -61,34 +56,28 @@ function SeatSelectionPage() {
         </div>
       </div>
 
-      <div className="relative z-10 grid grid-cols-[360px_minmax(0,1fr)] gap-8">
-        <div className="space-y-5">
-          <ShowtimeSelector showtimes={selectedEvent?.showtimes ?? []} />
-          <SeatCountPicker value={selectedSeatCount} onChange={setSeatCount} />
-          <AIBestSeats suggestions={suggestions} onApply={applySuggestedSeats} />
-        </div>
-
-        <div className="space-y-4">
-          <SeatLegend />
-          <SeatingMap
-            seats={seats}
-            selectedSeatIds={selectedSeatIds}
-            suggestedIds={suggestedIds}
-            onSeatAction={handleSeatAction}
-            soldOut={soldOut}
-          />
-        </div>
+      <div className="relative z-10">
+        <StageSection
+          event={selectedEvent}
+          seats={seats}
+          suggestions={suggestions}
+          selectedSeats={selectedSeats}
+          selectedSeatCount={selectedSeatCount}
+          selectedSeatIds={selectedSeatIds}
+          suggestedIds={suggestedIds}
+          soldOut={soldOut}
+          timer={timer}
+          total={total}
+          loading={loading}
+          disabled={!isContiguous || soldOut}
+          message={!isContiguous ? 'Selected seats should stay contiguous for a smoother group booking.' : ''}
+          onSeatCountChange={setSeatCount}
+          onSeatAction={handleSeatAction}
+          onApplySuggestedSeats={applySuggestedSeats}
+          onRemoveSeat={(seat) => handleSeatAction(seat)}
+          onProceed={handleProceed}
+        />
       </div>
-
-      <PriceSummaryBar
-        seats={selectedSeats}
-        total={total}
-        timer={timer}
-        onProceed={handleProceed}
-        disabled={!isContiguous || soldOut}
-        message={!isContiguous ? 'Selected seats should stay contiguous for a smoother group booking.' : ''}
-        loading={loading}
-      />
     </PageWrapper>
   );
 }
