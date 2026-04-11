@@ -54,7 +54,7 @@ function ConfirmationModal({ open, bookingId, event, showtime, seats, attendeeIn
         <motion.div
           initial={{ opacity: 0, scale: 0.88 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="group premium-panel relative w-full max-w-[680px] overflow-hidden rounded-[34px] border-[rgba(255,190,92,0.24)] bg-[linear-gradient(145deg,rgba(35,34,52,0.98),rgba(16,16,27,0.99)_58%,rgba(24,18,26,0.98))] p-8 text-center shadow-[0_32px_90px_rgba(0,0,0,0.5),0_0_0_1px_rgba(255,149,0,0.08)] transition-[border-color,box-shadow,transform,background] duration-300 hover:border-[rgba(255,190,92,0.42)] hover:shadow-[0_36px_100px_rgba(0,0,0,0.54),0_0_0_1px_rgba(255,190,92,0.18),0_0_36px_rgba(255,149,0,0.12)]"
+          className="group premium-panel relative w-full max-w-[600px] overflow-hidden rounded-[30px] border-[rgba(255,190,92,0.24)] bg-[linear-gradient(145deg,rgba(35,34,52,0.98),rgba(16,16,27,0.99)_58%,rgba(24,18,26,0.98))] p-6 text-center shadow-[0_32px_90px_rgba(0,0,0,0.5),0_0_0_1px_rgba(255,149,0,0.08)] transition-[border-color,box-shadow,transform,background] duration-300 hover:border-[rgba(255,190,92,0.42)] hover:shadow-[0_36px_100px_rgba(0,0,0,0.54),0_0_0_1px_rgba(255,190,92,0.18),0_0_36px_rgba(255,149,0,0.12)]"
         >
           <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
             <div className="absolute inset-x-[10%] top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(255,190,92,0.6),transparent)]" />
@@ -66,8 +66,8 @@ function ConfirmationModal({ open, bookingId, event, showtime, seats, attendeeIn
             <span className="h-2.5 w-2.5 rounded-full bg-[var(--color-brand-accent)] shadow-[0_0_16px_rgba(255,149,0,0.7)]" />
             Booking confirmed
           </div>
-          <h2 className="premium-readable-title mt-5 font-display text-5xl leading-[0.98]">See you there</h2>
-          <p className="premium-readable-body mt-3 text-base">
+          <h2 className="premium-readable-title mt-4 font-display text-[3.2rem] leading-[0.98]">See you there</h2>
+          <p className="premium-readable-body mt-3 text-[0.95rem]">
             {event.title} | {formatLongDate(showtime.date)} | {showtime.time}
           </p>
 
@@ -77,22 +77,22 @@ function ConfirmationModal({ open, bookingId, event, showtime, seats, attendeeIn
             </div>
           </div>
 
-          <div className="group/id premium-panel relative mt-7 overflow-hidden rounded-[26px] border-[rgba(255,190,92,0.28)] bg-[linear-gradient(145deg,rgba(44,34,28,0.92),rgba(28,27,40,0.96)_52%,rgba(38,20,22,0.92))] px-5 py-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_16px_36px_rgba(0,0,0,0.18)] transition-[border-color,box-shadow,background,transform] duration-300 hover:border-[rgba(255,190,92,0.44)] hover:bg-[linear-gradient(145deg,rgba(52,38,28,0.94),rgba(31,30,44,0.98)_52%,rgba(44,22,24,0.94))] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_20px_42px_rgba(0,0,0,0.22),0_0_24px_rgba(255,149,0,0.08)]">
+          <div className="group/id premium-panel relative mt-6 overflow-hidden rounded-[24px] border-[rgba(255,190,92,0.28)] bg-[linear-gradient(145deg,rgba(44,34,28,0.92),rgba(28,27,40,0.96)_52%,rgba(38,20,22,0.92))] px-5 py-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_16px_36px_rgba(0,0,0,0.18)] transition-[border-color,box-shadow,background,transform] duration-300 hover:border-[rgba(255,190,92,0.44)] hover:bg-[linear-gradient(145deg,rgba(52,38,28,0.94),rgba(31,30,44,0.98)_52%,rgba(44,22,24,0.94))] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_20px_42px_rgba(0,0,0,0.22),0_0_24px_rgba(255,149,0,0.08)]">
             <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover/id:opacity-100">
               <div className="absolute inset-x-[12%] top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(255,190,92,0.65),transparent)]" />
               <div className="absolute left-[-8%] top-[18%] h-28 w-28 rounded-full bg-[rgba(255,149,0,0.08)] blur-[70px]" />
               <div className="absolute right-[-10%] bottom-[-18%] h-36 w-36 rounded-full bg-[rgba(255,59,48,0.08)] blur-[72px]" />
             </div>
             <p className="text-[11px] uppercase tracking-[0.16em] text-[rgba(226,219,208,0.78)] [text-shadow:0_1px_8px_rgba(0,0,0,0.22)]">Booking ID</p>
-            <p className="premium-readable-title mt-2.5 font-display text-[2.2rem] tracking-[0.035em] !text-[var(--color-brand-accent)] transition-[text-shadow,color] duration-300 group-hover/id:!text-[#ffb13b] group-hover/id:[text-shadow:0_0_24px_rgba(255,149,0,0.28)]">
+            <p className="premium-readable-title mt-2 font-display text-[1.85rem] tracking-[0.03em] !text-[var(--color-brand-accent)] transition-[text-shadow,color] duration-300 group-hover/id:!text-[#ffb13b] group-hover/id:[text-shadow:0_0_24px_rgba(255,149,0,0.28)]">
               {bookingId}
             </p>
-            <p className="premium-readable-body mt-2 text-[13px]">
+            <p className="premium-readable-body mt-2 text-[12px]">
               Keep this reference handy for entry, support, and ticket verification.
             </p>
           </div>
 
-          <div className="mt-7 flex justify-center gap-3">
+          <div className="mt-6 flex justify-center gap-3">
             <Button
               onClick={() => {
                 const opened = openTicketPrintWindow({
@@ -109,11 +109,13 @@ function ConfirmationModal({ open, bookingId, event, showtime, seats, attendeeIn
                 }
               }}
               className="shadow-[0_18px_40px_rgba(255,59,48,0.28)] hover:shadow-[0_22px_48px_rgba(255,59,48,0.34)]"
+              size="sm"
             >
               Download Ticket
             </Button>
             <Button
               variant="secondary"
+              size="sm"
               className="border-[rgba(255,149,0,0.16)] bg-[rgba(255,255,255,0.02)] hover:border-[rgba(255,190,92,0.38)] hover:bg-[rgba(255,149,0,0.08)]"
               onClick={() => {
                 navigate('/discover', { replace: true });
