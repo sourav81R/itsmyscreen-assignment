@@ -552,14 +552,21 @@ const buildTicketHtml = ({ bookingId, event, showtime, seats, attendeeName, addO
       }
 
       @media print {
+        html,
         body {
           background: #ffffff;
-          display: block;
+          min-height: calc(297mm - 16mm);
+        }
+
+        body {
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
 
         .sheet {
           min-height: auto;
-          width: 100%;
+          width: min(100%, 190mm);
           margin: 0 auto;
           box-shadow: none;
         }
