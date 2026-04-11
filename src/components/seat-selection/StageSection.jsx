@@ -12,6 +12,7 @@ import AIPickPanel from './panels/AIPickPanel';
 import { useMapTransform } from './hooks/useMapTransform';
 import { useSeatLayout } from './hooks/useSeatLayout';
 import { useHoverTooltip } from './hooks/useHoverTooltip';
+import { formatPrice } from '../../utils/priceFormatter';
 
 function StageSection({
   event,
@@ -42,7 +43,7 @@ function StageSection({
   const mapContainerRef = useRef(null);
   const mapTransform = useMapTransform();
   const seatRows = useSeatLayout(seats);
-  const { tooltip, showTooltip, hideTooltip } = useHoverTooltip(mapContainerRef);
+  const { tooltip, showTooltip, hideTooltip, scheduleHide, cancelHide } = useHoverTooltip(mapContainerRef);
 
   const applyPrimarySuggestion = useCallback(() => {
     if (suggestions[0]) {
@@ -96,6 +97,26 @@ function StageSection({
     [activeTierFilter, previewSeatIds, selectedSeatIds, selectedSeats, suggestedIds, viewMode],
   );
 
+  const handleTooltipSeatAction = useCallback(
+    (seat) => {
+      const wasSelected = selectedSeatIds.has(seat.id);
+      const result = onSeatAction(seat);
+
+      if (result.accepted) {
+        setLiveMessage(
+          wasSelected
+            ? `Seat ${seat.row}${seat.number} removed from your selection.`
+            : `Seat ${seat.row}${seat.number} selected for ${formatPrice(seat.price)}.`,
+        );
+      } else if (result.message) {
+        setLiveMessage(result.message);
+      }
+
+      hideTooltip();
+    },
+    [hideTooltip, onSeatAction, selectedSeatIds],
+  );
+
   return (
     <section className="stage-section desktop">
       <div className="controls-panel">
@@ -140,7 +161,8 @@ function StageSection({
             onSeatAction={onSeatAction}
             onApplyAISuggestions={applyPrimarySuggestion}
             showTooltip={showTooltip}
-            hideTooltip={hideTooltip}
+            hideTooltip={scheduleHide}
+            keepTooltipOpen={cancelHide}
             announce={setLiveMessage}
           />
           <MapControls
@@ -150,7 +172,13 @@ function StageSection({
             onToggleFullscreen={toggleFullscreen}
             isFullscreen={isFullscreen}
           />
-          <SeatInfoTooltip tooltip={tooltip} />
+          <SeatInfoTooltip
+            tooltip={tooltip}
+            selectedSeatIds={selectedSeatIds}
+            onBookSeat={handleTooltipSeatAction}
+            onMouseEnter={cancelHide}
+            onMouseLeave={scheduleHide}
+          />
         </div>
       </div>
 

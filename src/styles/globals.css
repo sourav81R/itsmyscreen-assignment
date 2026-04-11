@@ -559,11 +559,12 @@ img {
 .seat-tooltip {
   position: absolute;
   z-index: 20;
-  pointer-events: none;
+  pointer-events: auto;
 }
 
 .seat-tooltip-card {
   min-width: 180px;
+  max-width: 220px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
   background: rgba(30, 30, 48, 0.96);

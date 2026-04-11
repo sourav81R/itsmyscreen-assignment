@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { AnimatePresence, motion } from 'framer-motion';
+import Button from '../../shared/Button';
 import { formatPrice } from '../../../utils/priceFormatter';
 
 const tierColors = {
@@ -8,7 +9,15 @@ const tierColors = {
   general: '#0A84FF',
 };
 
-function SeatInfoTooltip({ tooltip }) {
+const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+function SeatInfoTooltip({ tooltip, selectedSeatIds, onBookSeat, onMouseEnter, onMouseLeave }) {
+  const cardWidth = 220;
+  const cardHeight = tooltip.seat?.status === 'unavailable' ? 118 : 248;
+  const left = clamp(tooltip.screenX + 16, 12, Math.max(12, tooltip.containerWidth - cardWidth - 12));
+  const top = clamp(tooltip.screenY - 26, 12, Math.max(12, tooltip.containerHeight - cardHeight - 12));
+  const isSelected = Boolean(tooltip.seat?.id && selectedSeatIds.has(tooltip.seat.id));
+
   return (
     <AnimatePresence>
       {tooltip.visible ? (
@@ -18,11 +27,9 @@ function SeatInfoTooltip({ tooltip }) {
           exit={{ opacity: 0, y: 6 }}
           transition={{ duration: 0.15, ease: 'easeOut' }}
           className="seat-tooltip"
-          style={{
-            left: tooltip.screenX,
-            top: tooltip.screenY,
-            transform: tooltip.screenX > 420 ? 'translate(-108%, -18px)' : 'translate(14px, -18px)',
-          }}
+          style={{ left, top }}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
         >
           <div className="seat-tooltip-card" style={{ borderColor: `${tierColors[tooltip.seat?.tier] ?? '#434359'}55` }}>
             {tooltip.seat?.status === 'unavailable' ? (
@@ -49,6 +56,9 @@ function SeatInfoTooltip({ tooltip }) {
                   <span>view</span>
                 </div>
                 <p className="seat-tooltip-note">{tooltip.note}</p>
+                <Button size="sm" className="mt-4 w-full justify-center" onClick={() => onBookSeat(tooltip.seat)}>
+                  {isSelected ? 'Remove this seat' : 'Book this seat'}
+                </Button>
               </>
             )}
           </div>
@@ -63,9 +73,12 @@ SeatInfoTooltip.propTypes = {
     visible: PropTypes.bool.isRequired,
     screenX: PropTypes.number.isRequired,
     screenY: PropTypes.number.isRequired,
+    containerWidth: PropTypes.number.isRequired,
+    containerHeight: PropTypes.number.isRequired,
     viewQuality: PropTypes.number.isRequired,
     note: PropTypes.string.isRequired,
     seat: PropTypes.shape({
+      id: PropTypes.string,
       row: PropTypes.string,
       number: PropTypes.number,
       tier: PropTypes.string,
@@ -73,6 +86,10 @@ SeatInfoTooltip.propTypes = {
       price: PropTypes.number,
     }),
   }).isRequired,
+  selectedSeatIds: PropTypes.instanceOf(Set).isRequired,
+  onBookSeat: PropTypes.func.isRequired,
+  onMouseEnter: PropTypes.func.isRequired,
+  onMouseLeave: PropTypes.func.isRequired,
 };
 
 export default SeatInfoTooltip;

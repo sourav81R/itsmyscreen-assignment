@@ -19,6 +19,7 @@ function StageCanvas({
   onApplyAISuggestions,
   showTooltip,
   hideTooltip,
+  keepTooltipOpen,
   announce,
 }) {
   const [hoveredSeatId, setHoveredSeatId] = useState(null);
@@ -246,6 +247,7 @@ function StageCanvas({
                 onSeatHover={(seat) => (event) => {
                   setHoveredSeatId(seat.id);
                   setFocusedSeatId(seat.id);
+                  keepTooltipOpen();
                   showTooltip(seat, event);
                 }}
                 onSeatLeave={() => {
@@ -288,6 +290,7 @@ StageCanvas.propTypes = {
   onApplyAISuggestions: PropTypes.func.isRequired,
   showTooltip: PropTypes.func.isRequired,
   hideTooltip: PropTypes.func.isRequired,
+  keepTooltipOpen: PropTypes.func.isRequired,
   announce: PropTypes.func.isRequired,
 };
 
