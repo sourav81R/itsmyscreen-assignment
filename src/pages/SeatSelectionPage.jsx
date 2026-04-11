@@ -1,9 +1,10 @@
-import { useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useMemo, useState } from 'react';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import StageSection from '../components/seat-selection/StageSection';
 import PageWrapper from '../components/layout/PageWrapper';
 import { useBookingTimer } from '../hooks/useBookingTimer';
 import { useSeatSelection } from '../hooks/useSeatSelection';
+import { getEventById } from '../services/eventService';
 import { getSeatsByVenue, holdSeats } from '../services/seatService';
 import { useBookingStore } from '../store/useBookingStore';
 
@@ -11,21 +12,54 @@ import { useBookingStore } from '../store/useBookingStore';
  * Seat and showtime selection screen with interactive SVG map and AI seat recommendations.
  */
 function SeatSelectionPage() {
+  const { eventId } = useParams();
   const navigate = useNavigate();
   const selectedEvent = useBookingStore((state) => state.selectedEvent);
   const selectedShowtime = useBookingStore((state) => state.selectedShowtime);
   const selectedSeats = useBookingStore((state) => state.selectedSeats);
   const selectedSeatCount = useBookingStore((state) => state.selectedSeatCount);
   const seatHoldExpiry = useBookingStore((state) => state.seatHoldExpiry);
+  const setEvent = useBookingStore((state) => state.setEvent);
+  const setShowtime = useBookingStore((state) => state.setShowtime);
   const setSeatCount = useBookingStore((state) => state.setSeatCount);
   const [loading, setLoading] = useState(false);
-  const seats = useMemo(() => getSeatsByVenue(selectedEvent?.venueId), [selectedEvent?.venueId]);
+  const event = useMemo(
+    () => (selectedEvent?.id === eventId ? selectedEvent : getEventById(eventId)),
+    [eventId, selectedEvent],
+  );
+  const activeShowtime = useMemo(() => {
+    if (!event) {
+      return null;
+    }
+
+    const matchesSelectedShowtime = event.showtimes.some((showtime) => showtime.id === selectedShowtime?.id);
+    return matchesSelectedShowtime ? selectedShowtime : (event.showtimes[0] ?? null);
+  }, [event, selectedShowtime]);
+  const seats = useMemo(() => getSeatsByVenue(event?.venueId), [event?.venueId]);
+
+  useEffect(() => {
+    if (!event) {
+      return;
+    }
+
+    if (selectedEvent?.id !== event.id) {
+      setEvent(event);
+    }
+
+    if (activeShowtime && selectedShowtime?.id !== activeShowtime.id) {
+      setShowtime(activeShowtime);
+    }
+  }, [activeShowtime, event, selectedEvent?.id, selectedShowtime?.id, setEvent, setShowtime]);
 
   const { suggestions, selectedSeatIds, suggestedIds, handleSeatAction, applySuggestedSeats, isContiguous } =
     useSeatSelection(seats);
   const timer = useBookingTimer(seatHoldExpiry);
   const total = useMemo(() => selectedSeats.reduce((sum, seat) => sum + seat.price, 0), [selectedSeats]);
-  const soldOut = (selectedShowtime?.availableSeats ?? 0) <= 0;
+  const soldOut = (activeShowtime?.availableSeats ?? 0) <= 0;
+
+  if (!event) {
+    return <Navigate to="/discover" replace />;
+  }
 
   const handleProceed = async () => {
     setLoading(true);
@@ -47,7 +81,7 @@ function SeatSelectionPage() {
           <p className="text-xs uppercase tracking-[0.28em] text-[var(--color-text-muted)]">Step 2 of 3</p>
           <h1 className="mt-2 font-display text-[4rem] leading-none text-[var(--color-text-primary)]">Select Seats</h1>
           <p className="mt-3 text-[var(--color-text-secondary)]">
-            {selectedEvent?.title} · {selectedEvent?.venue?.name}
+            {event.title} · {event.venue?.name}
           </p>
         </div>
 
@@ -58,7 +92,7 @@ function SeatSelectionPage() {
 
       <div className="relative z-10">
         <StageSection
-          event={selectedEvent}
+          event={event}
           seats={seats}
           suggestions={suggestions}
           selectedSeats={selectedSeats}

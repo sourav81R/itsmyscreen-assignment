@@ -28,14 +28,7 @@ function App() {
           <Route path="/" element={<Navigate to="/discover" replace />} />
           <Route path="/discover" element={<DiscoveryPage city={city} />} />
           <Route path="/event/:eventId" element={<EventDetailPage />} />
-          <Route
-            path="/event/:eventId/seats"
-            element={
-              <RouteGuard canAccess={Boolean(selectedEvent)}>
-                <SeatSelectionPage />
-              </RouteGuard>
-            }
-          />
+          <Route path="/event/:eventId/seats" element={<SeatSelectionPage />} />
           <Route
             path="/booking/summary"
             element={

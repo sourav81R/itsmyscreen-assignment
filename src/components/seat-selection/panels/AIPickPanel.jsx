@@ -4,6 +4,12 @@ import Button from '../../shared/Button';
 import { buildSeatGroupLabel } from '../../../services/aiService';
 import { formatPrice } from '../../../utils/priceFormatter';
 
+const tierColors = {
+  general: '#0A84FF',
+  premium: '#30D158',
+  vip: '#FFD60A',
+};
+
 function AIPickPanel({ suggestions, onApply, onPreviewChange }) {
   return (
     <section className="editorial-panel premium-panel rounded-[28px] bg-[linear-gradient(180deg,rgba(24,24,38,0.98),rgba(14,14,24,0.98))] p-6">
@@ -32,7 +38,10 @@ function AIPickPanel({ suggestions, onApply, onPreviewChange }) {
               <div className="flex items-center justify-between gap-4">
                 <div className="min-w-0 flex-1">
                   <p className="truncate font-medium text-[var(--color-text-primary)]">
-                    {firstSeat.tier.toUpperCase()} · Row {buildSeatGroupLabel(group)}
+                    <span style={{ color: tierColors[firstSeat.tier] ?? 'var(--color-text-primary)' }}>
+                      {firstSeat.tier.toUpperCase()}
+                    </span>{' '}
+                    · Row {buildSeatGroupLabel(group)}
                   </p>
                   <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
                     {formatPrice(firstSeat.price)} each · {formatPrice(group.total)} total
