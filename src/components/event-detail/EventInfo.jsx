@@ -116,12 +116,12 @@ function EventInfo({ event }) {
                 </div>
               </div>
 
-              <div className="premium-panel rounded-[24px] bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] p-5">
+              <div className="premium-panel rounded-[24px] bg-[linear-gradient(180deg,rgba(34,34,50,0.96),rgba(16,16,26,0.98))] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
                 <span className="premium-chip inline-flex h-10 w-10 items-center justify-center rounded-[14px] text-[var(--color-brand-accent)]">
                   <MapPin className="h-5 w-5" aria-hidden="true" />
                 </span>
                 <p className="mt-4 text-xs uppercase tracking-[0.18em] text-[rgba(185,185,200,0.8)]">Address</p>
-                <p className="mt-2 text-base font-medium leading-7 text-[rgba(245,245,247,0.98)] [text-shadow:0_1px_10px_rgba(0,0,0,0.28)]">
+                <p className="premium-readable-title mt-2 text-base font-medium leading-7">
                   {event.venue.address}
                 </p>
 

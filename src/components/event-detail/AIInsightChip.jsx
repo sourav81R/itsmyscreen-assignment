@@ -30,7 +30,7 @@ function AIInsightChip({ event, onSelectSeats }) {
   const Icon = style.icon;
 
   return (
-    <div className="premium-panel rounded-[24px] bg-[linear-gradient(135deg,rgba(255,149,0,0.11),rgba(255,59,48,0.08)_46%,rgba(12,14,24,0.98))] px-5 py-4 backdrop-blur-xl">
+    <div className="premium-panel rounded-[24px] bg-[linear-gradient(135deg,rgba(255,149,0,0.16),rgba(255,59,48,0.1)_44%,rgba(12,14,24,0.98))] px-5 py-4 backdrop-blur-xl">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-start gap-3">
           <span className={`premium-chip inline-flex h-12 w-12 items-center justify-center rounded-[16px] ${style.accent}`}>
@@ -38,10 +38,10 @@ function AIInsightChip({ event, onSelectSeats }) {
           </span>
           <div className="max-w-[740px]">
             <p className="text-[11px] uppercase tracking-[0.24em] text-[rgba(185,185,200,0.82)]">{style.badge}</p>
-            <p className="mt-1.5 text-base font-semibold text-[rgba(245,245,247,0.98)] [text-shadow:0_1px_10px_rgba(0,0,0,0.32)]">
+            <p className="premium-readable-title mt-1.5 text-base font-semibold">
               {prediction.label}
             </p>
-            <p className="mt-1.5 text-sm leading-6 text-[rgba(233,233,241,0.9)] [text-shadow:0_1px_8px_rgba(0,0,0,0.24)]">
+            <p className="premium-readable-body mt-1.5 text-sm leading-6">
               {event.aiInsight}
             </p>
           </div>
