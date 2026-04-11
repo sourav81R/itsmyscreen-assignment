@@ -78,6 +78,10 @@ function BookingSummaryPage() {
     paymentMethod &&
     Object.values(paymentErrors).every((value) => !value);
 
+  if (!selectedEvent || !selectedShowtime || selectedSeats.length === 0) {
+    return null;
+  }
+
   const handleSubmit = async () => {
     if (!formValid) {
       showToast({ message: 'Complete the attendee and payment details to continue.' });

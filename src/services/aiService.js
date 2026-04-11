@@ -107,7 +107,6 @@ export const getSellOutPrediction = (event) => {
  * @returns {Array}
  */
 export const getAddOns = (event) => {
-  const venue = venueMap[event.venueId];
   const byVenueKind = {
     stadium: [
       { id: 'parking', icon: 'P', name: 'Parking Pass', price: 200 },
@@ -126,7 +125,9 @@ export const getAddOns = (event) => {
     ],
   };
 
-  return byVenueKind[venue.kind] ?? byVenueKind.grounds;
+  const venue = event?.venueId ? venueMap[event.venueId] : null;
+
+  return byVenueKind[venue?.kind] ?? byVenueKind.grounds;
 };
 
 export const buildSeatGroupLabel = (group) => {

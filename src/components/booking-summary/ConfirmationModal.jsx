@@ -116,8 +116,8 @@ function ConfirmationModal({ open, bookingId, event, showtime, seats, attendeeIn
               variant="secondary"
               className="border-[rgba(255,149,0,0.16)] bg-[rgba(255,255,255,0.02)] hover:border-[rgba(255,190,92,0.38)] hover:bg-[rgba(255,149,0,0.08)]"
               onClick={() => {
+                navigate('/discover', { replace: true });
                 onClose();
-                navigate('/discover');
               }}
             >
               Browse More Events
