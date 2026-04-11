@@ -58,7 +58,7 @@ function SeatLegend({ seats, activeTierFilter, onToggleTier }) {
           <span className="seat-legend-swatch seat-legend-selected" aria-hidden="true" />
           <span>Selected</span>
         </div>
-        <div className="seat-legend-static">
+        <div className="seat-legend-static seat-legend-static-unavailable">
           <span className="seat-legend-swatch seat-legend-unavailable" aria-hidden="true" />
           <span>Unavailable</span>
         </div>
