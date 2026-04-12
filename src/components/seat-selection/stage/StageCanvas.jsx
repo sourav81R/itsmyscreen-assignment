@@ -6,6 +6,7 @@ import TierBoundary from './TierBoundary';
 import SeatGroup from './SeatGroup';
 
 function StageCanvas({
+  isMobile,
   seatRows,
   selectedSeats,
   selectedSeatIds,
@@ -171,7 +172,7 @@ function StageCanvas({
             event.stopPropagation();
           }
         }}
-        tabIndex={0}
+        tabIndex={isMobile ? -1 : 0}
         {...mapTransform.bind}
       >
         <svg
@@ -179,9 +180,13 @@ function StageCanvas({
           width="100%"
           height="100%"
           preserveAspectRatio="xMidYMid meet"
-          style={{ touchAction: 'none', display: 'block' }}
-          role="application"
-          aria-label="Interactive seating map. Use arrow keys to move between seats and Space to select."
+          style={{ touchAction: isMobile ? 'auto' : 'none', display: 'block' }}
+          role={isMobile ? 'img' : 'application'}
+          aria-label={
+            isMobile
+              ? 'Interactive seating map. Tap a seat to select it.'
+              : 'Interactive seating map. Use arrow keys to move between seats and Space to select.'
+          }
           className="h-full w-full"
         >
           <defs>
@@ -245,6 +250,7 @@ function StageCanvas({
               <SeatGroup
                 key={row.id}
                 row={row}
+                isMobile={isMobile}
                 viewMode={viewMode}
                 selectedSeatIds={selectedSeatIds}
                 aiSuggestedIds={aiSuggestedIds}
@@ -257,12 +263,20 @@ function StageCanvas({
                 }}
                 onSeatClick={(seat) => handleSeatClick(seat)}
                 onSeatHover={(seat) => (event) => {
+                  if (isMobile) {
+                    return;
+                  }
+
                   setHoveredSeatId(seat.id);
                   setFocusedSeatId(seat.id);
                   keepTooltipOpen();
                   showTooltip(seat, event);
                 }}
                 onSeatLeave={() => {
+                  if (isMobile) {
+                    return;
+                  }
+
                   setHoveredSeatId(null);
                   setFocusedSeatId(null);
                   hideTooltip();
@@ -278,6 +292,7 @@ function StageCanvas({
 }
 
 StageCanvas.propTypes = {
+  isMobile: PropTypes.bool,
   seatRows: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.string.isRequired, seats: PropTypes.array.isRequired })).isRequired,
   selectedSeats: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.string.isRequired, price: PropTypes.number.isRequired })).isRequired,
   selectedSeatIds: PropTypes.instanceOf(Set).isRequired,
@@ -309,6 +324,7 @@ StageCanvas.propTypes = {
 
 StageCanvas.defaultProps = {
   activeTierFilter: null,
+  isMobile: false,
 };
 
 export default StageCanvas;

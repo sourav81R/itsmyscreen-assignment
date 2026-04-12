@@ -4,6 +4,7 @@ import SeatCircle from './SeatCircle';
 
 const SeatGroup = memo(function SeatGroup({
   row,
+  isMobile,
   viewMode,
   selectedSeatIds,
   aiSuggestedIds,
@@ -63,6 +64,7 @@ const SeatGroup = memo(function SeatGroup({
           <SeatCircle
             key={seat.id}
             seat={seat}
+            isMobile={isMobile}
             position={rowPositions[index]}
             isSelected={selectedSeatIds.has(seat.id)}
             isAISuggested={aiSuggestedIds.has(seat.id) || previewSeatIds.has(seat.id)}
@@ -95,6 +97,7 @@ SeatGroup.propTypes = {
       }),
     ).isRequired,
   }).isRequired,
+  isMobile: PropTypes.bool,
   viewMode: PropTypes.oneOf(['birdsEye', 'perspective']).isRequired,
   selectedSeatIds: PropTypes.instanceOf(Set).isRequired,
   aiSuggestedIds: PropTypes.instanceOf(Set).isRequired,
@@ -113,6 +116,7 @@ SeatGroup.defaultProps = {
   activeTierFilter: null,
   hoveredSeatId: null,
   focusedSeatId: null,
+  isMobile: false,
 };
 
 export default SeatGroup;

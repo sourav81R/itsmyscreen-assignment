@@ -21,6 +21,7 @@ const strokeMap = {
 
 const SeatCircle = memo(function SeatCircle({
   seat,
+  isMobile,
   position,
   isSelected,
   isAISuggested,
@@ -52,11 +53,14 @@ const SeatCircle = memo(function SeatCircle({
       aria-label={`Seat ${seat.row}${seat.number}, ${seat.tier} tier, ${formatPrice(seat.price)}, ${seat.status}`}
       aria-selected={isSelected}
       aria-disabled={isUnavailable}
-      tabIndex={isUnavailable ? -1 : 0}
+      tabIndex={isUnavailable || isMobile ? -1 : 0}
       onClick={(event) => {
         event.stopPropagation();
         if (!isUnavailable) {
           onClick(seat);
+        }
+        if (isMobile && document.activeElement instanceof HTMLElement) {
+          document.activeElement.blur?.();
         }
       }}
       onDoubleClick={(event) => {
@@ -66,12 +70,14 @@ const SeatCircle = memo(function SeatCircle({
       onMouseEnter={onHoverStart}
       onMouseLeave={onHoverEnd}
       onPointerDown={(event) => {
-        onHoverStart(event);
+        if (event.pointerType === 'mouse') {
+          onHoverStart(event);
+        }
       }}
-      onFocus={onHoverStart}
-      onBlur={onHoverEnd}
+      onFocus={isMobile ? undefined : onHoverStart}
+      onBlur={isMobile ? undefined : onHoverEnd}
       onKeyDown={onKeyDown}
-      style={{ opacity: seatOpacity }}
+      style={{ opacity: seatOpacity, touchAction: 'manipulation' }}
     >
       {isAISuggested && !isSelected ? (
         <>
@@ -151,6 +157,7 @@ SeatCircle.propTypes = {
     price: PropTypes.number.isRequired,
     seatRadius: PropTypes.number.isRequired,
   }).isRequired,
+  isMobile: PropTypes.bool,
   position: PropTypes.shape({
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired,
@@ -165,6 +172,10 @@ SeatCircle.propTypes = {
   onHoverStart: PropTypes.func.isRequired,
   onHoverEnd: PropTypes.func.isRequired,
   onKeyDown: PropTypes.func.isRequired,
+};
+
+SeatCircle.defaultProps = {
+  isMobile: false,
 };
 
 export default SeatCircle;

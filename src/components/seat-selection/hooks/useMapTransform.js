@@ -27,7 +27,8 @@ const normalizeState = (nextState) => {
 const distanceBetween = ([first, second]) =>
   Math.hypot(second.x - first.x, second.y - first.y);
 
-export function useMapTransform() {
+export function useMapTransform(options = {}) {
+  const { disableTouchGestures = false } = options;
   const [state, setState] = useState(DEFAULT_STATE);
   const stateRef = useRef(DEFAULT_STATE);
   const pointersRef = useRef(new Map());
@@ -64,6 +65,10 @@ export function useMapTransform() {
   }, []);
 
   const handlePointerDown = useCallback((event) => {
+    if (disableTouchGestures && event.pointerType === 'touch') {
+      return;
+    }
+
     event.currentTarget.setPointerCapture?.(event.pointerId);
     pointersRef.current.set(event.pointerId, { x: event.clientX, y: event.clientY });
 
@@ -86,9 +91,13 @@ export function useMapTransform() {
       dragRef.current = null;
       didDragRef.current = true;
     }
-  }, []);
+  }, [disableTouchGestures]);
 
   const handlePointerMove = useCallback((event) => {
+    if (disableTouchGestures && event.pointerType === 'touch') {
+      return;
+    }
+
     if (!pointersRef.current.has(event.pointerId)) {
       return;
     }
@@ -117,9 +126,13 @@ export function useMapTransform() {
         y: dragRef.current.originY + deltaY,
       }));
     }
-  }, []);
+  }, [disableTouchGestures]);
 
   const finishPointer = useCallback((event) => {
+    if (disableTouchGestures && event.pointerType === 'touch') {
+      return;
+    }
+
     pointersRef.current.delete(event.pointerId);
 
     if (dragRef.current?.pointerId === event.pointerId) {
@@ -135,18 +148,28 @@ export function useMapTransform() {
         didDragRef.current = false;
       }, 0);
     }
-  }, []);
+  }, [disableTouchGestures]);
 
   const bind = useMemo(
-    () => ({
-      onWheel: handleWheel,
-      onPointerDown: handlePointerDown,
-      onPointerMove: handlePointerMove,
-      onPointerUp: finishPointer,
-      onPointerCancel: finishPointer,
-      onPointerLeave: finishPointer,
-    }),
-    [finishPointer, handlePointerDown, handlePointerMove, handleWheel],
+    () =>
+      disableTouchGestures
+        ? {
+            onWheel: undefined,
+            onPointerDown: undefined,
+            onPointerMove: undefined,
+            onPointerUp: undefined,
+            onPointerCancel: undefined,
+            onPointerLeave: undefined,
+          }
+        : {
+            onWheel: handleWheel,
+            onPointerDown: handlePointerDown,
+            onPointerMove: handlePointerMove,
+            onPointerUp: finishPointer,
+            onPointerCancel: finishPointer,
+            onPointerLeave: finishPointer,
+          },
+    [disableTouchGestures, finishPointer, handlePointerDown, handlePointerMove, handleWheel],
   );
 
   return {
@@ -155,7 +178,7 @@ export function useMapTransform() {
     zoomOut,
     reset,
     panBy,
-    shouldBlockClick: () => didDragRef.current,
+    shouldBlockClick: () => (disableTouchGestures ? false : didDragRef.current),
     bind,
   };
 }

@@ -13,6 +13,7 @@ import { useMapTransform } from './hooks/useMapTransform';
 import { useSeatLayout } from './hooks/useSeatLayout';
 import { useHoverTooltip } from './hooks/useHoverTooltip';
 import { formatPrice } from '../../utils/priceFormatter';
+import { useIsMobile } from '../../hooks/useMediaQuery';
 
 function StageSection({
   event,
@@ -34,6 +35,7 @@ function StageSection({
   onRemoveSeat,
   onProceed,
 }) {
+  const isMobile = useIsMobile();
   const [viewMode, setViewMode] = useState('birdsEye');
   const [activeTierFilter, setActiveTierFilter] = useState(null);
   const [previewSeatIds, setPreviewSeatIds] = useState(new Set());
@@ -41,7 +43,7 @@ function StageSection({
   const [isFullscreen, setIsFullscreen] = useState(false);
   const mapAreaRef = useRef(null);
   const mapContainerRef = useRef(null);
-  const mapTransform = useMapTransform();
+  const mapTransform = useMapTransform({ disableTouchGestures: isMobile });
   const seatRows = useSeatLayout(seats);
   const { tooltip, showTooltip, hideTooltip, scheduleHide, cancelHide } = useHoverTooltip(mapContainerRef);
 
@@ -122,12 +124,14 @@ function StageSection({
       <div className="controls-panel order-1 flex flex-col gap-5 lg:order-none">
         <ShowtimeSelector showtimes={event?.showtimes ?? []} />
         <SeatCountPicker value={selectedSeatCount} onChange={onSeatCountChange} />
-        <AIPickPanel
-          suggestions={suggestions}
-          seatRows={seatRows}
-          onApply={onApplySuggestedSeats}
-          onPreviewChange={setPreviewSeatIds}
-        />
+        <div className="hidden lg:block">
+          <AIPickPanel
+            suggestions={suggestions}
+            seatRows={seatRows}
+            onApply={onApplySuggestedSeats}
+            onPreviewChange={setPreviewSeatIds}
+          />
+        </div>
       </div>
 
       <div ref={mapAreaRef} className="map-area order-2">
@@ -143,8 +147,13 @@ function StageSection({
           <SeatLegend seats={seats} activeTierFilter={activeTierFilter} onToggleTier={setActiveTierFilter} />
         </div>
 
+        <div className="mb-4 lg:hidden">
+          <SeatLegend seats={seats} activeTierFilter={activeTierFilter} onToggleTier={setActiveTierFilter} />
+        </div>
+
         <div ref={mapContainerRef} className="map-container">
           <StageCanvas
+            isMobile={isMobile}
             seatRows={seatRows}
             selectedSeats={mapSummary.selectedSeats}
             selectedSeatIds={mapSummary.selectedSeatIds}
@@ -168,17 +177,24 @@ function StageSection({
             onToggleFullscreen={toggleFullscreen}
             isFullscreen={isFullscreen}
           />
-          <SeatInfoTooltip
-            tooltip={tooltip}
-            selectedSeatIds={selectedSeatIds}
-            onBookSeat={handleTooltipSeatAction}
-            onMouseEnter={cancelHide}
-            onMouseLeave={scheduleHide}
-          />
+          {!isMobile ? (
+            <SeatInfoTooltip
+              tooltip={tooltip}
+              selectedSeatIds={selectedSeatIds}
+              onBookSeat={handleTooltipSeatAction}
+              onMouseEnter={cancelHide}
+              onMouseLeave={scheduleHide}
+            />
+          ) : null}
         </div>
 
         <div className="mt-4 lg:hidden">
-          <SeatLegend seats={seats} activeTierFilter={activeTierFilter} onToggleTier={setActiveTierFilter} />
+          <AIPickPanel
+            suggestions={suggestions}
+            seatRows={seatRows}
+            onApply={onApplySuggestedSeats}
+            onPreviewChange={setPreviewSeatIds}
+          />
         </div>
       </div>
 
