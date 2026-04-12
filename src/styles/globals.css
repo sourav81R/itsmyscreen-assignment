@@ -708,6 +708,19 @@ img {
     bottom: 16px;
     z-index: 10;
   }
+
+  .view-angle-toggle {
+    width: 100%;
+    padding: 3px;
+  }
+
+  .view-angle-button {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 9px 12px;
+    font-size: 12px;
+    text-align: center;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
