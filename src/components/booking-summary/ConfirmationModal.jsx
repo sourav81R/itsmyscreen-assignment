@@ -50,11 +50,11 @@ function ConfirmationModal({ open, bookingId, event, showtime, seats, attendeeIn
         />
       ))}
 
-      <div className="flex h-full items-center justify-center px-8">
+      <div className="flex h-full items-center justify-center px-2 py-2 xs:px-3 xs:py-3 md:px-8 md:py-8">
         <motion.div
           initial={{ opacity: 0, scale: 0.88 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="group premium-panel relative w-full max-w-[600px] overflow-hidden rounded-[30px] border-[rgba(255,190,92,0.24)] bg-[linear-gradient(145deg,rgba(35,34,52,0.98),rgba(16,16,27,0.99)_58%,rgba(24,18,26,0.98))] p-6 text-center shadow-[0_32px_90px_rgba(0,0,0,0.5),0_0_0_1px_rgba(255,149,0,0.08)] transition-[border-color,box-shadow,transform,background] duration-300 hover:border-[rgba(255,190,92,0.42)] hover:shadow-[0_36px_100px_rgba(0,0,0,0.54),0_0_0_1px_rgba(255,190,92,0.18),0_0_36px_rgba(255,149,0,0.12)]"
+          className="group premium-panel relative w-full max-w-[600px] overflow-x-hidden overflow-y-auto rounded-[26px] border-[rgba(255,190,92,0.24)] bg-[linear-gradient(145deg,rgba(35,34,52,0.98),rgba(16,16,27,0.99)_58%,rgba(24,18,26,0.98))] p-5 text-center shadow-[0_32px_90px_rgba(0,0,0,0.5),0_0_0_1px_rgba(255,149,0,0.08)] transition-[border-color,box-shadow,transform,background] duration-300 hover:border-[rgba(255,190,92,0.42)] hover:shadow-[0_36px_100px_rgba(0,0,0,0.54),0_0_0_1px_rgba(255,190,92,0.18),0_0_36px_rgba(255,149,0,0.12)] max-h-[calc(100vh-16px)] xs:max-h-[calc(100vh-24px)] xs:rounded-[28px] xs:p-6 md:rounded-[30px]"
         >
           <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
             <div className="absolute inset-x-[10%] top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(255,190,92,0.6),transparent)]" />
@@ -84,7 +84,7 @@ function ConfirmationModal({ open, bookingId, event, showtime, seats, attendeeIn
               <div className="absolute right-[-10%] bottom-[-18%] h-36 w-36 rounded-full bg-[rgba(255,59,48,0.08)] blur-[72px]" />
             </div>
             <p className="text-[11px] uppercase tracking-[0.16em] text-[rgba(226,219,208,0.78)] [text-shadow:0_1px_8px_rgba(0,0,0,0.22)]">Booking ID</p>
-            <p className="premium-readable-title mt-2 font-display text-[1.85rem] tracking-[0.03em] !text-[var(--color-brand-accent)] transition-[text-shadow,color] duration-300 group-hover/id:!text-[#ffb13b] group-hover/id:[text-shadow:0_0_24px_rgba(255,149,0,0.28)]">
+            <p className="premium-readable-title mt-2 select-all font-display text-[1.85rem] tracking-[0.03em] !text-[var(--color-brand-accent)] transition-[text-shadow,color] duration-300 group-hover/id:!text-[#ffb13b] group-hover/id:[text-shadow:0_0_24px_rgba(255,149,0,0.28)]">
               {bookingId}
             </p>
             <p className="premium-readable-body mt-2 text-[12px]">
@@ -92,7 +92,7 @@ function ConfirmationModal({ open, bookingId, event, showtime, seats, attendeeIn
             </p>
           </div>
 
-          <div className="mt-6 flex justify-center gap-3">
+          <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
             <Button
               onClick={() => {
                 const opened = openTicketPrintWindow({
@@ -108,7 +108,7 @@ function ConfirmationModal({ open, bookingId, event, showtime, seats, attendeeIn
                   window.print();
                 }
               }}
-              className="shadow-[0_18px_40px_rgba(255,59,48,0.28)] hover:shadow-[0_22px_48px_rgba(255,59,48,0.34)]"
+              className="w-full shadow-[0_18px_40px_rgba(255,59,48,0.28)] hover:shadow-[0_22px_48px_rgba(255,59,48,0.34)] sm:w-auto"
               size="sm"
             >
               Download Ticket
@@ -116,7 +116,7 @@ function ConfirmationModal({ open, bookingId, event, showtime, seats, attendeeIn
             <Button
               variant="secondary"
               size="sm"
-              className="border-[rgba(255,149,0,0.16)] bg-[rgba(255,255,255,0.02)] hover:border-[rgba(255,190,92,0.38)] hover:bg-[rgba(255,149,0,0.08)]"
+              className="w-full border-[rgba(255,149,0,0.16)] bg-[rgba(255,255,255,0.02)] hover:border-[rgba(255,190,92,0.38)] hover:bg-[rgba(255,149,0,0.08)] sm:w-auto"
               onClick={() => {
                 navigate('/discover', { replace: true });
                 onClose();

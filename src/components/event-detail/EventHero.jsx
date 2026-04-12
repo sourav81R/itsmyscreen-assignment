@@ -9,13 +9,13 @@ import { formatPrice } from '../../utils/priceFormatter';
  * Full-bleed event hero with layered editorial overlays and sticky CTA bar.
  * Props: event, onSelectSeats.
  */
-function EventHero({ event, onSelectSeats }) {
+function EventHero({ event, onSelectSeats, ctaRef }) {
   const firstShowtime = event.showtimes[0];
   const headlineGenres = event.genre.slice(0, 2);
 
   return (
     <section className="premium-panel rounded-[30px] bg-[rgba(11,12,18,0.92)] p-3 lg:p-4">
-        <div className="group relative h-[660px] overflow-hidden rounded-[28px]">
+        <div className="group relative h-[260px] overflow-hidden rounded-[28px] sm:h-[320px] md:h-[400px] xl:h-[660px]">
           <img
             src={event.bannerUrl}
             alt={`${event.title} hero artwork`}
@@ -54,7 +54,7 @@ function EventHero({ event, onSelectSeats }) {
             <div className="max-w-[540px]">
               <div className="premium-panel rounded-[22px] bg-[linear-gradient(180deg,rgba(9,11,18,0.48),rgba(9,11,18,0.68))] p-[18px] backdrop-blur-xl lg:p-5">
                 <p className="text-[11px] uppercase tracking-[0.28em] text-[var(--color-text-secondary)]">{event.artist}</p>
-                <h1 className="mt-2 max-w-[11ch] font-display text-[clamp(1.95rem,3vw,3.45rem)] leading-[0.96] text-[var(--color-text-primary)]">
+                <h1 className="mt-2 max-w-[11ch] font-display text-2xl leading-[0.96] text-[var(--color-text-primary)] sm:text-3xl md:text-4xl xl:text-5xl">
                   {event.title}
                 </h1>
                 <p className="mt-2 max-w-[30rem] text-[13px] leading-5 text-[rgba(245,245,247,0.76)]">
@@ -100,13 +100,15 @@ function EventHero({ event, onSelectSeats }) {
                   </div>
                 </div>
 
-                <Button
-                  className="mt-3.5 w-full bg-[linear-gradient(135deg,#ff5a3d,#ff3b30_55%,#ff7b33)] shadow-[0_16px_38px_rgba(255,59,48,0.28)] hover:shadow-[0_20px_44px_rgba(255,59,48,0.34)]"
-                  size="sm"
-                  onClick={onSelectSeats}
-                >
-                  Select Seats
-                </Button>
+                <div ref={ctaRef}>
+                  <Button
+                    className="mt-3.5 w-full bg-[linear-gradient(135deg,#ff5a3d,#ff3b30_55%,#ff7b33)] shadow-[0_16px_38px_rgba(255,59,48,0.28)] hover:shadow-[0_20px_44px_rgba(255,59,48,0.34)]"
+                    size="sm"
+                    onClick={onSelectSeats}
+                  >
+                    Select Seats
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
@@ -137,6 +139,11 @@ EventHero.propTypes = {
     ).isRequired,
   }).isRequired,
   onSelectSeats: PropTypes.func.isRequired,
+  ctaRef: PropTypes.shape({ current: PropTypes.any }),
+};
+
+EventHero.defaultProps = {
+  ctaRef: null,
 };
 
 export default EventHero;

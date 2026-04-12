@@ -22,13 +22,13 @@ function EventInfo({ event }) {
             <h2 className="mt-2.5 font-display text-3xl text-[var(--color-text-primary)]">Story, lineup, and venue feel</h2>
           </div>
 
-          <div className="flex flex-wrap gap-2">
+          <div className="flex gap-2 overflow-x-auto" style={{ scrollbarWidth: 'none' }}>
             {tabs.map((tab) => (
               <button
                 key={tab}
                 type="button"
                 onClick={() => setActiveTab(tab)}
-                className={`premium-chip rounded-full px-4 py-2 text-sm transition ${
+                className={`premium-chip shrink-0 rounded-full px-4 py-2 text-sm transition ${
                   activeTab === tab
                     ? '!border-[rgba(255,149,0,0.34)] !bg-[linear-gradient(135deg,rgba(255,149,0,0.18),rgba(255,59,48,0.12))] text-[var(--color-text-primary)]'
                     : 'text-[var(--color-text-secondary)]'
@@ -82,7 +82,7 @@ function EventInfo({ event }) {
               {event.lineup.map((slot, index) => (
                 <div
                   key={`${slot.name}-${slot.time}`}
-                  className="premium-panel flex items-center justify-between rounded-[22px] bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.015))] px-4 py-3.5"
+                  className="premium-panel flex flex-col gap-3 rounded-[22px] bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.015))] px-4 py-3.5 sm:flex-row sm:items-center sm:justify-between"
                 >
                   <div className="flex items-center gap-4">
                     <span className="premium-chip inline-flex h-10 w-10 items-center justify-center rounded-[14px] text-sm font-medium text-[var(--color-brand-accent)]">
@@ -105,7 +105,7 @@ function EventInfo({ event }) {
                 <img
                   src={event.venue.mapImageUrl}
                   alt={`${event.venue.name} venue map preview`}
-                  className="h-[270px] w-full rounded-[24px] object-cover transition duration-700 hover:scale-[1.03]"
+                  className="h-[200px] w-full rounded-[24px] object-cover transition duration-700 hover:scale-[1.03] md:h-[280px] xl:h-[320px]"
                 />
                 <div className="border-t border-[rgba(255,255,255,0.06)] px-5 py-4">
                   <p className="text-[11px] uppercase tracking-[0.22em] text-[var(--color-brand-accent)]">About this show</p>

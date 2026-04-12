@@ -14,13 +14,13 @@ function PaymentSelector({ values, errors, onFieldChange }) {
   return (
     <section className="premium-panel rounded-[30px] bg-[linear-gradient(145deg,rgba(31,31,49,0.96),rgba(15,15,23,0.98))] p-6">
       <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-text-muted)]">Payment</p>
-      <div className="mt-5 flex gap-2">
+      <div className="mt-5 flex w-full gap-2">
         {tabs.map((tab) => (
           <button
             key={tab}
             type="button"
             onClick={() => setPaymentMethod(tab.toLowerCase())}
-            className={`premium-chip rounded-full px-4 py-2 text-sm transition ${
+            className={`premium-chip flex-1 rounded-full px-4 py-2 text-sm transition ${
               paymentMethod === tab.toLowerCase()
                 ? 'border-[rgba(255,190,92,0.44)] bg-[linear-gradient(135deg,rgba(255,149,0,0.24),rgba(255,59,48,0.18))] text-[var(--color-text-primary)] shadow-[0_16px_34px_rgba(255,149,0,0.12)]'
                 : 'text-[var(--color-text-secondary)]'
@@ -47,7 +47,7 @@ function PaymentSelector({ values, errors, onFieldChange }) {
                 onChange={(event) => onFieldChange(field.key, event.target.value)}
                 autoComplete="off"
                 placeholder={field.placeholder}
-                className={`dark-input w-full rounded-[20px] border px-4 py-3 outline-none transition duration-200 hover:border-[rgba(255,190,92,0.28)] focus:border-[rgba(255,190,92,0.42)] ${
+                className={`dark-input h-[52px] w-full rounded-[20px] border px-4 py-3 outline-none transition duration-200 hover:border-[rgba(255,190,92,0.28)] focus:border-[rgba(255,190,92,0.42)] md:h-[44px] ${
                   errors[field.key] ? 'border-[rgba(255,69,58,0.5)]' : 'border-[rgba(255,149,0,0.14)]'
                 }`}
               />
@@ -65,7 +65,7 @@ function PaymentSelector({ values, errors, onFieldChange }) {
             onChange={(event) => onFieldChange('upiId', event.target.value)}
             autoComplete="off"
             placeholder=""
-            className={`dark-input w-full rounded-[20px] border px-4 py-3 outline-none transition duration-200 hover:border-[rgba(255,190,92,0.28)] focus:border-[rgba(255,190,92,0.42)] ${
+            className={`dark-input h-[52px] w-full rounded-[20px] border px-4 py-3 outline-none transition duration-200 hover:border-[rgba(255,190,92,0.28)] focus:border-[rgba(255,190,92,0.42)] md:h-[44px] ${
               errors.upiId ? 'border-[rgba(255,69,58,0.5)]' : 'border-[rgba(255,149,0,0.14)]'
             }`}
           />

@@ -54,7 +54,7 @@ function PricingTiers({ event, onSelectSeats }) {
         </div>
       </div>
 
-      <div className="mt-4 grid gap-3 lg:grid-cols-3">
+      <div className="mt-4 flex flex-col gap-3 md:grid md:grid-cols-3 md:gap-4">
         {columns.map((column) => (
           <div
             key={column.key}

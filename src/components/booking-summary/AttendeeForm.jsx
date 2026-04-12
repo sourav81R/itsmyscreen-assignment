@@ -24,7 +24,7 @@ function AttendeeForm({ values, errors, onChange }) {
               onChange={(event) => onChange(field.key, event.target.value)}
               autoComplete="off"
               placeholder={field.placeholder}
-              className={`dark-input w-full rounded-[20px] border px-4 py-3 outline-none transition duration-200 hover:border-[rgba(255,190,92,0.28)] focus:border-[rgba(255,190,92,0.42)] ${
+              className={`dark-input h-[52px] w-full rounded-[20px] border px-4 py-3 outline-none transition duration-200 hover:border-[rgba(255,190,92,0.28)] focus:border-[rgba(255,190,92,0.42)] md:h-[44px] ${
                 errors[field.key] ? 'border-[rgba(255,69,58,0.5)]' : 'border-[rgba(255,149,0,0.14)]'
               }`}
             />

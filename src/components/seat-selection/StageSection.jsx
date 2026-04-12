@@ -118,23 +118,19 @@ function StageSection({
   );
 
   return (
-    <section className="stage-section desktop">
-      <div className="controls-panel">
+    <section className="stage-section min-h-0 flex flex-col gap-6 lg:grid lg:grid-cols-[320px_minmax(0,1fr)]">
+      <div className="controls-panel order-1 flex flex-col gap-5 lg:order-none">
         <ShowtimeSelector showtimes={event?.showtimes ?? []} />
-        <div className="mt-5">
-          <SeatCountPicker value={selectedSeatCount} onChange={onSeatCountChange} />
-        </div>
-        <div className="mt-5">
-          <AIPickPanel
-            suggestions={suggestions}
-            seatRows={seatRows}
-            onApply={onApplySuggestedSeats}
-            onPreviewChange={setPreviewSeatIds}
-          />
-        </div>
+        <SeatCountPicker value={selectedSeatCount} onChange={onSeatCountChange} />
+        <AIPickPanel
+          suggestions={suggestions}
+          seatRows={seatRows}
+          onApply={onApplySuggestedSeats}
+          onPreviewChange={setPreviewSeatIds}
+        />
       </div>
 
-      <div ref={mapAreaRef} className="map-area">
+      <div ref={mapAreaRef} className="map-area order-2">
         <div className="map-area-topbar">
           <div>
             <p className="text-xs uppercase tracking-[0.22em] text-[var(--color-text-muted)]">Immersive view</p>
@@ -143,7 +139,7 @@ function StageSection({
           <ViewAngleToggle value={viewMode} onChange={setViewMode} />
         </div>
 
-        <div className="mb-4">
+        <div className="mb-4 hidden lg:block">
           <SeatLegend seats={seats} activeTierFilter={activeTierFilter} onToggleTier={setActiveTierFilter} />
         </div>
 
@@ -179,6 +175,10 @@ function StageSection({
             onMouseEnter={cancelHide}
             onMouseLeave={scheduleHide}
           />
+        </div>
+
+        <div className="mt-4 lg:hidden">
+          <SeatLegend seats={seats} activeTierFilter={activeTierFilter} onToggleTier={setActiveTierFilter} />
         </div>
       </div>
 

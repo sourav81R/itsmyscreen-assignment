@@ -41,7 +41,7 @@ function ShowtimeSelector({ showtimes }) {
         ))}
       </div>
 
-      <div className="mt-5 grid grid-cols-2 gap-3">
+      <div className="mt-5 flex gap-3 overflow-x-auto pb-2 md:grid md:grid-cols-2 md:overflow-visible md:pb-0">
         {dateTimes.map((showtime) => {
           const soldOut = showtime.availableSeats <= 0;
           const active = selectedShowtime?.id === showtime.id;
@@ -51,8 +51,8 @@ function ShowtimeSelector({ showtimes }) {
               type="button"
               disabled={soldOut}
               onClick={() => setShowtime(showtime)}
-            className={`premium-panel rounded-[20px] px-4 py-4 text-left transition ${
-              active
+              className={`premium-panel min-w-[148px] rounded-[20px] px-4 py-4 text-left transition md:min-w-0 ${
+                active
                   ? 'border-[rgba(255,149,0,0.4)] bg-[linear-gradient(135deg,rgba(255,149,0,0.12),rgba(255,59,48,0.08))]'
                   : 'bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.015))] hover:border-[rgba(255,149,0,0.28)] hover:bg-[rgba(255,255,255,0.05)]'
               } ${soldOut ? 'cursor-not-allowed opacity-40' : ''}`}

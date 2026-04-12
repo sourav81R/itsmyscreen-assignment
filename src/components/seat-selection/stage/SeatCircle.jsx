@@ -66,7 +66,6 @@ const SeatCircle = memo(function SeatCircle({
       onMouseEnter={onHoverStart}
       onMouseLeave={onHoverEnd}
       onPointerDown={(event) => {
-        event.stopPropagation();
         onHoverStart(event);
       }}
       onFocus={onHoverStart}

@@ -1,10 +1,28 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-const MIN_SCALE = 0.65;
-const MAX_SCALE = 2.4;
+const MIN_SCALE = 0.6;
+const MAX_SCALE = 4;
 const DEFAULT_STATE = { scale: 1, x: 0, y: 0 };
+const MAP_WIDTH = 1000;
+const MAP_HEIGHT = 800;
+const DRAG_THRESHOLD = 5;
 
 const clampScale = (value) => Math.min(Math.max(value, MIN_SCALE), MAX_SCALE);
+const clampValue = (value, min, max) => Math.min(Math.max(value, min), max);
+const clampTranslate = (x, y, scale) => ({
+  x: clampValue(x, -MAP_WIDTH * scale * 0.5, MAP_WIDTH * scale * 0.5),
+  y: clampValue(y, -MAP_HEIGHT * scale * 0.5, MAP_HEIGHT * scale * 0.5),
+});
+const normalizeState = (nextState) => {
+  const scale = clampScale(nextState.scale);
+  const translate = clampTranslate(nextState.x, nextState.y, scale);
+
+  return {
+    scale,
+    x: translate.x,
+    y: translate.y,
+  };
+};
 
 const distanceBetween = ([first, second]) =>
   Math.hypot(second.x - first.x, second.y - first.y);
@@ -15,17 +33,18 @@ export function useMapTransform() {
   const pointersRef = useRef(new Map());
   const dragRef = useRef(null);
   const pinchRef = useRef(null);
+  const didDragRef = useRef(false);
 
   useEffect(() => {
     stateRef.current = state;
   }, [state]);
 
   const zoomIn = useCallback(() => {
-    setState((current) => ({ ...current, scale: clampScale(current.scale + 0.18) }));
+    setState((current) => normalizeState({ ...current, scale: current.scale + 0.18 }));
   }, []);
 
   const zoomOut = useCallback(() => {
-    setState((current) => ({ ...current, scale: clampScale(current.scale - 0.18) }));
+    setState((current) => normalizeState({ ...current, scale: current.scale - 0.18 }));
   }, []);
 
   const reset = useCallback(() => {
@@ -33,14 +52,14 @@ export function useMapTransform() {
   }, []);
 
   const panBy = useCallback((dx, dy) => {
-    setState((current) => ({ ...current, x: current.x + dx, y: current.y + dy }));
+    setState((current) => normalizeState({ ...current, x: current.x + dx, y: current.y + dy }));
   }, []);
 
   const handleWheel = useCallback((event) => {
     event.preventDefault();
-    setState((current) => ({
+    setState((current) => normalizeState({
       ...current,
-      scale: clampScale(current.scale + (event.deltaY < 0 ? 0.09 : -0.09)),
+      scale: current.scale + (event.deltaY < 0 ? 0.09 : -0.09),
     }));
   }, []);
 
@@ -56,6 +75,7 @@ export function useMapTransform() {
         originX: stateRef.current.x,
         originY: stateRef.current.y,
       };
+      didDragRef.current = false;
     }
 
     if (pointersRef.current.size === 2) {
@@ -64,6 +84,7 @@ export function useMapTransform() {
         distance: distanceBetween([...pointersRef.current.values()]),
       };
       dragRef.current = null;
+      didDragRef.current = true;
     }
   }, []);
 
@@ -76,16 +97,24 @@ export function useMapTransform() {
 
     if (pointersRef.current.size === 2 && pinchRef.current) {
       const nextDistance = distanceBetween([...pointersRef.current.values()]);
-      const nextScale = clampScale((pinchRef.current.scale * nextDistance) / pinchRef.current.distance);
-      setState((current) => ({ ...current, scale: nextScale }));
+      const nextScale = (pinchRef.current.scale * nextDistance) / pinchRef.current.distance;
+      didDragRef.current = true;
+      setState((current) => normalizeState({ ...current, scale: nextScale }));
       return;
     }
 
     if (dragRef.current?.pointerId === event.pointerId) {
-      setState((current) => ({
+      const deltaX = event.clientX - dragRef.current.startX;
+      const deltaY = event.clientY - dragRef.current.startY;
+
+      if (Math.hypot(deltaX, deltaY) > DRAG_THRESHOLD) {
+        didDragRef.current = true;
+      }
+
+      setState((current) => normalizeState({
         ...current,
-        x: dragRef.current.originX + (event.clientX - dragRef.current.startX),
-        y: dragRef.current.originY + (event.clientY - dragRef.current.startY),
+        x: dragRef.current.originX + deltaX,
+        y: dragRef.current.originY + deltaY,
       }));
     }
   }, []);
@@ -99,6 +128,12 @@ export function useMapTransform() {
 
     if (pointersRef.current.size < 2) {
       pinchRef.current = null;
+    }
+
+    if (pointersRef.current.size === 0) {
+      window.setTimeout(() => {
+        didDragRef.current = false;
+      }, 0);
     }
   }, []);
 
@@ -120,6 +155,7 @@ export function useMapTransform() {
     zoomOut,
     reset,
     panBy,
+    shouldBlockClick: () => didDragRef.current,
     bind,
   };
 }

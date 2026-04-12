@@ -10,7 +10,7 @@ const genres = ['Pop', 'Rock', 'Classical', 'Electronic', 'Jazz', 'Hip-Hop', 'Bo
  * Persistent discovery filter sidebar connected to the filter store.
  * Props: venues.
  */
-function FilterPanel({ venues }) {
+function FilterPanel({ venues, className }) {
   const { genres: activeGenres, dateRange, priceRange, venue, toggleGenre, setFilter, resetFilters } =
     useFilterStore();
   const [venueMenuOpen, setVenueMenuOpen] = useState(false);
@@ -40,19 +40,19 @@ function FilterPanel({ venues }) {
   }, []);
 
   return (
-    <aside className="sticky top-28 h-fit overflow-hidden rounded-[36px] border border-[rgba(255,149,0,0.24)] bg-[linear-gradient(180deg,rgba(31,31,49,0.96),rgba(17,17,27,0.98))] shadow-[0_24px_70px_rgba(0,0,0,0.35),0_0_0_1px_rgba(255,149,0,0.08)]">
-      <div className="pointer-events-none absolute inset-0 rounded-[36px] border border-[rgba(255,210,120,0.08)]" />
+    <aside className={`sticky top-28 h-fit overflow-hidden rounded-[28px] border border-[rgba(255,149,0,0.24)] bg-[linear-gradient(180deg,rgba(31,31,49,0.96),rgba(17,17,27,0.98))] shadow-[0_24px_70px_rgba(0,0,0,0.35),0_0_0_1px_rgba(255,149,0,0.08)] sm:rounded-[36px] ${className}`}>
+      <div className="pointer-events-none absolute inset-0 rounded-[28px] border border-[rgba(255,210,120,0.08)] sm:rounded-[36px]" />
       <div className="absolute inset-x-0 top-0 h-24 bg-[radial-gradient(circle_at_top_left,rgba(255,149,0,0.16),transparent_60%)]" />
 
-      <div className="relative p-6">
-        <div className="mb-6 flex items-start justify-between gap-4">
-          <div className="flex items-start gap-4">
-            <span className="inline-flex h-12 w-12 items-center justify-center rounded-[18px] border border-[rgba(255,149,0,0.18)] bg-[linear-gradient(180deg,rgba(255,149,0,0.18),rgba(255,149,0,0.06))] text-[var(--color-brand-accent)]">
+      <div className="relative p-4 xs:p-5 sm:p-6">
+        <div className="mb-5 flex items-start justify-between gap-3 sm:mb-6 sm:gap-4">
+          <div className="flex min-w-0 items-start gap-3 sm:gap-4">
+            <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-[16px] border border-[rgba(255,149,0,0.18)] bg-[linear-gradient(180deg,rgba(255,149,0,0.18),rgba(255,149,0,0.06))] text-[var(--color-brand-accent)] sm:h-12 sm:w-12 sm:rounded-[18px]">
               <Sparkles className="h-5 w-5" aria-hidden="true" />
             </span>
-            <div>
+            <div className="min-w-0">
               <p className="text-xs uppercase tracking-[0.28em] text-[var(--color-text-muted)]">Filters</p>
-              <h2 className="mt-2 font-display text-[2.2rem] leading-none text-[var(--color-text-primary)]">
+              <h2 className="mt-2 font-display text-[1.7rem] leading-none text-[var(--color-text-primary)] xs:text-[1.9rem] sm:text-[2.2rem]">
                 Refine the night
               </h2>
               <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
@@ -81,7 +81,7 @@ function FilterPanel({ venues }) {
         </div>
 
         <section className="space-y-5">
-          <div className="rounded-[26px] border border-[rgba(255,149,0,0.14)] bg-[rgba(255,255,255,0.02)] p-4 transition duration-300 hover:-translate-y-0.5 hover:border-[rgba(255,149,0,0.28)] hover:bg-[rgba(255,255,255,0.04)]">
+          <div className="rounded-[24px] border border-[rgba(255,149,0,0.14)] bg-[rgba(255,255,255,0.02)] p-4 transition duration-300 hover:-translate-y-0.5 hover:border-[rgba(255,149,0,0.28)] hover:bg-[rgba(255,255,255,0.04)] sm:rounded-[26px]">
             <p className="mb-3 text-xs uppercase tracking-[0.18em] text-[var(--color-text-muted)]">Genre</p>
             <div className="flex flex-wrap gap-2">
               {genres.map((genre) => {
@@ -91,7 +91,7 @@ function FilterPanel({ venues }) {
                     key={genre}
                     type="button"
                     onClick={() => toggleGenre(genre)}
-                  className={`rounded-full border px-3 py-2 text-sm transition duration-200 hover:-translate-y-0.5 ${
+                  className={`rounded-full border px-3 py-2 text-[13px] transition duration-200 hover:-translate-y-0.5 xs:text-sm ${
                       active
                         ? 'border-[rgba(255,149,0,0.3)] bg-[linear-gradient(180deg,rgba(255,59,48,0.18),rgba(255,149,0,0.12))] text-[var(--color-text-primary)] shadow-[0_10px_24px_rgba(255,149,0,0.08)]'
                         : 'border-[rgba(255,149,0,0.12)] bg-[rgba(255,255,255,0.03)] text-[var(--color-text-secondary)] hover:border-[rgba(255,149,0,0.24)] hover:bg-[rgba(255,255,255,0.05)]'
@@ -267,7 +267,7 @@ function FilterPanel({ venues }) {
         <button
           type="button"
           onClick={resetFilters}
-          className="mt-6 inline-flex items-center gap-2 rounded-full border border-[rgba(255,149,0,0.18)] bg-[rgba(255,149,0,0.06)] px-4 py-2 text-sm font-medium text-[var(--color-brand-accent)] transition hover:bg-[rgba(255,149,0,0.12)] hover:text-[var(--color-text-primary)]"
+          className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full border border-[rgba(255,149,0,0.18)] bg-[rgba(255,149,0,0.06)] px-4 py-3 text-sm font-medium text-[var(--color-brand-accent)] transition hover:bg-[rgba(255,149,0,0.12)] hover:text-[var(--color-text-primary)] sm:w-auto sm:justify-start sm:py-2"
         >
           Reset filters
         </button>
@@ -283,6 +283,11 @@ FilterPanel.propTypes = {
       name: PropTypes.string.isRequired,
     }),
   ).isRequired,
+  className: PropTypes.string,
+};
+
+FilterPanel.defaultProps = {
+  className: '',
 };
 
 export default FilterPanel;

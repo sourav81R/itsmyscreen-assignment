@@ -36,7 +36,7 @@ function SearchBar({ placeholder }) {
 
   return (
     <div className="relative flex-1">
-      <div className="flex items-center gap-3 rounded-full border border-[var(--color-border-subtle)] bg-[rgba(255,255,255,0.04)] px-5 py-4">
+      <div className="flex items-center gap-3 rounded-full border border-[var(--color-border-subtle)] bg-[rgba(255,255,255,0.04)] px-4 py-3.5 xs:px-5 xs:py-4">
         <Search className="h-5 w-5 text-[var(--color-brand-accent)]" aria-hidden="true" />
         <input
           type="text"
@@ -65,7 +65,7 @@ function SearchBar({ placeholder }) {
             }
           }}
           placeholder={placeholder}
-          className="w-full bg-transparent text-[var(--color-text-primary)] outline-none placeholder:text-[var(--color-text-muted)]"
+          className="w-full bg-transparent text-[15px] text-[var(--color-text-primary)] outline-none placeholder:text-[var(--color-text-muted)] xs:text-base"
         />
       </div>
 
@@ -77,15 +77,15 @@ function SearchBar({ placeholder }) {
               type="button"
               onMouseEnter={() => setActiveIndex(index)}
               onMouseDown={() => chooseResult(event)}
-              className={`flex w-full items-center justify-between px-5 py-4 text-left transition ${
+              className={`flex w-full items-center justify-between gap-3 px-4 py-3 text-left transition xs:px-5 xs:py-4 ${
                 activeIndex === index ? 'bg-[rgba(255,59,48,0.12)]' : 'hover:bg-[rgba(255,255,255,0.04)]'
               }`}
             >
-              <div>
+              <div className="min-w-0">
                 <p className="font-medium text-[var(--color-text-primary)]">{event.title}</p>
                 <p className="text-sm text-[var(--color-text-secondary)]">{event.artist}</p>
               </div>
-              <span className="text-xs uppercase tracking-[0.18em] text-[var(--color-text-muted)]">
+              <span className="shrink-0 text-[10px] uppercase tracking-[0.18em] text-[var(--color-text-muted)] xs:text-xs">
                 {event.venue.city}
               </span>
             </button>

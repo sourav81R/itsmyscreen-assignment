@@ -148,7 +148,7 @@ function StageCanvas({
   );
 
   return (
-    <div className="stage-canvas-shell editorial-panel premium-panel">
+    <div className="stage-canvas-shell editorial-panel premium-panel h-[55vh] max-h-[400px] min-h-[320px] lg:h-auto lg:max-h-none lg:min-h-[560px]">
       {soldOut ? (
         <div className="absolute inset-0 z-30 flex items-center justify-center bg-[rgba(10,10,15,0.82)] backdrop-blur-sm">
           <div className="rounded-[28px] border border-[rgba(255,69,58,0.3)] bg-[rgba(34,14,14,0.84)] px-8 py-6 text-center">
@@ -162,11 +162,22 @@ function StageCanvas({
         Drag to pan - scroll or pinch to zoom - Ctrl+A for AI picks
       </div>
 
-      <div className="stage-map-inner" onKeyDown={handleMapKeyDown} tabIndex={0} {...mapTransform.bind}>
+      <div
+        className="stage-map-inner h-full min-h-0 lg:min-h-[560px]"
+        onKeyDown={handleMapKeyDown}
+        onClickCapture={(event) => {
+          if (mapTransform.shouldBlockClick()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+        }}
+        tabIndex={0}
+        {...mapTransform.bind}
+      >
         <svg
           viewBox="0 0 1000 800"
           width="100%"
-          height="auto"
+          height="100%"
           preserveAspectRatio="xMidYMid meet"
           style={{ touchAction: 'none', display: 'block' }}
           role="application"
@@ -285,6 +296,7 @@ StageCanvas.propTypes = {
     zoomOut: PropTypes.func.isRequired,
     reset: PropTypes.func.isRequired,
     panBy: PropTypes.func.isRequired,
+    shouldBlockClick: PropTypes.func.isRequired,
     bind: PropTypes.object.isRequired,
   }).isRequired,
   onSeatAction: PropTypes.func.isRequired,

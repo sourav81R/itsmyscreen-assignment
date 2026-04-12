@@ -149,7 +149,7 @@ function SortDropdown({ value, onChange, className }) {
   const SelectedIcon = selectedOption.icon;
 
   return (
-    <div ref={containerRef} className={`relative shrink-0 ${className}`}>
+    <div ref={containerRef} className={`relative w-full shrink-0 md:w-auto ${className}`}>
       <button
         ref={triggerRef}
         type="button"
@@ -158,20 +158,22 @@ function SortDropdown({ value, onChange, className }) {
         aria-label={`Sort events by ${selectedOption.label}`}
         onClick={() => (open ? closeMenu() : openMenu())}
         onKeyDown={handleTriggerKeyDown}
-        className={`group flex min-w-[290px] items-center gap-3 rounded-[22px] border px-3.5 py-3 text-left transition duration-200 ${
+        className={`group flex w-full min-w-0 items-center gap-3 rounded-[20px] border px-3 py-2.5 text-left transition duration-200 xs:px-3.5 xs:py-3 md:min-w-[290px] md:rounded-[22px] ${
           open
             ? 'border-[rgba(255,190,92,0.34)] bg-[linear-gradient(135deg,rgba(255,149,0,0.16),rgba(255,255,255,0.05))] shadow-[0_20px_44px_rgba(255,149,0,0.12)]'
             : 'border-[rgba(255,149,0,0.14)] bg-[linear-gradient(180deg,rgba(255,255,255,0.045),rgba(255,255,255,0.025))] hover:-translate-y-0.5 hover:border-[rgba(255,190,92,0.26)] hover:bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03))]'
         }`}
       >
-        <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-[14px] border border-[rgba(255,149,0,0.16)] bg-[linear-gradient(180deg,rgba(255,149,0,0.18),rgba(255,149,0,0.06))] text-[var(--color-brand-accent)] shadow-[0_10px_24px_rgba(255,149,0,0.08)]">
-          <SelectedIcon className="h-4.5 w-4.5" aria-hidden="true" />
+        <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-[13px] border border-[rgba(255,149,0,0.16)] bg-[linear-gradient(180deg,rgba(255,149,0,0.18),rgba(255,149,0,0.06))] text-[var(--color-brand-accent)] shadow-[0_10px_24px_rgba(255,149,0,0.08)] xs:h-10 xs:w-10 xs:rounded-[14px]">
+          <SelectedIcon className="h-4 w-4 xs:h-[18px] xs:w-[18px]" aria-hidden="true" />
         </span>
 
         <span className="min-w-0 flex-1">
           <span className="block text-[9px] uppercase tracking-[0.22em] text-[var(--color-text-muted)]">Sort results</span>
-          <span className="mt-0.5 block text-[15px] font-medium text-[var(--color-text-primary)]">{selectedOption.label}</span>
-          <span className="mt-0.5 block truncate text-[12px] text-[var(--color-text-secondary)]">
+          <span className="mt-0.5 block text-[14px] font-medium text-[var(--color-text-primary)] xs:text-[15px]">
+            {selectedOption.label}
+          </span>
+          <span className="mt-0.5 hidden truncate text-[12px] text-[var(--color-text-secondary)] sm:block">
             {selectedOption.description}
           </span>
         </span>
@@ -195,7 +197,7 @@ function SortDropdown({ value, onChange, className }) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -8, scale: 0.985 }}
             transition={{ duration: 0.18, ease: 'easeOut' }}
-            className="absolute right-0 top-[calc(100%+12px)] z-30 w-[320px] overflow-hidden rounded-[24px] border border-[rgba(255,190,92,0.2)] bg-[linear-gradient(180deg,rgba(24,24,36,0.98),rgba(13,13,22,0.98))] shadow-[0_24px_52px_rgba(0,0,0,0.34),0_0_0_1px_rgba(255,149,0,0.06)] backdrop-blur-xl"
+            className="absolute inset-x-0 top-[calc(100%+12px)] z-30 overflow-hidden rounded-[22px] border border-[rgba(255,190,92,0.2)] bg-[linear-gradient(180deg,rgba(24,24,36,0.98),rgba(13,13,22,0.98))] shadow-[0_24px_52px_rgba(0,0,0,0.34),0_0_0_1px_rgba(255,149,0,0.06)] backdrop-blur-xl sm:left-auto sm:right-0 sm:w-[320px] sm:rounded-[24px]"
           >
             <div className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-[radial-gradient(circle_at_top,rgba(255,149,0,0.16),transparent_72%)]" />
 
@@ -203,7 +205,7 @@ function SortDropdown({ value, onChange, className }) {
               <div className="rounded-[18px] border border-[rgba(255,149,0,0.12)] bg-[rgba(255,255,255,0.025)] px-3.5 py-2.5">
                 <p className="text-[9px] uppercase tracking-[0.2em] text-[var(--color-text-muted)]">Sort playlist</p>
                 <p className="mt-1 text-[13px] font-medium leading-snug text-[var(--color-text-primary)]">Choose how the lineup is ordered</p>
-                <p className="mt-1 text-[12px] leading-relaxed text-[var(--color-text-secondary)]">
+                <p className="mt-1 hidden text-[12px] leading-relaxed text-[var(--color-text-secondary)] sm:block">
                   Every option updates the event rail instantly, so it is easy to compare what matters most.
                 </p>
               </div>
@@ -247,7 +249,7 @@ function SortDropdown({ value, onChange, className }) {
                       <span className="min-w-0 flex-1">
                         <span className="flex items-center gap-2">
                           <span className="text-[14px] font-medium">{option.label}</span>
-                          <span className="rounded-full border border-[rgba(255,255,255,0.08)] px-2 py-1 text-[9px] uppercase tracking-[0.16em] text-[var(--color-text-muted)]">
+                          <span className="hidden rounded-full border border-[rgba(255,255,255,0.08)] px-2 py-1 text-[9px] uppercase tracking-[0.16em] text-[var(--color-text-muted)] sm:inline-flex">
                             {option.chip}
                           </span>
                         </span>

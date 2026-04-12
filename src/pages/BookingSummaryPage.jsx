@@ -10,6 +10,7 @@ import PageWrapper from '../components/layout/PageWrapper';
 import { getAddOns } from '../services/aiService';
 import { useBookingStore } from '../store/useBookingStore';
 import { useUIStore } from '../store/useUIStore';
+import { formatPrice } from '../utils/priceFormatter';
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const phonePattern = /^\d{10}$/;
@@ -77,6 +78,11 @@ function BookingSummaryPage() {
     Object.values(attendeeErrors).every((value) => !value) &&
     paymentMethod &&
     Object.values(paymentErrors).every((value) => !value);
+  const base = selectedSeats.reduce((sum, seat) => sum + seat.price, 0);
+  const bookingFee = selectedSeats.length * 100;
+  const addOnTotal = addOns.reduce((sum, addOn) => sum + addOn.price, 0);
+  const gst = Math.round((base + bookingFee + addOnTotal) * 0.18);
+  const total = base + bookingFee + addOnTotal + gst;
 
   if (!selectedEvent || !selectedShowtime || selectedSeats.length === 0) {
     return null;
@@ -100,7 +106,7 @@ function BookingSummaryPage() {
 
   return (
     <>
-      <PageWrapper className="relative mx-auto max-w-[1440px] overflow-hidden px-8 pb-12 pt-8">
+      <PageWrapper className="relative mx-auto max-w-[1440px] overflow-hidden px-4 pb-12 pt-4 md:px-6 md:pt-6 xl:px-8">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 -z-10"
@@ -110,10 +116,10 @@ function BookingSummaryPage() {
           <div className="absolute bottom-10 left-1/3 h-64 w-64 rounded-full bg-[rgba(80,90,255,0.07)] blur-[120px]" />
         </div>
 
-        <div className="mb-8 flex items-end justify-between gap-6">
+        <div className="mb-6 flex flex-col gap-4 md:mb-8 md:flex-row md:items-end md:justify-between md:gap-6">
           <div className="max-w-[760px]">
             <p className="text-xs uppercase tracking-[0.28em] text-[var(--color-text-muted)]">Step 3 of 3</p>
-            <h1 className="mt-2 font-display text-5xl text-[var(--color-text-primary)]">Booking Summary</h1>
+            <h1 className="mt-2 font-display text-4xl text-[var(--color-text-primary)] md:text-5xl">Booking Summary</h1>
             <p className="mt-3 max-w-[620px] text-sm text-[var(--color-text-secondary)]">
               Review your seats, complete attendee details, and finish payment with a cleaner premium checkout flow.
             </p>
@@ -123,18 +129,24 @@ function BookingSummaryPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-[0.9fr_1.1fr] items-start gap-8">
+        <div className="flex flex-col gap-4 md:grid md:grid-cols-[0.9fr_1.1fr] md:items-start md:gap-8">
           <div className="space-y-5">
             <OrderSummaryCard event={selectedEvent} showtime={selectedShowtime} seats={selectedSeats} />
             <PriceBreakdown seats={selectedSeats} addOns={addOns} />
           </div>
 
-          <div className="space-y-5">
-            <AttendeeForm values={attendeeInfo} errors={attendeeErrors} onChange={(key, value) => setAttendeeInfo({ [key]: value })} />
-            <PaymentSelector values={attendeeInfo} errors={paymentErrors} onFieldChange={(key, value) => setAttendeeInfo({ [key]: value })} />
-            <AIAddOnStrip addOns={contextualAddOns} selectedAddOns={addOns} onToggle={toggleAddOn} />
+          <div className="flex flex-col gap-5">
+            <div className="order-1 md:order-3">
+              <AIAddOnStrip addOns={contextualAddOns} selectedAddOns={addOns} onToggle={toggleAddOn} />
+            </div>
+            <div className="order-2 md:order-1">
+              <AttendeeForm values={attendeeInfo} errors={attendeeErrors} onChange={(key, value) => setAttendeeInfo({ [key]: value })} />
+            </div>
+            <div className="order-3 md:order-2">
+              <PaymentSelector values={attendeeInfo} errors={paymentErrors} onFieldChange={(key, value) => setAttendeeInfo({ [key]: value })} />
+            </div>
 
-            <section className="premium-panel rounded-[30px] bg-[linear-gradient(145deg,rgba(28,28,42,0.96),rgba(15,15,23,0.98))] p-6">
+            <section className="order-4 hidden rounded-[30px] bg-[linear-gradient(145deg,rgba(28,28,42,0.96),rgba(15,15,23,0.98))] p-6 md:block premium-panel">
               <details>
                 <summary className="cursor-pointer text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-text-primary)]">
                   Cancellation & refund policy
@@ -162,6 +174,27 @@ function BookingSummaryPage() {
           </div>
         </div>
       </PageWrapper>
+
+      <div className="safe-bottom fixed inset-x-0 bottom-0 z-50 flex items-center justify-between gap-4 border-t border-white/10 bg-[rgba(17,17,24,0.96)] px-4 pt-3 pb-3 backdrop-blur-xl md:hidden">
+        <div>
+          <div style={{ color: '#F5F5F7', fontWeight: 700, fontSize: 18 }}>
+            {formatPrice(total)}
+          </div>
+          <div style={{ color: '#555568', fontSize: 11 }}>+ taxes & fees</div>
+        </div>
+
+        <Button
+          onClick={handleSubmit}
+          disabled={!formValid}
+          loading={isLoading}
+          title={!formValid ? 'Complete required fields before payment.' : 'Pay now'}
+          className="w-full max-w-[200px] shadow-[0_16px_34px_rgba(255,59,48,0.24)] hover:shadow-[0_20px_42px_rgba(255,59,48,0.34)]"
+        >
+          Pay Now
+        </Button>
+      </div>
+
+      <div className="h-24 md:hidden" />
 
       {isLoading ? (
         <div className="fixed inset-0 z-40 flex items-center justify-center bg-[rgba(10,10,15,0.64)] backdrop-blur-sm">

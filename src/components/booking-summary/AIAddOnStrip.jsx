@@ -10,13 +10,13 @@ function AIAddOnStrip({ addOns, selectedAddOns, onToggle }) {
   return (
     <section className="premium-panel rounded-[30px] bg-[linear-gradient(145deg,rgba(31,31,48,0.96),rgba(15,15,23,0.98))] p-6">
       <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-text-muted)]">AI add-ons</p>
-      <div className="mt-5 grid gap-4 md:grid-cols-3">
+      <div className="mt-5 flex gap-4 overflow-x-auto pb-2 md:grid md:grid-cols-3 md:overflow-visible md:pb-0">
         {addOns.map((addOn) => {
           const active = selectedAddOns.some((item) => item.id === addOn.id);
           return (
             <div
               key={addOn.id}
-              className={`premium-panel rounded-[24px] p-4 transition duration-200 ${
+              className={`premium-panel min-w-[240px] rounded-[24px] p-4 transition duration-200 md:min-w-0 ${
                 active
                   ? 'border-[rgba(255,190,92,0.4)] bg-[linear-gradient(145deg,rgba(255,149,0,0.16),rgba(255,59,48,0.08)_70%,rgba(255,255,255,0.03))] shadow-[0_18px_40px_rgba(255,149,0,0.08)]'
                   : 'bg-[linear-gradient(180deg,rgba(255,255,255,0.035),rgba(255,255,255,0.02))]'
