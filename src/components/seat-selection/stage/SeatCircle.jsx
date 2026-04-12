@@ -63,6 +63,9 @@ const SeatCircle = memo(function SeatCircle({
           document.activeElement.blur?.();
         }
       }}
+      onMouseDown={(event) => {
+        event.stopPropagation();
+      }}
       onDoubleClick={(event) => {
         event.preventDefault();
         event.stopPropagation();
@@ -70,9 +73,13 @@ const SeatCircle = memo(function SeatCircle({
       onMouseEnter={onHoverStart}
       onMouseLeave={onHoverEnd}
       onPointerDown={(event) => {
+        event.stopPropagation();
         if (event.pointerType === 'mouse') {
           onHoverStart(event);
         }
+      }}
+      onPointerUp={(event) => {
+        event.stopPropagation();
       }}
       onFocus={isMobile ? undefined : onHoverStart}
       onBlur={isMobile ? undefined : onHoverEnd}

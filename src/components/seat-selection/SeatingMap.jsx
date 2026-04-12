@@ -42,6 +42,8 @@ const SeatNode = memo(function SeatNode({
       onMouseEnter={onHover}
       onMouseLeave={onLeave}
       onMouseDown={(event) => event.stopPropagation()}
+      onPointerDown={(event) => event.stopPropagation()}
+      onPointerUp={(event) => event.stopPropagation()}
       onClick={(event) => {
         event.stopPropagation();
         onSelect(event);
