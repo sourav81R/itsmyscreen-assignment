@@ -181,6 +181,7 @@ function Navbar({ city, onCityChange }) {
   const isMobileMenuOpen = useUIStore((state) => state.isMobileMenuOpen);
   const toggleMobileMenu = useUIStore((state) => state.toggleMobileMenu);
   const closeMobileMenu = useUIStore((state) => state.closeMobileMenu);
+  const showToast = useUIStore((state) => state.showToast);
   const [cityMenuOpen, setCityMenuOpen] = useState(false);
   const cityMenuRef = useRef(null);
   const headerRef = useRef(null);
@@ -190,15 +191,28 @@ function Navbar({ city, onCityChange }) {
   const mobileLinks = useMemo(
     () => [
       { label: 'Discover', to: '/discover', enabled: true },
-      { label: 'Seats', to: selectedEvent ? `/event/${selectedEvent.id}/seats` : '', enabled: Boolean(selectedEvent) },
+      {
+        label: 'Seats',
+        to: selectedEvent ? `/event/${selectedEvent.id}/seats` : '',
+        enabled: Boolean(selectedEvent),
+        lockedMessage: 'Choose an event before opening seats.',
+      },
       {
         label: 'Summary',
         to: selectedEvent && selectedSeats.length > 0 ? '/booking/summary' : '',
         enabled: Boolean(selectedEvent) && selectedSeats.length > 0,
+        lockedMessage: selectedEvent
+          ? 'Select at least one seat to continue to summary.'
+          : 'Choose an event before opening summary.',
       },
     ],
     [selectedEvent, selectedSeats.length],
   );
+
+  const handleLockedMobileLink = (message) => {
+    closeMobileMenu();
+    showToast({ message });
+  };
 
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
@@ -316,12 +330,14 @@ function Navbar({ city, onCityChange }) {
                         {item.label}
                       </Link>
                     ) : (
-                      <span
+                      <button
                         key={item.label}
-                        className="rounded-[18px] border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] px-4 py-3 text-sm text-[var(--color-text-muted)]"
+                        type="button"
+                        onClick={() => handleLockedMobileLink(item.lockedMessage)}
+                        className="rounded-[18px] border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] px-4 py-3 text-left text-sm text-[var(--color-text-muted)] transition duration-200 hover:border-[rgba(255,149,0,0.22)] hover:text-[var(--color-text-secondary)]"
                       >
                         {item.label}
-                      </span>
+                      </button>
                     ),
                   )}
                 </div>
